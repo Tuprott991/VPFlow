@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom'
 import {
     Box,
     Container,
@@ -62,6 +63,8 @@ const VPFlowLogo = () => (
 )
 
 export default function LoginPage() {
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -79,7 +82,7 @@ export default function LoginPage() {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log("Login attempt:", formData)
-        // Add your login logic here
+        navigate("/list-of-workflows")
     }
 
     return (

@@ -1,6 +1,7 @@
 import {
     ListOfWorkflowsPage,
-    PainPointFeedbackPage
+    PainPointFeedbackPage,
+    FeedbackDetailsPage
 } from '../pages/PrivatePage';
 
 const PrivateRoutes = [
@@ -9,8 +10,12 @@ const PrivateRoutes = [
         element: <ListOfWorkflowsPage />,
     },
     {
-        path: '/pain-point-feedback',
+        path: '/pain-point-feedbacks',
         element: <PainPointFeedbackPage />,
+    },
+    {
+        path: '/feedback-details',
+        element: <FeedbackDetailsPage />
     }
 ];
 

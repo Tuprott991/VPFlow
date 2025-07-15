@@ -1,6 +1,9 @@
 "use client";
 
 import {
+    NavLink
+} from "react-router-dom"
+import {
     Box,
     Drawer,
     List,
@@ -25,7 +28,7 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 
-const drawerWidth = 280;
+const drawerWidth = 230;
 
 const VPFlowLogo = () => (
     <Box sx={{ display: "flex", alignItems: "center", p: 2, backgroundColor: "#2E8B57" }}>
@@ -69,12 +72,17 @@ const Sidebar = () => {
         {
             text: "List of workflows",
             icon: <BookmarkBorder />,
-            selected: true,
+            link: '/list-of-workflows',
         },
         {
             text: "Workflow with AI",
             icon: <Star />,
         },
+        {
+            text: "Pain point feedbacks",
+            icon: <Group />,
+            link: '/pain-point-feedbacks'
+        }
     ];
 
     return (
@@ -93,30 +101,31 @@ const Sidebar = () => {
         >
             <VPFlowLogo />
 
-            <List sx={{ px: 2 }}>
+            <List>
                 {sidebarItems.map((item, index) => (
                     <Box key={index}>
-                        <ListItemButton
-                            selected={item.selected}
-                            sx={{
-                                borderRadius: 1,
-                                mb: 0.5,
-                                "&.Mui-selected": {
-                                    backgroundColor: "#e3f2fd",
-                                    "&:hover": {
+                        <NavLink to={item.link || "#"} style={{ textDecoration: "none", color: "inherit" }}>
+                            <ListItemButton
+                                sx={{
+                                    borderRadius: 1,
+                                    mb: 0.5,
+                                    "&.Mui-selected": {
                                         backgroundColor: "#e3f2fd",
+                                        "&:hover": {
+                                            backgroundColor: "#e3f2fd",
+                                        },
                                     },
-                                },
-                            }}
-                        >
-                            <ListItemIcon sx={{ minWidth: 36 }}>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text} primaryTypographyProps={{ fontSize: "0.875rem" }} />
-                            {item.shortcut && (
-                                <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                                    {item.shortcut}
-                                </Typography>
-                            )}
-                        </ListItemButton>
+                                }}
+                            >
+                                <ListItemIcon sx={{ minWidth: 36 }}>{item.icon}</ListItemIcon>
+                                <ListItemText primary={item.text} primaryTypographyProps={{ fontSize: "0.875rem" }} />
+                                {item.shortcut && (
+                                    <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                                        {item.shortcut}
+                                    </Typography>
+                                )}
+                            </ListItemButton>
+                        </NavLink>
                         {item.divider && <Divider sx={{ my: 1 }} />}
                     </Box>
                 ))}
@@ -137,21 +146,11 @@ const Sidebar = () => {
                     </List>
                 </Collapse>
 
-                <Divider sx={{ my: 2 }} />
-
-                <Typography variant="caption" sx={{ px: 2, color: "text.secondary", fontWeight: 500 }}>
-                    Records
-                </Typography>
-
-                <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-                    <ListItemIcon sx={{ minWidth: 36 }}>
-                        <Group />
-                    </ListItemIcon>
-                    <ListItemText primary="Pain Point Feedbacks" primaryTypographyProps={{ fontSize: "0.875rem" }} />
-                </ListItemButton>
             </List>
 
-            <Box sx={{ mt: "auto", p: 2 }}>
+            <Box sx={{ mt: "auto", py: 1 }}>
+                <Divider sx={{ mb: 2 }} />
+
                 <ListItemButton sx={{ borderRadius: 1, mb: 1 }}>
                     <ListItemIcon sx={{ minWidth: 36 }}>
                         <Group />
@@ -168,7 +167,7 @@ const Sidebar = () => {
                 </ListItemButton>
 
                 <Box sx={{ display: "flex", alignItems: "center", px: 1 }}>
-                    <Avatar sx={{ width: 32, height: 32, backgroundColor: "#4FC3F7", mr: 1 }}>T</Avatar>
+                    <Avatar sx={{ width: 30, height: 30, backgroundColor: "#4FC3F7", mr: 1 }}>T</Avatar>
                     <Typography variant="body2" sx={{ fontWeight: 500 }}>
                         Tu Ku
                     </Typography>

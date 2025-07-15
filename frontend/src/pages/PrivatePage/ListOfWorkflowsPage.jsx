@@ -22,6 +22,7 @@ import {
     TableRow,
     Paper,
     Chip,
+    Divider,
 } from "@mui/material"
 
 import {
@@ -133,7 +134,7 @@ export default function ListOfWorkflowsPage() {
                 </AppBar>
 
                 {/* Content Area */}
-                <Box sx={{ p: 3, flexGrow: 1 }}>
+                <Box sx={{ p: 1.5, flexGrow: 1 }}>
                     {/* Top Controls */}
                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
                         <FormControl size="small">
@@ -143,10 +144,10 @@ export default function ListOfWorkflowsPage() {
                         </FormControl>
 
                         <Box sx={{ display: "flex", gap: 1 }}>
-                            <Button variant="outlined" startIcon={<Settings />} size="small">
+                            <Button variant="outlined" startIcon={<Settings />} size="small" sx={{ textTransform: 'none' }}>
                                 View settings
                             </Button>
-                            <Button variant="outlined" startIcon={<ImportExport />} size="small">
+                            <Button variant="outlined" startIcon={<ImportExport />} size="small" sx={{ textTransform: 'none' }}>
                                 Import/Export
                             </Button>
                         </Box>
@@ -159,8 +160,8 @@ export default function ListOfWorkflowsPage() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
+                            endAdornment: (
+                                <InputAdornment position="end">
                                     <Search />
                                 </InputAdornment>
                             ),
@@ -274,27 +275,25 @@ export default function ListOfWorkflowsPage() {
                                         </TableCell>
                                     </TableRow>
                                 ))}
+                                <TableRow>
+                                    <TableCell align="right" sx={{ fontWeight: 500 }}>
+                                        <strong>{workflowData.length}</strong> count
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Button variant="text" size="small" startIcon={<Add />}>Add</Button>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Button variant="text" size="small" startIcon={<Add />}>Add</Button>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Button variant="text" size="small" startIcon={<Add />}>Add</Button>
+                                    </TableCell>
+                                    <TableCell align="right" />
+                                    <TableCell align="right" />
+                                </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
-
-                    {/* Footer */}
-                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 2 }}>
-                        <Typography variant="body2" color="text.secondary">
-                            {workflowData.length} count
-                        </Typography>
-                        <Box sx={{ display: "flex", gap: 2 }}>
-                            <Button variant="text" size="small" startIcon={<Add />}>
-                                Add
-                            </Button>
-                            <Button variant="text" size="small" startIcon={<Add />}>
-                                Add
-                            </Button>
-                            <Button variant="text" size="small" startIcon={<Add />}>
-                                Add
-                            </Button>
-                        </Box>
-                    </Box>
                 </Box>
             </Box>
         </Box>

@@ -9,7 +9,7 @@ const PrivateLayout = () => {
         <Box sx={{ display: "flex", minHeight: "100vh", width: "100%" }}>
             <Sidebar />
 
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1 }}>
                 <Outlet />
             </Box>
         </Box>
