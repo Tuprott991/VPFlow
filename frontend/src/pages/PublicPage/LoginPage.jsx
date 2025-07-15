@@ -28,40 +28,141 @@ const theme = createTheme({
     },
 })
 
-const VPFlowLogo = () => (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 4 }}>
-        {/* Circular logo with interconnected dots */}
-        <Box
-            sx={{
-                width: 64,
-                height: 64,
-                backgroundColor: "white",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                mr: 2,
-            }}
-        >
-            <svg width="40" height="40" viewBox="0 0 40 40">
-                <circle cx="12" cy="12" r="3" fill="#2E8B57" />
-                <circle cx="28" cy="12" r="3" fill="#2E8B57" />
-                <circle cx="20" cy="28" r="3" fill="#2E8B57" />
-                <line x1="12" y1="12" x2="28" y2="12" stroke="#2E8B57" strokeWidth="2" />
-                <line x1="12" y1="12" x2="20" y2="28" stroke="#2E8B57" strokeWidth="2" />
-                <line x1="28" y1="12" x2="20" y2="28" stroke="#2E8B57" strokeWidth="2" />
-            </svg>
-        </Box>
 
-        {/* Brand name */}
-        <Typography variant="h3" component="div" sx={{ fontWeight: "bold" }}>
-            <span style={{ color: "#D64545" }}>VP</span>
-            <span style={{ color: "white" }}>Flow</span>
-            <sup style={{ fontSize: "0.6em" }}>®</sup>
-        </Typography>
-    </Box>
-)
 
+function LoginForm({ formData, handleChange, handleSubmit }) {
+    return (
+        <>
+            <Typography
+                variant="h4"
+                component="h1"
+                sx={{
+                    fontWeight: "bold",
+                    color: "#1a1a1a",
+                    mb: 4,
+                }}
+            >
+                Welcome back!
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: "100%" }}>
+                <Typography variant="body2" sx={{ mb: 1, color: "#666", fontWeight: 500 }}>
+                    Email address
+                </Typography>
+                <TextField
+                    fullWidth
+                    name="email"
+                    type="email"
+                    placeholder="Enter your name"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    sx={{
+                        mb: 3,
+                        "& .MuiOutlinedInput-root": {
+                            backgroundColor: "white",
+                            "& fieldset": {
+                                borderColor: "#ffffffff",
+                            },
+                            "&:hover fieldset": {
+                                borderColor: "#2E8B57",
+                            },
+                            "&.Mui-focused fieldset": {
+                                borderColor: "#2E8B57",
+                            },
+                        },
+                    }}
+                />
+
+                <Typography variant="body2" sx={{ mb: 1, color: "#666", fontWeight: 500 }}>
+                    Password
+                </Typography>
+                <TextField
+                    fullWidth
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    sx={{
+                        mb: 2,
+                        "& .MuiOutlinedInput-root": {
+                            backgroundColor: "white",
+                            "& fieldset": {
+                                borderColor: "#ffffffff",
+                            },
+                            "&:hover fieldset": {
+                                borderColor: "#2E8B57",
+                            },
+                            "&.Mui-focused fieldset": {
+                                borderColor: "#2E8B57",
+                            },
+                        },
+                    }}
+                />
+
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            name="rememberMe"
+                            checked={formData.rememberMe}
+                            onChange={handleChange}
+                            sx={{
+                                color: "#666",
+                                "&.Mui-checked": {
+                                    color: "#2E8B57",
+                                },
+                            }}
+                        />
+                    }
+                    label={
+                        <Typography variant="body2" sx={{ color: "#666" }}>
+                            Remember me
+                        </Typography>
+                    }
+                    sx={{ mb: 3 }}
+                />
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                        py: 1,
+                        backgroundColor: "#3A5B22",
+                        fontWeight: 600,
+                        fontSize: "1rem",
+                        textTransform: "none",
+                        mb: 3,
+                    }}
+                >
+                    Login
+                </Button>
+
+                <Box sx={{ textAlign: "center" }}>
+                    <Typography variant="body2" sx={{ color: "#666" }}>
+                        Have an account?{" "}
+                        <Link
+                            href="/signup"
+                            sx={{
+                                color: "#1976d2",
+                                textDecoration: "none",
+                                fontWeight: 700,
+                                "&:hover": {
+                                    textDecoration: "underline",
+                                },
+                            }}
+                        >
+                            Sign Up
+                        </Link>
+                    </Typography>
+                </Box>
+            </Box>
+        </>
+    )
+}
+
+// ...existing code...
 export default function LoginPage() {
     const navigate = useNavigate()
 
@@ -71,7 +172,7 @@ export default function LoginPage() {
         rememberMe: false,
     })
 
-    const handleChange = (event) => {
+    const handleChange = (event) =>{
         const { name, value, checked, type } = event.target
         setFormData((prev) => ({
             ...prev,
@@ -85,224 +186,66 @@ export default function LoginPage() {
         navigate("/list-of-workflows")
     }
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Box
+
+return (
+    <ThemeProvider theme={theme}>
+        <Grid
+            container // Thêm container prop
+            sx={{
+                minHeight: "100vh",
+                width: "100vw",
+                backgroundImage: "url('/Group39.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                margin: 0, // Loại bỏ margin mặc định
+                padding: 0, // Loại bỏ padding mặc định
+            }}
+        >
+            {/* Form section - 1/3 màn hình */}
+            <Grid
+                size={{xs: 12, md: 4}}
                 sx={{
-                    minHeight: "100vh",
-                    position: "relative",
-                    overflow: "hidden",
                     display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: 2, // Thêm padding
                 }}
             >
-                {/* Background with diagonal sections */}
-                <Box
+                <Container
+                    maxWidth="xs"
                     sx={{
-                        position: "absolute",
-                        inset: 0,
+                        width: 320,
+                        backgroundColor: "rgba(255,255,255,0)",
+                        borderRadius: 3,
+                        boxShadow: 3,
+                        p: 3,
                         display: "flex",
-                        zIndex: 0,
+                        flexDirection: "column",
+                        alignItems: "center",
                     }}
                 >
-                    {/* White section */}
-                    <Box sx={{ flex: 1, backgroundColor: "#f5f5f5" }} />
-
-                    {/* Red diagonal stripe */}
-                    <Box
-                        sx={{
-                            width: "128px",
-                            backgroundColor: "#D64545",
-                            transform: "skewX(12deg)",
-                            transformOrigin: "top",
-                        }}
+                    <LoginForm
+                        formData={formData}
+                        handleChange={handleChange}
+                        handleSubmit={handleSubmit}
                     />
+                </Container>
+            </Grid>
 
-                    {/* Green section */}
-                    <Box sx={{ flex: 1, backgroundColor: "#2E8B57" }} />
-                </Box>
-
-                {/* Content */}
-                <Grid container sx={{ position: "relative", zIndex: 1 }}>
-                    {/* Left side - Login Form */}
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Container
-                            maxWidth="sm"
-                            sx={{
-                                height: "100vh",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                px: 4,
-                            }}
-                        >
-                            <Paper
-                                elevation={0}
-                                sx={{
-                                    p: 4,
-                                    width: "100%",
-                                    maxWidth: 400,
-                                    backgroundColor: "transparent",
-                                }}
-                            >
-                                <Typography
-                                    variant="h4"
-                                    component="h1"
-                                    sx={{
-                                        fontWeight: "bold",
-                                        color: "#1a1a1a",
-                                        mb: 4,
-                                    }}
-                                >
-                                    Welcome back!
-                                </Typography>
-
-                                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                                    <Typography variant="body2" sx={{ mb: 1, color: "#666", fontWeight: 500 }}>
-                                        Email address
-                                    </Typography>
-                                    <TextField
-                                        fullWidth
-                                        name="email"
-                                        type="email"
-                                        placeholder="Enter your name"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                        sx={{
-                                            mb: 3,
-                                            "& .MuiOutlinedInput-root": {
-                                                backgroundColor: "white",
-                                                "& fieldset": {
-                                                    borderColor: "#d1d5db",
-                                                },
-                                                "&:hover fieldset": {
-                                                    borderColor: "#2E8B57",
-                                                },
-                                                "&.Mui-focused fieldset": {
-                                                    borderColor: "#2E8B57",
-                                                },
-                                            },
-                                        }}
-                                    />
-
-                                    <Typography variant="body2" sx={{ mb: 1, color: "#666", fontWeight: 500 }}>
-                                        Password
-                                    </Typography>
-                                    <TextField
-                                        fullWidth
-                                        name="password"
-                                        type="password"
-                                        placeholder="Password"
-                                        value={formData.password}
-                                        onChange={handleChange}
-                                        required
-                                        sx={{
-                                            mb: 2,
-                                            "& .MuiOutlinedInput-root": {
-                                                backgroundColor: "white",
-                                                "& fieldset": {
-                                                    borderColor: "#d1d5db",
-                                                },
-                                                "&:hover fieldset": {
-                                                    borderColor: "#2E8B57",
-                                                },
-                                                "&.Mui-focused fieldset": {
-                                                    borderColor: "#2E8B57",
-                                                },
-                                            },
-                                        }}
-                                    />
-
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                name="rememberMe"
-                                                checked={formData.rememberMe}
-                                                onChange={handleChange}
-                                                sx={{
-                                                    color: "#666",
-                                                    "&.Mui-checked": {
-                                                        color: "#2E8B57",
-                                                    },
-                                                }}
-                                            />
-                                        }
-                                        label={
-                                            <Typography variant="body2" sx={{ color: "#666" }}>
-                                                Remember me
-                                            </Typography>
-                                        }
-                                        sx={{ mb: 3 }}
-                                    />
-
-                                    <Button
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        sx={{
-                                            py: 1,
-                                            backgroundColor: "#3A5B22",
-                                            fontWeight: 600,
-                                            fontSize: "1rem",
-                                            textTransform: "none",
-                                            mb: 3,
-                                        }}
-                                    >
-                                        Login
-                                    </Button>
-
-                                    <Box sx={{ textAlign: "center" }}>
-                                        <Typography variant="body2" sx={{ color: "#666" }}>
-                                            Have an account?{" "}
-                                            <Link
-                                                href="/signup"
-                                                sx={{
-                                                    color: "#1976d2",
-                                                    textDecoration: "none",
-                                                    fontWeight: 700,
-                                                    "&:hover": {
-                                                        textDecoration: "underline",
-                                                    },
-                                                }}
-                                            >
-                                                Sign Up
-                                            </Link>
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                            </Paper>
-                        </Container>
-                    </Grid>
-
-                    {/* Right side - VPFlow Branding */}
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Container
-                            sx={{
-                                height: "100vh",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                px: 4,
-                            }}
-                        >
-                            <Box sx={{ textAlign: "center", color: "white" }}>
-                                <VPFlowLogo />
-
-                                <Typography
-                                    variant="h5"
-                                    sx={{
-                                        fontWeight: 500,
-                                        color: "white",
-                                        mt: 2,
-                                    }}
-                                >
-                                    Visionary workflows, generating Prosperity
-                                </Typography>
-                            </Box>
-                        </Container>
-                    </Grid>
-                </Grid>
-            </Box>
-        </ThemeProvider>
+            {/* Background section - 2/3 màn hình */}
+            <Grid
+                size={{xs: 12, md: 8}}
+                sx={{
+                    display: { xs: "none", md: "flex" },
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                }}
+            >
+                {/* Có thể thêm logo hoặc content khác ở đây */}
+            </Grid>
+        </Grid>
+    </ThemeProvider>
     )
-}
+
+    }
