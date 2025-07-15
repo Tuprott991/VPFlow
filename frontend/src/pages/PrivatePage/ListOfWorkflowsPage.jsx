@@ -32,6 +32,7 @@ import { BiCategory } from "react-icons/bi";
 import { SiCodemagic } from "react-icons/si";
 import { CiShoppingTag } from "react-icons/ci";
 import { LiaNetworkWiredSolid } from "react-icons/lia";
+import { GrUpdate } from "react-icons/gr";
 import {
     workflowData
 } from "@/data/mock_data/workflowData.js";
@@ -106,11 +107,11 @@ export default function ListOfWorkflowsPage() {
                                     Workflow
                                 </Box>
                             </TableCell>
-                            <TableCell sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
-                                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                            <TableCell align="center" sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
+                                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
                                     <CiShoppingTag size={24} />
-                                    Categories
-                                    <SiCodemagic size={24} />
+                                        Categories
+                                    {/* <SiCodemagic size={24} /> */}
                                 </Box>
                             </TableCell>
                             <TableCell sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
@@ -121,7 +122,7 @@ export default function ListOfWorkflowsPage() {
                             </TableCell>
                             <TableCell sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                    <Star fontSize="small" />
+                                    <GrUpdate  fontSize="small" />
                                     Last Published
                                 </Box>
                             </TableCell>
