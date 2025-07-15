@@ -7,9 +7,8 @@ import {
     Toolbar,
     Typography,
     IconButton,
-    Avatar,
 } from "@mui/material";
-import { Info, MoreVert } from "@mui/icons-material";
+import { Info } from "@mui/icons-material";
 import Sidebar from "./sidebar";
 
 const PrivateLayout = () => {
@@ -34,12 +33,6 @@ const PrivateLayout = () => {
                             </Typography>
                             <IconButton size="small">
                                 <Info fontSize="small" />
-                            </IconButton>
-                        </Box>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                            <Avatar sx={{ width: 32, height: 32, backgroundColor: "#4FC3F7" }}>T</Avatar>
-                            <IconButton size="small">
-                                <MoreVert />
                             </IconButton>
                         </Box>
                     </Toolbar>
