@@ -1,7 +1,8 @@
 import {
     ListOfWorkflowsPage,
     PainPointFeedbackPage,
-    FeedbackDetailsPage
+    FeedbackDetailsPage,
+    WorkflowWithAI
 } from '../pages/PrivatePage';
 
 const PrivateRoutes = [
@@ -16,6 +17,10 @@ const PrivateRoutes = [
     {
         path: '/feedback-details',
         element: <FeedbackDetailsPage />
+    },
+    {
+        path: '/workflow-with-ai',
+        element: <WorkflowWithAI />
     }
 ];
 

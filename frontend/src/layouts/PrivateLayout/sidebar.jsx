@@ -9,21 +9,16 @@ import {
     ListItemText,
     ListItemButton,
     Typography,
-    Collapse,
     Avatar,
     Divider,
-    IconButton,
 } from "@mui/material";
 import {
-    ExpandLess,
-    ExpandMore,
     KeyboardCommandKey,
     BookmarkBorder,
 } from "@mui/icons-material";
 import { PiGraph } from "react-icons/pi";
 import { BsPatchQuestion } from "react-icons/bs";
 import { TbMailQuestion } from "react-icons/tb";
-import { useState } from "react";
 
 const drawerWidth = 240;
 
@@ -75,8 +70,6 @@ const VPFlowLogo = () => (
 );
 
 const Sidebar = () => {
-    const [workflowExpanded, setWorkflowExpanded] = useState(false);
-
     const sidebarItems = [
         {
             text: "Quick actions",
@@ -91,6 +84,7 @@ const Sidebar = () => {
         {
             text: "Workflow with AI",
             icon: <PiGraph size={24} />,
+            link: "/workflow-with-ai",
         },
         {
             text: "Pain Point Feedbacks",
@@ -165,43 +159,6 @@ const Sidebar = () => {
                         </NavLink>
                     </Box>
                 ))}
-
-                <ListItemButton
-                    onClick={() => setWorkflowExpanded(!workflowExpanded)}
-                    sx={{
-                        borderRadius: 1,
-                        mb: 0.5,
-                        overflowX: "hidden",
-                        maxWidth: "100%",
-                    }}
-                >
-                    <ListItemIcon sx={{ minWidth: 36 }}>
-                        <BookmarkBorder />
-                    </ListItemIcon>
-                    <ListItemText
-                        primary="Workflow 1"
-                        primaryTypographyProps={{ fontSize: "0.875rem", noWrap: true }}
-                    />
-                    {workflowExpanded ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-
-                <Collapse in={workflowExpanded} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding sx={{ pl: 2 }}>
-                        <ListItemButton
-                            sx={{
-                                pl: 2,
-                                borderRadius: 1,
-                                overflowX: "hidden",
-                                maxWidth: "100%",
-                            }}
-                        >
-                            <ListItemText
-                                primary="Workflow 2"
-                                primaryTypographyProps={{ fontSize: "0.875rem", noWrap: true }}
-                            />
-                        </ListItemButton>
-                    </List>
-                </Collapse>
             </List>
 
             <Box sx={{ mt: "auto", pb: 2 }}>
