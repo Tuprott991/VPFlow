@@ -62,7 +62,7 @@ const VPFlowLogo = () => (
     </Box>
 )
 
-export default function LoginPage() {
+export default function SignupPage() {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({

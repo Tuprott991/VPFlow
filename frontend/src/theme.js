@@ -1,7 +1,20 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+  },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          fontFamily: '"Poppins", sans-serif',
+        },
+        "*": {
+          fontFamily: '"Poppins", sans-serif',
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: "outlined",
