@@ -1,83 +1,51 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Box, Typography, Button, Card, CardContent, IconButton, Avatar, Paper } from "@mui/material"
-import { FilterList, Sort, Info, MoreVert, ExpandMore } from "@mui/icons-material"
-
-// Sample feedback data
-const feedbackData = [
-    {
-        id: 1,
-        title: "Feedback 1",
-        subtitle: "Report the problem",
-        content: "The bottleneck of open bank account workflow is inaccurate",
-        from: "LXThanh",
-        role: "director",
-        status: "Recieved",
-        statusColor: "#1976d2", // Blue
-    },
-    {
-        id: 2,
-        title: "Feedback 2",
-        subtitle: "Report the AI chat bot",
-        content: "The chat bot is malfunction",
-        from: "NgZun",
-        role: "Banker",
-        status: "Implemented",
-        statusColor: "#2e7d32", // Green
-    },
-    {
-        id: 3,
-        title: "Feedback 3",
-        subtitle: "Report the system",
-        content: "The system is wonderful",
-        from: "NhPham",
-        role: "Banker",
-        status: "In Progress",
-        statusColor: "#f57c00", // Orange
-    },
-]
+import {
+    Box,
+    Typography,
+    Button,
+    Card,
+    CardContent,
+    Paper,
+} from "@mui/material";
+import {
+    FilterList,
+    Sort,
+    ExpandMore
+} from "@mui/icons-material";
+import {
+    feedbackData
+} from "@/data/mock_data/feedbackData.js";
 
 const FeedbackCard = ({ feedback }) => {
-    const [statusAnchorEl, setStatusAnchorEl] = useState(null)
-
-    const handleStatusClick = (event) => {
-        setStatusAnchorEl(event.currentTarget)
-    }
-
-    const handleStatusClose = () => {
-        setStatusAnchorEl(null)
-    }
-
     return (
         <Card
             sx={{
                 mb: 3,
-                backgroundColor: "#faf5e6", // Light beige background
+                backgroundColor: "#faf5e6",
                 borderRadius: 2,
                 boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
             }}
         >
             <CardContent sx={{ p: 3 }}>
-                {/* Header */}
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        mb: 2,
+                    }}
+                >
                     <Box>
                         <Typography
                             variant="h6"
-                            sx={{
-                                color: "#2e7d32", // Green color
-                                fontWeight: "bold",
-                                mb: 0.5,
-                            }}
+                            sx={{ color: "#2e7d32", fontWeight: "bold", mb: 0.5 }}
                         >
                             {feedback.title}
                         </Typography>
                         <Typography
                             variant="subtitle1"
-                            sx={{
-                                fontWeight: "bold",
-                                color: "#333",
-                            }}
+                            sx={{ fontWeight: "bold", color: "#333" }}
                         >
                             Title: {feedback.subtitle}
                         </Typography>
@@ -91,7 +59,6 @@ const FeedbackCard = ({ feedback }) => {
                             variant="contained"
                             size="small"
                             endIcon={<ExpandMore />}
-                            onClick={handleStatusClick}
                             sx={{
                                 backgroundColor: feedback.statusColor,
                                 color: "white",
@@ -108,7 +75,6 @@ const FeedbackCard = ({ feedback }) => {
                     </Box>
                 </Box>
 
-                {/* Content */}
                 <Paper
                     sx={{
                         p: 2,
@@ -123,7 +89,6 @@ const FeedbackCard = ({ feedback }) => {
                     </Typography>
                 </Paper>
 
-                {/* View Detail Button */}
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button
                         variant="contained"
@@ -143,49 +108,18 @@ const FeedbackCard = ({ feedback }) => {
                 </Box>
             </CardContent>
         </Card>
-    )
-}
+    );
+};
 
 export default function PainPointFeedbacksPage() {
-    const [sortBy, setSortBy] = useState("Lastest")
-
     return (
-        <Box sx={{ minHeight: "100vh", backgroundColor: "#f5f5f5" }}>
-            {/* Header */}
+        <Box sx={{ minHeight: "100vh", backgroundColor: "#fff" }}>
             <Box
                 sx={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    p: 3,
-                    backgroundColor: "white",
-                    borderBottom: "1px solid #e0e0e0",
-                }}
-            >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", mr: 1 }}>
-                        Pain Point Feedbacks
-                    </Typography>
-                    <IconButton size="small">
-                        <Info fontSize="small" />
-                    </IconButton>
-                </Box>
-
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Avatar sx={{ width: 32, height: 32, backgroundColor: "#4FC3F7" }}>T</Avatar>
-                    <IconButton size="small">
-                        <MoreVert />
-                    </IconButton>
-                </Box>
-            </Box>
-
-            {/* Controls */}
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    p: 3,
+                    p: 1.5,
                     backgroundColor: "white",
                     borderBottom: "1px solid #e0e0e0",
                 }}
@@ -201,7 +135,7 @@ export default function PainPointFeedbacksPage() {
                             borderColor: "#ddd",
                         }}
                     >
-                        Sorted by {sortBy}
+                        Sorted by Latest
                     </Button>
                     <Button
                         variant="outlined"
@@ -229,12 +163,11 @@ export default function PainPointFeedbacksPage() {
                 </Button>
             </Box>
 
-            {/* Content */}
             <Box sx={{ p: 3 }}>
                 {feedbackData.map((feedback) => (
                     <FeedbackCard key={feedback.id} feedback={feedback} />
                 ))}
             </Box>
         </Box>
-    )
+    );
 }

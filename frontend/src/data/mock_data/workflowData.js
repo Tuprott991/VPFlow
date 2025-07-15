@@ -1,0 +1,57 @@
+export const workflowData = [
+  {
+    id: 1,
+    name: "Credit Card",
+    categories: [
+      { name: "Computer Hardware", color: "#FFA726" },
+      { name: "Consumer goods", color: "#5C6BC0" },
+      { name: "Consumer", color: "#AB47BC" },
+    ],
+    lastInteraction: "27/06/2025",
+    lastPublished: "27/06/2025",
+    version: "Version 3.0",
+    note: "",
+  },
+  {
+    id: 2,
+    name: "WF02",
+    categories: [
+      { name: "Automation", color: "#FF7043" },
+      { name: "B2B", color: "#8D6E63" },
+      { name: "B2C", color: "#8D6E63" },
+      { name: "E-commerce", color: "#FFB74D" },
+    ],
+    lastInteraction: "27/06/2025",
+    lastPublished: "26/06/2025",
+    version: "Version 1.0",
+    note: "",
+  },
+  {
+    id: 3,
+    name: "WF03",
+    categories: [
+      { name: "B2C", color: "#8D6E63" },
+      { name: "Finance", color: "#FFB74D" },
+      { name: "Internet", color: "#4FC3F7" },
+      { name: "Marketplace", color: "#81C784" },
+    ],
+    lastInteraction: "26/06/2025",
+    lastPublished: "25/06/2025",
+    version: "Version 1.0",
+    note: "Most Important",
+  },
+  {
+    id: 4,
+    name: "WF04",
+    categories: [
+      { name: "B2C", color: "#8D6E63" },
+      { name: "Internet", color: "#4FC3F7" },
+      { name: "Financial services", color: "#FFB74D" },
+      { name: "Information", color: "#A5D6A7" },
+    ],
+    lastInteraction: "25/06/2025",
+    lastPublished: "24/06/2025",
+    version: "Version 1.0",
+    note: "",
+  },
+];

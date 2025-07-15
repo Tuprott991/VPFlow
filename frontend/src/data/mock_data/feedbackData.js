@@ -1,0 +1,32 @@
+export const feedbackData = [
+  {
+    id: 1,
+    title: "Feedback 1",
+    subtitle: "Report the problem",
+    content: "The bottleneck of open bank account workflow is inaccurate",
+    from: "LXThanh",
+    role: "director",
+    status: "Recieved",
+    statusColor: "#1976d2",
+  },
+  {
+    id: 2,
+    title: "Feedback 2",
+    subtitle: "Report the AI chat bot",
+    content: "The chat bot is malfunction",
+    from: "NgZun",
+    role: "Banker",
+    status: "Implemented",
+    statusColor: "#2e7d32",
+  },
+  {
+    id: 3,
+    title: "Feedback 3",
+    subtitle: "Report the system",
+    content: "The system is wonderful",
+    from: "NhPham",
+    role: "Banker",
+    status: "In Progress",
+    statusColor: "#f57c00",
+  },
+];
