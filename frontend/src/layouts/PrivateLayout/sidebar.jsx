@@ -99,6 +99,7 @@ const Sidebar = () => {
                             to={item.link || "#"}
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
+                            {({ isActive }) => (
                             <ListItemButton
                                 selected={isActive}
                                 sx={{
@@ -133,7 +134,7 @@ const Sidebar = () => {
                                         {item.shortcut}
                                     </Typography>
                                 )}
-                            </ListItemButton>
+                            </ListItemButton>)}
                         </NavLink> )}
                     </Box>
                 ))}
