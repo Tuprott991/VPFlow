@@ -17,7 +17,10 @@ import {
     feedbackData
 } from "@/data/mock_data/feedbackData.js";
 
+import { useNavigate } from "react-router-dom";
+
 const FeedbackCard = ({ feedback }) => {
+    const navigate = useNavigate();
     return (
         <Card
             sx={{
@@ -102,6 +105,7 @@ const FeedbackCard = ({ feedback }) => {
                                 backgroundColor: "#555",
                             },
                         }}
+                        onClick={() => navigate("/feedback-details")}
                     >
                         View detail
                     </Button>
