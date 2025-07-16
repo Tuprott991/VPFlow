@@ -12,6 +12,7 @@ import {
     Avatar,
     Divider,
     IconButton,
+    TextField
 } from "@mui/material";
 import {
     KeyboardCommandKey,
@@ -84,6 +85,16 @@ const Sidebar = () => {
             <List sx={{ overflowX: "hidden" }}>
                 {sidebarItems.map((item, index) => (
                     <Box key={index}>
+                        {item.text==="Quick actions" ? (
+                            <Box sx={{ px: 2, py: 1 }}>
+                                <TextField
+                                    fullWidth
+                                    size="small"
+                                    placeholder="Search..."
+                                    variant="outlined"
+                                />
+                            </Box>
+                        ) :(
                         <NavLink
                             to={item.link || "#"}
                             style={{ textDecoration: "none", color: "inherit" }}
@@ -122,7 +133,7 @@ const Sidebar = () => {
                                     </Typography>
                                 )}
                             </ListItemButton>
-                        </NavLink>
+                        </NavLink> )}
                     </Box>
                 ))}
             </List>
