@@ -147,6 +147,7 @@ const Sidebar = () => {
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
                             <ListItemButton
+                                selected={isActive}
                                 sx={{
                                     borderRadius: 1,
                                     mb: 0.5,
