@@ -22,52 +22,52 @@ import { TbMailQuestion } from "react-icons/tb";
 
 const drawerWidth = 240;
 
-const VPFlowLogo = () => (
-    <Box
-        sx={{
-            display: "flex",
-            alignItems: "center",
-            p: 2,
-            backgroundColor: "#019C4B",
-            overflow: "hidden",
-        }}
-    >
-        <Box
-            sx={{
-                width: 32,
-                height: 32,
-                backgroundColor: "white",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                mr: 1,
-                flexShrink: 0,
-            }}
-        >
-            <svg width="20" height="20" viewBox="0 0 20 20">
-                <circle cx="6" cy="6" r="2" fill="#2E8B57" />
-                <circle cx="14" cy="6" r="2" fill="#2E8B57" />
-                <circle cx="10" cy="14" r="2" fill="#2E8B57" />
-                <line x1="6" y1="6" x2="14" y2="6" stroke="#2E8B57" strokeWidth="1" />
-                <line x1="6" y1="6" x2="10" y2="14" stroke="#2E8B57" strokeWidth="1" />
-                <line x1="14" y1="6" x2="10" y2="14" stroke="#2E8B57" strokeWidth="1" />
-            </svg>
-        </Box>
-        <Typography
-            variant="h6"
-            sx={{
-                fontWeight: "bold",
-                color: "white",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-            }}
-        >
-            <span style={{ color: "#D64545" }}>VP</span>Flow
-        </Typography>
-    </Box>
-);
+// const VPFlowLogo = () => (
+//     <Box
+//         sx={{
+//             display: "flex",
+//             alignItems: "center",
+//             p: 2,
+//             backgroundColor: "#019C4B",
+//             overflow: "hidden",
+//         }}
+//     >
+//         <Box
+//             sx={{
+//                 width: 32,
+//                 height: 32,
+//                 backgroundColor: "white",
+//                 borderRadius: "50%",
+//                 display: "flex",
+//                 alignItems: "center",
+//                 justifyContent: "center",
+//                 mr: 1,
+//                 flexShrink: 0,
+//             }}
+//         >
+//             <svg width="20" height="20" viewBox="0 0 20 20">
+//                 <circle cx="6" cy="6" r="2" fill="#2E8B57" />
+//                 <circle cx="14" cy="6" r="2" fill="#2E8B57" />
+//                 <circle cx="10" cy="14" r="2" fill="#2E8B57" />
+//                 <line x1="6" y1="6" x2="14" y2="6" stroke="#2E8B57" strokeWidth="1" />
+//                 <line x1="6" y1="6" x2="10" y2="14" stroke="#2E8B57" strokeWidth="1" />
+//                 <line x1="14" y1="6" x2="10" y2="14" stroke="#2E8B57" strokeWidth="1" />
+//             </svg>
+//         </Box>
+//         <Typography
+//             variant="h6"
+//             sx={{
+//                 fontWeight: "bold",
+//                 color: "white",
+//                 overflow: "hidden",
+//                 whiteSpace: "nowrap",
+//                 textOverflow: "ellipsis",
+//             }}
+//         >
+//             <span style={{ color: "#D64545" }}>VP</span>Flow
+//         </Typography>
+//     </Box>
+// );
 
 const Sidebar = () => {
     const sidebarItems = [
@@ -113,7 +113,13 @@ const Sidebar = () => {
                 },
             }}
         >
-            <VPFlowLogo />
+            <Box sx={{ display: "flex", alignItems: "center", p: 2, backgroundColor: "#019C4B" }}>
+                <img
+                    src="../../public/group_41.png" 
+                    alt="VPFlow Logo"
+                    style={{ height: 40, objectFit: "contain" }}
+                />
+            </Box>
 
             <List sx={{ overflowX: "hidden" }}>
                 {sidebarItems.map((item, index) => (
