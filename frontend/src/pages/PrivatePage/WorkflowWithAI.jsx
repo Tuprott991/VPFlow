@@ -23,7 +23,7 @@ import {
     Description
 } from '@mui/icons-material';
 import { IoInformationCircleOutline } from 'react-icons/io5';
-import LoanWorkflow from '@/components/LoanWorkflow';
+import SwimlaneDiagram from '@/components/SwimlaneDiagram';
 
 const WorkflowHeader = () => (
     <Box sx={{ bgcolor: '#E5EEFF', borderBottom: 1, borderColor: 'divider', px: 1.5, py: 1 }}>
@@ -158,8 +158,8 @@ const App = () => (
                 <WorkflowHeader />
             </Box>
 
-            <Box sx={{ flex: 1, overflow: 'hidden', p: 2 }}>
-                <LoanWorkflow />
+            <Box sx={{ flex: 1, overflow: 'hidden' }}>
+                <SwimlaneDiagram />
             </Box>
         </Box>
 
