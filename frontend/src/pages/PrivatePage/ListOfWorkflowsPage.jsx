@@ -17,6 +17,7 @@ import {
     TableRow,
     Paper,
     Chip,
+    Typography,
 } from "@mui/material";
 
 import {
@@ -110,7 +111,7 @@ export default function ListOfWorkflowsPage() {
                             <TableCell align="center" sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
                                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
                                     <CiShoppingTag size={24} />
-                                        Categories
+                                    Categories
                                     {/* <SiCodemagic size={24} /> */}
                                 </Box>
                             </TableCell>
@@ -122,7 +123,7 @@ export default function ListOfWorkflowsPage() {
                             </TableCell>
                             <TableCell sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                    <GrUpdate  fontSize="small" />
+                                    <GrUpdate fontSize="small" />
                                     Last Published
                                 </Box>
                             </TableCell>
@@ -142,7 +143,11 @@ export default function ListOfWorkflowsPage() {
                     <TableBody>
                         {workflowData.map((workflow) => (
                             <TableRow key={workflow.id} hover>
-                                <TableCell sx={{ fontWeight: 500, borderRight: "1px solid #EEEFF1" }}>{workflow.name}</TableCell>
+                                <TableCell sx={{ fontWeight: 500, borderRight: "1px solid #EEEFF1" }}>
+                                    <Typography sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                                        {workflow.name}
+                                    </Typography>
+                                </TableCell>
                                 <TableCell sx={{ borderRight: "1px solid #EEEFF1" }}>
                                     <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
                                         {workflow.categories.map((category, index) => (
@@ -159,31 +164,43 @@ export default function ListOfWorkflowsPage() {
                                         ))}
                                     </Box>
                                 </TableCell>
-                                <TableCell sx={{ borderRight: "1px solid #EEEFF1" }}>{workflow.lastInteraction}</TableCell>
-                                <TableCell sx={{ borderRight: "1px solid #EEEFF1" }}>{workflow.lastPublished}</TableCell>
                                 <TableCell sx={{ borderRight: "1px solid #EEEFF1" }}>
-                                    <Chip
-                                        label={workflow.version}
-                                        size="small"
-                                        sx={{
-                                            backgroundColor: "#FFC4DC",
-                                            color: "#FF467D",
-                                            fontWeight: 600,
-                                        }}
-                                    />
+                                    <Typography sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                                        {workflow.lastInteraction}
+                                    </Typography>
                                 </TableCell>
-                                <TableCell>
-                                    {workflow.note && (
+                                <TableCell sx={{ borderRight: "1px solid #EEEFF1" }}>
+                                    <Typography sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                                        {workflow.lastPublished}
+                                    </Typography>
+                                </TableCell>
+                                <TableCell sx={{ borderRight: "1px solid #EEEFF1" }}>
+                                    <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
                                         <Chip
-                                            label={workflow.note}
+                                            label={workflow.version}
                                             size="small"
                                             sx={{
-                                                backgroundColor: "#FFE7C4",
-                                                color: "#FF9B37",
+                                                backgroundColor: "#FFC4DC",
+                                                color: "#FF467D",
                                                 fontWeight: 600,
                                             }}
                                         />
-                                    )}
+                                    </Box>
+                                </TableCell>
+                                <TableCell>
+                                    <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                                        {workflow.note && (
+                                            <Chip
+                                                label={workflow.note}
+                                                size="small"
+                                                sx={{
+                                                    backgroundColor: "#FFE7C4",
+                                                    color: "#FF9B37",
+                                                    fontWeight: 600,
+                                                }}
+                                            />
+                                        )}
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -212,6 +229,6 @@ export default function ListOfWorkflowsPage() {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Box>
+        </Box >
     );
 }

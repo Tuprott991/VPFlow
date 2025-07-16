@@ -1,6 +1,6 @@
 "use client";
 
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import {
     Box,
     Drawer,
@@ -11,6 +11,7 @@ import {
     Typography,
     Avatar,
     Divider,
+    IconButton,
 } from "@mui/material";
 import {
     KeyboardCommandKey,
@@ -18,7 +19,7 @@ import {
 } from "@mui/icons-material";
 import { PiGraph } from "react-icons/pi";
 import { BsPatchQuestion } from "react-icons/bs";
-import { TbMailQuestion } from "react-icons/tb";
+import { TbMailQuestion, TbLogout } from "react-icons/tb";
 
 const drawerWidth = 240;
 
@@ -70,6 +71,12 @@ const drawerWidth = 240;
 // );
 
 const Sidebar = () => {
+    const navigate = useNavigate();
+    const handleClickLogout = () => {
+        console.log("Logout clicked");
+        navigate("/login");
+    };
+
     const sidebarItems = [
         {
             text: "Quick actions",
@@ -191,8 +198,9 @@ const Sidebar = () => {
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        px: 2,
-                        overflowX: "hidden",
+                        pl: 2,
+                        pr: 1,
+                        overflow: "hidden",
                         maxWidth: "100%",
                     }}
                 >
@@ -200,13 +208,15 @@ const Sidebar = () => {
                         sx={{
                             width: 24,
                             height: 24,
-                            backgroundColor: "#4FC3F7",
+                            bgcolor: "#4FC3F7",
                             mr: 1.5,
                             flexShrink: 0,
+                            fontSize: 14,
                         }}
                     >
                         T
                     </Avatar>
+
                     <Typography
                         variant="body2"
                         sx={{
@@ -214,13 +224,26 @@ const Sidebar = () => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
+                            flexGrow: 1,
                         }}
                     >
                         Tu Ku
                     </Typography>
+
+                    <IconButton
+                        size="small"
+                        sx={{
+                            color: "warning.main",
+                            ml: 1,
+                            flexShrink: 0,
+                        }}
+                        onClick={() => handleClickLogout()}
+                    >
+                        <TbLogout size={20} />
+                    </IconButton>
                 </Box>
             </Box>
-        </Drawer>
+        </Drawer >
     );
 };
 

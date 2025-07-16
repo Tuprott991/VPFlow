@@ -11,24 +11,20 @@ import {
     FormControlLabel,
     Checkbox,
     Link,
-    Paper,
     Grid,
 } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 
-// Custom theme with VPFlow colors
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#2E8B57", // Green color
+            main: "#2E8B57",
         },
         secondary: {
-            main: "#D64545", // Red color
+            main: "#D64545",
         },
     },
 })
-
-
 
 function LoginForm({ formData, handleChange, handleSubmit }) {
     return (
@@ -162,7 +158,6 @@ function LoginForm({ formData, handleChange, handleSubmit }) {
     )
 }
 
-// ...existing code...
 export default function LoginPage() {
     const navigate = useNavigate()
 
@@ -172,7 +167,7 @@ export default function LoginPage() {
         rememberMe: false,
     })
 
-    const handleChange = (event) =>{
+    const handleChange = (event) => {
         const { name, value, checked, type } = event.target
         setFormData((prev) => ({
             ...prev,
@@ -186,66 +181,61 @@ export default function LoginPage() {
         navigate("/list-of-workflows")
     }
 
-
-return (
-    <ThemeProvider theme={theme}>
-        <Grid
-            container // Thêm container prop
-            sx={{
-                minHeight: "100vh",
-                width: "100vw",
-                backgroundImage: "url('/Group39.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                margin: 0, // Loại bỏ margin mặc định
-                padding: 0, // Loại bỏ padding mặc định
-            }}
-        >
-            {/* Form section - 1/3 màn hình */}
+    return (
+        <ThemeProvider theme={theme}>
             <Grid
-                size={{xs: 12, md: 4}}
+                container
                 sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: 2, // Thêm padding
+                    minHeight: "100vh",
+                    width: "100vw",
+                    backgroundImage: "url('/Group39.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    margin: 0,
+                    padding: 0,
                 }}
             >
-                <Container
-                    maxWidth="xs"
+                <Grid
+                    size={{ xs: 12, md: 4 }}
                     sx={{
-                        width: 320,
-                        backgroundColor: "rgba(255,255,255,0)",
-                        borderRadius: 3,
-                        boxShadow: 3,
-                        p: 3,
                         display: "flex",
-                        flexDirection: "column",
                         alignItems: "center",
+                        justifyContent: "center",
+                        padding: 2,
                     }}
                 >
-                    <LoginForm
-                        formData={formData}
-                        handleChange={handleChange}
-                        handleSubmit={handleSubmit}
-                    />
-                </Container>
-            </Grid>
+                    <Container
+                        maxWidth="xs"
+                        sx={{
+                            width: 320,
+                            backgroundColor: "rgba(255,255,255,0)",
+                            borderRadius: 3,
+                            boxShadow: 3,
+                            p: 3,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                        }}
+                    >
+                        <LoginForm
+                            formData={formData}
+                            handleChange={handleChange}
+                            handleSubmit={handleSubmit}
+                        />
+                    </Container>
+                </Grid>
 
-            {/* Background section - 2/3 màn hình */}
-            <Grid
-                size={{xs: 12, md: 8}}
-                sx={{
-                    display: { xs: "none", md: "flex" },
-                    alignItems: "center",
-                    justifyContent: "center",
-                    position: "relative",
-                }}
-            >
-                {/* Có thể thêm logo hoặc content khác ở đây */}
+                <Grid
+                    size={{ xs: 12, md: 8 }}
+                    sx={{
+                        display: { xs: "none", md: "flex" },
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "relative",
+                    }}
+                >
+                </Grid>
             </Grid>
-        </Grid>
-    </ThemeProvider>
+        </ThemeProvider>
     )
-
-    }
+}
