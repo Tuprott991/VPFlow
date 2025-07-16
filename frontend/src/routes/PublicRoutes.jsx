@@ -1,10 +1,14 @@
 import { Navigate } from 'react-router-dom';
-import LoginPage from '../pages/PublicPage/LoginPage';
+import { LoginPage, SignupPage } from '../pages/PublicPage';
 
 const PublicRoutes = [
     {
         path: '/login',
         element: <LoginPage />,
+    },
+    {
+        path: '/signup',
+        element: <SignupPage />,
     },
     {
         path: '/',
