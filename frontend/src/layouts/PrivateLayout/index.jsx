@@ -1,6 +1,9 @@
 "use client";
 
-import { Outlet } from "react-router-dom";
+import {
+    Outlet,
+    useLocation
+} from "react-router-dom";
 import {
     Box,
     AppBar,
@@ -11,12 +14,34 @@ import {
 import { Info } from "@mui/icons-material";
 import Sidebar from "./sidebar";
 
+const formatTitle = (segment) => {
+    if (!segment) return "Dashboard";
+    return segment
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+};
+
+
 const PrivateLayout = () => {
+    const location = useLocation();
+    const segments = location.pathname.split('/').filter(Boolean);
+    const lastSegment = segments[segments.length - 1];
+    const titlePage = formatTitle(lastSegment);
+
     return (
         <Box sx={{ display: "flex", minHeight: "100vh", width: "100%" }}>
             <Sidebar />
 
-            <Box component="main" sx={{ flexGrow: 1, display: "flex", flexDirection: "column", backgroundColor: "#ffffff" }}>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    backgroundColor: "#ffffff",
+                }}
+            >
                 <AppBar
                     position="sticky"
                     elevation={0}
@@ -29,7 +54,7 @@ const PrivateLayout = () => {
                     <Toolbar sx={{ justifyContent: "space-between" }}>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mr: 1 }}>
-                                List Of Workflows
+                                {titlePage}
                             </Typography>
                             <IconButton size="small">
                                 <Info fontSize="small" />
