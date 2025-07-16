@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Box,
     Typography,
@@ -24,6 +23,7 @@ import {
     Description
 } from '@mui/icons-material';
 import { IoInformationCircleOutline } from 'react-icons/io5';
+import LoanWorkflow from '@/components/LoanWorkflow';
 
 const WorkflowHeader = () => (
     <Box sx={{ bgcolor: '#E5EEFF', borderBottom: 1, borderColor: 'divider', px: 1.5, py: 1 }}>
@@ -153,18 +153,13 @@ const ToolsPanel = () => (
 
 const App = () => (
     <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 320px)' }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 320px)', overflow: 'hidden' }}>
             <Box sx={{ bgcolor: 'background.default', borderBottom: 1, borderColor: 'divider', flexShrink: 0 }}>
                 <WorkflowHeader />
             </Box>
 
-            <Box sx={{ flex: 1, overflow: 'auto', p: 2 }}>
-                <Typography variant="h6">Workflow Content Area</Typography>
-                {Array.from({ length: 50 }).map((_, index) => (
-                    <Typography key={index} my={2}>
-                        Content line {index + 1}
-                    </Typography>
-                ))}
+            <Box sx={{ flex: 1, overflow: 'hidden', p: 2 }}>
+                <LoanWorkflow />
             </Box>
         </Box>
 
@@ -174,7 +169,7 @@ const App = () => (
                 bgcolor: '#f8f9fa',
                 borderLeft: 1,
                 borderColor: 'divider',
-                overflow: 'auto', // Thay đổi từ 'hidden' thành 'auto'
+                overflow: 'hidden',
                 flexShrink: 0
             }}
         >
