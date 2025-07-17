@@ -1,0 +1,258 @@
+2025-07-17 22:48:26,447 - lightrag - INFO - Created new empty graph
+2025-07-17 22:48:26,470 - lightrag - INFO - Process 11732 KV load full_docs with 0 records
+2025-07-17 22:48:26,470 - lightrag - INFO - Process 11732 KV load text_chunks with 0 records
+2025-07-17 22:48:26,472 - lightrag - INFO - Process 11732 KV load llm_response_cache with 0 records
+2025-07-17 22:48:26,472 - lightrag - INFO - Process 11732 doc status load doc_status with 0 records
+2025-07-17 22:48:26,482 - lightrag - INFO - Stored 1 new unique documents
+2025-07-17 22:48:26,483 - lightrag - INFO - Storage Initialization completed!
+2025-07-17 22:48:26,483 - lightrag - INFO - Processing 1 document(s)
+2025-07-17 22:48:26,483 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-17 22:48:26,484 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-17 22:48:26,503 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-17 22:48:26,504 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-17 22:48:26,508 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:48:26,509 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:48:26,510 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:48:26,511 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:48:26,511 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:48:26,576 - lightrag - ERROR - Traceback (most recent call last):
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1006, in process_document
+    await asyncio.gather(*tasks)
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\kg\nano_vector_db_impl.py", line 109, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 585, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 369, in worker
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 241, in __call__
+    return await self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 446, in openai_embed
+    openai_async_client = create_openai_async_client(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 72, in create_openai_async_client
+    api_key = os.environ["OPENAI_API_KEY"]
+              ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 679, in __getitem__
+KeyError: 'OPENAI_API_KEY'
+
+2025-07-17 22:48:26,577 - lightrag - ERROR - Failed to extract document 1/1: unknown_source
+2025-07-17 22:48:26,579 - lightrag - INFO - Document processing pipeline completed
+2025-07-17 22:48:26,622 - lightrag - INFO - Creating a new event loop in main thread.
+2025-07-17 22:57:14,026 - lightrag - INFO - Created new empty graph
+2025-07-17 22:57:14,041 - lightrag - INFO - Process 28320 KV load full_docs with 0 records
+2025-07-17 22:57:14,041 - lightrag - INFO - Process 28320 KV load text_chunks with 0 records
+2025-07-17 22:57:14,042 - lightrag - INFO - Process 28320 KV load llm_response_cache with 0 records
+2025-07-17 22:57:14,059 - lightrag - INFO - Process 28320 doc status load doc_status with 1 records
+2025-07-17 22:57:14,062 - lightrag - INFO - No new unique documents were found.
+2025-07-17 22:57:14,062 - lightrag - INFO - Storage Initialization completed!
+2025-07-17 22:57:14,062 - lightrag - INFO - Processing 1 document(s)
+2025-07-17 22:57:14,063 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-17 22:57:14,063 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-17 22:57:14,080 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-17 22:57:14,081 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-17 22:57:14,084 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:57:14,086 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:57:14,086 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:57:14,087 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:57:14,087 - lightrag - ERROR - limit_async: Error in decorated function: 'OPENAI_API_KEY'
+2025-07-17 22:57:14,134 - lightrag - ERROR - Traceback (most recent call last):
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1006, in process_document
+    await asyncio.gather(*tasks)
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\kg\nano_vector_db_impl.py", line 109, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 585, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 369, in worker
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 241, in __call__
+    return await self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 446, in openai_embed
+    openai_async_client = create_openai_async_client(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 72, in create_openai_async_client
+    api_key = os.environ["OPENAI_API_KEY"]
+              ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 679, in __getitem__
+KeyError: 'OPENAI_API_KEY'
+
+2025-07-17 22:57:14,136 - lightrag - ERROR - Failed to extract document 1/1: unknown_source
+2025-07-17 22:57:14,139 - lightrag - INFO - Document processing pipeline completed
+2025-07-17 22:57:14,181 - lightrag - INFO - Creating a new event loop in main thread.
+2025-07-17 22:57:35,135 - lightrag - INFO - Created new empty graph
+2025-07-17 22:57:35,149 - lightrag - INFO - Process 19496 KV load full_docs with 0 records
+2025-07-17 22:57:35,150 - lightrag - INFO - Process 19496 KV load text_chunks with 0 records
+2025-07-17 22:57:35,150 - lightrag - INFO - Process 19496 KV load llm_response_cache with 0 records
+2025-07-17 22:57:35,169 - lightrag - INFO - Process 19496 doc status load doc_status with 1 records
+2025-07-17 22:57:35,171 - lightrag - INFO - No new unique documents were found.
+2025-07-17 22:57:35,171 - lightrag - INFO - Storage Initialization completed!
+2025-07-17 22:57:35,171 - lightrag - INFO - Processing 1 document(s)
+2025-07-17 22:57:35,172 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-17 22:57:35,172 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-17 22:57:35,190 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-17 22:57:35,191 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-17 22:57:45,758 - lightrag - INFO -  == LLM cache == saving default: e2c957c8e46da496339cfad4f783acf8
+2025-07-17 22:57:48,271 - lightrag - INFO -  == LLM cache == saving default: fa1fba9b6643464d4a6e5bcea7416820
+2025-07-17 22:57:51,280 - lightrag - INFO -  == LLM cache == saving default: 4fa21cf73fe58dfc616cfcd4f721670d
+2025-07-17 22:57:54,711 - lightrag - INFO -  == LLM cache == saving default: 877955f3d28dbd5372d6914d73e73cea
+2025-07-17 22:58:00,518 - lightrag - INFO -  == LLM cache == saving default: 0ab2b4d4e4cc316688c49e19a734b52f
+2025-07-17 22:58:00,520 - lightrag - INFO - Chunk 1 of 15 extracted 17 Ent + 12 Rel
+2025-07-17 22:58:00,758 - lightrag - INFO -  == LLM cache == saving default: b36488265507f167d4523734e8919dcb
+2025-07-17 22:58:00,760 - lightrag - INFO - Chunk 2 of 15 extracted 20 Ent + 14 Rel
+2025-07-17 22:58:05,614 - lightrag - INFO -  == LLM cache == saving default: 202b411db53ae74fef56ed57b87cb586
+2025-07-17 22:58:05,616 - lightrag - INFO - Chunk 3 of 15 extracted 15 Ent + 13 Rel
+2025-07-17 22:58:09,892 - lightrag - INFO -  == LLM cache == saving default: 8b98137105fe85f88237673664a1d282
+2025-07-17 22:58:11,553 - lightrag - INFO -  == LLM cache == saving default: 2b7462c362bfa3483405c066c2c0cde5
+2025-07-17 22:58:15,791 - lightrag - INFO -  == LLM cache == saving default: d684c1c1fb430ec6483153a8045ca286
+2025-07-17 22:58:15,792 - lightrag - INFO - Chunk 4 of 15 extracted 21 Ent + 24 Rel
+2025-07-17 22:58:16,375 - lightrag - INFO -  == LLM cache == saving default: 65cc79ef463250338d48722214524af8
+2025-07-17 22:58:25,486 - lightrag - INFO -  == LLM cache == saving default: 84df91dda4abea00c6c7e68f6763c19a
+2025-07-17 22:58:25,489 - lightrag - INFO - Chunk 5 of 15 extracted 17 Ent + 14 Rel
+2025-07-17 22:58:26,280 - lightrag - INFO -  == LLM cache == saving default: 89ed8306f3e2e44c006dd9b605e14d56
+2025-07-17 22:58:26,281 - lightrag - INFO - Chunk 6 of 15 extracted 18 Ent + 14 Rel
+2025-07-17 22:58:29,961 - lightrag - INFO -  == LLM cache == saving default: 2bc8d5130231cfe40a65646431b96029
+2025-07-17 22:58:30,773 - lightrag - INFO -  == LLM cache == saving default: 4f38239e1fb1f59719042bdc702618cb
+2025-07-17 22:58:30,774 - lightrag - INFO - Chunk 7 of 15 extracted 18 Ent + 15 Rel
+2025-07-17 22:58:36,555 - lightrag - INFO -  == LLM cache == saving default: 043aae09ad41d0934a3f373be1cabb13
+2025-07-17 22:58:37,093 - lightrag - INFO -  == LLM cache == saving default: 35630e58458aaec3e39ab00dda2250b3
+2025-07-17 22:58:40,296 - lightrag - INFO -  == LLM cache == saving default: ced82889accb3d37aa404bbcc3d199e4
+2025-07-17 22:58:47,633 - lightrag - INFO -  == LLM cache == saving default: 7c3eedb21f2400b1fc666c4b69b3f55d
+2025-07-17 22:58:47,634 - lightrag - INFO - Chunk 8 of 15 extracted 13 Ent + 10 Rel
+2025-07-17 22:58:57,193 - lightrag - INFO -  == LLM cache == saving default: 68378566f4de44f344c8079b6f2b315b
+2025-07-17 22:58:57,195 - lightrag - INFO - Chunk 9 of 15 extracted 18 Ent + 15 Rel
+2025-07-17 22:58:57,647 - lightrag - INFO -  == LLM cache == saving default: b39fc0aee20d6eccbc49a6b2031ff2ab
+2025-07-17 22:58:57,648 - lightrag - INFO - Chunk 10 of 15 extracted 16 Ent + 10 Rel
+2025-07-17 22:59:01,783 - lightrag - INFO -  == LLM cache == saving default: 5bc5e19f38d5933b75f5708c176f7f33
+2025-07-17 22:59:02,278 - lightrag - INFO -  == LLM cache == saving default: bfc95a3863ebe66edf661e2db2929111
+2025-07-17 22:59:02,280 - lightrag - INFO - Chunk 11 of 15 extracted 14 Ent + 10 Rel
+2025-07-17 22:59:13,241 - lightrag - INFO -  == LLM cache == saving default: bf216703b2b2cd8731eb0200cf4a1761
+2025-07-17 22:59:14,087 - lightrag - INFO -  == LLM cache == saving default: 730a49371b43005d456d432ea0db9177
+2025-07-17 22:59:20,019 - lightrag - INFO -  == LLM cache == saving default: 7f25efc275b58f460971e9c84540e824
+2025-07-17 22:59:20,021 - lightrag - INFO - Chunk 12 of 15 extracted 18 Ent + 12 Rel
+2025-07-17 22:59:20,399 - lightrag - INFO -  == LLM cache == saving default: 7402f3fa170895ea97068b23433d034b
+2025-07-17 22:59:25,785 - lightrag - INFO -  == LLM cache == saving default: 7ec329a35400807f3196604ab3c0ce77
+2025-07-17 22:59:25,788 - lightrag - INFO - Chunk 13 of 15 extracted 19 Ent + 12 Rel
+2025-07-17 22:59:28,320 - lightrag - INFO -  == LLM cache == saving default: c0764a58cc6ce0cbd441959c71778555
+2025-07-17 22:59:28,323 - lightrag - INFO - Chunk 14 of 15 extracted 10 Ent + 9 Rel
+2025-07-17 22:59:39,445 - lightrag - INFO -  == LLM cache == saving default: f2f870daf68c4fe97afae2b83ca0cba4
+2025-07-17 22:59:39,448 - lightrag - INFO - Chunk 15 of 15 extracted 17 Ent + 11 Rel
+2025-07-17 22:59:39,449 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-07-17 22:59:39,451 - lightrag - INFO - LLM merge N: VPBank | 9+0
+2025-07-17 22:59:43,577 - lightrag - INFO -  == LLM cache == saving default: 6ad0acf9f1ba29c41831b33a753bcca6
+2025-07-17 22:59:43,577 - lightrag - INFO - Merge N: VPFlow | 4+0
+2025-07-17 22:59:43,578 - lightrag - INFO - Merge N: Dynamic Swimlane Diagram | 2+0
+2025-07-17 22:59:43,578 - lightrag - INFO - Merge N: Lương Xuân Thanh | 2+0
+2025-07-17 22:59:43,578 - lightrag - INFO - Merge N: AWS | 2+0
+2025-07-17 22:59:43,580 - lightrag - INFO - Merge N: SageMaker | 3+0
+2025-07-17 22:59:43,580 - lightrag - INFO - Merge N: IAM | 2+0
+2025-07-17 22:59:43,581 - lightrag - INFO - Merge N: CloudTrail | 2+0
+2025-07-17 22:59:43,581 - lightrag - INFO - Merge N: Generative AI | 2+0
+2025-07-17 22:59:43,582 - lightrag - INFO - Merge N: SOPs | 2+0
+2025-07-17 22:59:43,583 - lightrag - INFO - Merge N: Node Registry | 2+0
+2025-07-17 22:59:43,584 - lightrag - INFO - Merge N: Pain Points | 2+0
+2025-07-17 22:59:43,585 - lightrag - INFO - Merge N: Key Capabilities | 2+0
+2025-07-17 22:59:43,585 - lightrag - INFO - Merge N: AI Suggestions | 2+0
+2025-07-17 22:59:43,586 - lightrag - INFO - Merge N: Architecture | 2+0
+2025-07-17 22:59:43,586 - lightrag - INFO - Merge N: Dynamic Swimlane | 2+0
+2025-07-17 22:59:43,586 - lightrag - INFO - Merge N: EPIC 6 - Feedback & Improvement Loop | 2+0
+2025-07-17 22:59:43,588 - lightrag - INFO - Merge N: Multilingual LLM | 2+0
+2025-07-17 22:59:43,588 - lightrag - INFO - Merge N: Workflow Diagram | 2+0
+2025-07-17 22:59:43,588 - lightrag - INFO - Merge N: Change Log | 2+0
+2025-07-17 22:59:43,589 - lightrag - INFO - Merge N: Amazon SageMaker | 4+0
+2025-07-17 22:59:43,589 - lightrag - INFO - Merge N: AWS Cloud | 2+0
+2025-07-17 22:59:43,590 - lightrag - INFO - Merge N: Amazon EventBridge | 2+0
+2025-07-17 22:59:43,590 - lightrag - INFO - Merge N: Amazon S3 | 2+0
+2025-07-17 22:59:43,591 - lightrag - INFO - Merge N: Amazon Neptune | 4+0
+2025-07-17 22:59:43,591 - lightrag - INFO - Merge N: Diagram Generation | 2+0
+2025-07-17 22:59:43,592 - lightrag - INFO - Merge N: Feedback Loop | 2+0
+2025-07-17 22:59:43,592 - lightrag - INFO - Merge N: Neptune | 2+0
+2025-07-17 22:59:43,595 - lightrag - INFO - Merge N: AWS Lambda | 2+0
+2025-07-17 22:59:43,596 - lightrag - INFO - Merge N: Bedrock | 2+0
+2025-07-17 22:59:43,597 - lightrag - INFO - Merge E: Dynamic Swimlane Diagram - VPFlow | 2+0
+2025-07-17 22:59:43,599 - lightrag - INFO - Merge E: AWS - CloudTrail | 2+0
+2025-07-17 22:59:43,600 - lightrag - INFO - Merge E: VPBank - VPFlow | 2+0
+2025-07-17 22:59:43,604 - lightrag - INFO - Merge E: AWS Cloud - Amazon SageMaker | 2+0
+2025-07-17 22:59:43,605 - lightrag - INFO - Merge E: AWS Lambda - Amazon EventBridge | 2+0
+2025-07-17 22:59:43,610 - lightrag - INFO - Updating 205 entities  1/1: unknown_source
+2025-07-17 22:59:52,557 - lightrag - INFO - Updating 190 relations 1/1: unknown_source
+2025-07-17 23:00:00,423 - lightrag - INFO - Writing graph with 208 nodes, 190 edges
+2025-07-17 23:00:00,478 - lightrag - INFO - In memory DB persist to disk
+2025-07-17 23:00:00,480 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-07-17 23:00:00,481 - lightrag - INFO - Document processing pipeline completed
+2025-07-17 23:00:00,483 - lightrag - INFO - Storage Finalization completed!
+2025-07-17 23:09:36,231 - lightrag - INFO - Loaded graph from ./lightrag_data\graph_chunk_entity_relation.graphml with 208 nodes, 190 edges
+2025-07-17 23:09:36,281 - lightrag - INFO - Process 53748 KV load full_docs with 1 records
+2025-07-17 23:09:36,284 - lightrag - INFO - Process 53748 KV load text_chunks with 15 records
+2025-07-17 23:09:36,293 - lightrag - INFO - Process 53748 KV load llm_response_cache with 31 records
+2025-07-17 23:09:36,295 - lightrag - INFO - Process 53748 doc status load doc_status with 1 records
+2025-07-17 23:09:36,301 - lightrag - INFO - Storage Initialization completed!
+2025-07-17 23:09:36,303 - lightrag - INFO - Storage Finalization completed!
+2025-07-17 23:12:00,208 - lightrag - INFO - Loaded graph from ./lightrag_data\graph_chunk_entity_relation.graphml with 208 nodes, 190 edges
+2025-07-17 23:12:00,253 - lightrag - INFO - Process 51320 KV load full_docs with 1 records
+2025-07-17 23:12:00,255 - lightrag - INFO - Process 51320 KV load text_chunks with 15 records
+2025-07-17 23:12:00,260 - lightrag - INFO - Process 51320 KV load llm_response_cache with 31 records
+2025-07-17 23:12:00,262 - lightrag - INFO - Process 51320 doc status load doc_status with 1 records
+2025-07-17 23:12:00,268 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-17 23:12:00,268 - lightrag - INFO - Storage Initialization completed!
+2025-07-17 23:12:03,305 - lightrag - INFO -  == LLM cache == saving hybrid: 6eedde22e86b262dbb6240babb39695d
+2025-07-17 23:12:03,305 - lightrag - INFO - Process 51320 building query context...
+2025-07-17 23:12:03,305 - lightrag - INFO - Query nodes: Leaders, Main features, Project management, Team structure, top_k: 60, cosine: 0.2
+2025-07-17 23:12:03,306 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-17 23:12:04,656 - lightrag - INFO - Local query uses 60 entites, 80 relations, 3 chunks
+2025-07-17 23:12:04,657 - lightrag - INFO - Query edges: VPFlow project, Leadership, Project features, top_k: 60, cosine: 0.2
+2025-07-17 23:12:06,088 - lightrag - INFO - Global query uses 69 entites, 60 relations, 3 chunks
+2025-07-17 23:12:17,452 - lightrag - INFO -  == LLM cache == saving hybrid: 397a1cbd271e1205af244fc09087138e
+2025-07-17 23:12:17,460 - lightrag - INFO - Storage Finalization completed!

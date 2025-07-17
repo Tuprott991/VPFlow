@@ -28,20 +28,14 @@ async def main():
         # Initialize RAG instance
         rag = await initialize_rag()
 
-        # Read md file as f
-        with open("vpflow.md", "r", encoding="utf-8") as f:
-            text = f.read()
-
-        await rag.ainsert(text, ids="vpflow_softai_doc")
-
-        # # Perform hybrid search
-        # mode = "hybrid"
-        # print(
-        #   await rag.query(
-        #       "What are the top themes in this story?",
-        #       param=QueryParam(mode=mode)
-        #   )
-        # )
+        # Perform hybrid search
+        mode = "hybrid"
+        print(
+          await rag.aquery(
+              "Who are the leader of VPFlow project and what are the main features?",
+              param=QueryParam(mode=mode)
+          )
+        )
 
     except Exception as e:
         print(f"An error occurred: {e}")
