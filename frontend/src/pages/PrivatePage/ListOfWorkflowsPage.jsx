@@ -21,6 +21,7 @@ import {
     Typography,
     Menu
 } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 import {
     Search,
@@ -61,6 +62,7 @@ export default function ListOfWorkflowsPage() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const navigate = useNavigate();
 
     return (
         <Box sx={{ p: 1.5, flexGrow: 1 }}>
@@ -180,7 +182,17 @@ export default function ListOfWorkflowsPage() {
 
                     <TableBody>
                             {filteredWorkflows.map((workflow) => (
-                            <TableRow key={workflow.id} hover>
+                            <TableRow 
+                             key={workflow.id}
+                            hover
+                            onClick={() => navigate('/workflow-details')}
+                            sx={{
+                                cursor: 'pointer',
+                                '&:hover': {
+                                    backgroundColor: '#85e9b6ff !important',  
+                                }
+                            }}
+                            >
                                 <TableCell sx={{ fontWeight: 500, borderRight: "1px solid #EEEFF1" }}>
                                     <Typography sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
                                         {workflow.name}
