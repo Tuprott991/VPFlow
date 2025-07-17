@@ -3,5 +3,5 @@ import PainPointFeedbackPage from './PainPointFeedbackPage';
 import FeedbackDetailsPage from './FeedbackDetailsPage';
 import WorkflowWithAI from './WorkflowWithAI';
 import HelpsAndFirstStepPage from './HelpsAndFirstStepPage';
-
-export { ListOfWorkflowsPage, PainPointFeedbackPage, FeedbackDetailsPage, WorkflowWithAI, HelpsAndFirstStepPage };
+import WorkflowDetailsPage from './WorkFlowDetailsPage';
+export { ListOfWorkflowsPage, PainPointFeedbackPage, FeedbackDetailsPage, WorkflowWithAI, HelpsAndFirstStepPage, WorkflowDetailsPage };
