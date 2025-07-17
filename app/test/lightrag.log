@@ -1,0 +1,331 @@
+2025-07-16 17:29:40,496 - lightrag - INFO - Creating a new event loop in main thread.
+2025-07-16 17:31:58,754 - lightrag - INFO - Created new empty graph
+2025-07-16 17:32:01,519 - lightrag - INFO - Process 1716 KV load full_docs with 0 records
+2025-07-16 17:32:01,520 - lightrag - INFO - Process 1716 KV load text_chunks with 0 records
+2025-07-16 17:32:01,521 - lightrag - INFO - Process 1716 KV load llm_response_cache with 0 records
+2025-07-16 17:32:01,522 - lightrag - INFO - Process 1716 doc status load doc_status with 0 records
+2025-07-16 17:32:01,523 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:32:01,524 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:32:17,283 - lightrag - INFO - Created new empty graph
+2025-07-16 17:32:17,310 - lightrag - INFO - Process 56928 KV load full_docs with 0 records
+2025-07-16 17:32:17,311 - lightrag - INFO - Process 56928 KV load text_chunks with 0 records
+2025-07-16 17:32:17,312 - lightrag - INFO - Process 56928 KV load llm_response_cache with 0 records
+2025-07-16 17:32:17,312 - lightrag - INFO - Process 56928 doc status load doc_status with 0 records
+2025-07-16 17:32:17,315 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:32:17,315 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:34:37,014 - lightrag - INFO - Created new empty graph
+2025-07-16 17:34:37,034 - lightrag - INFO - Process 9788 KV load full_docs with 0 records
+2025-07-16 17:34:37,035 - lightrag - INFO - Process 9788 KV load text_chunks with 0 records
+2025-07-16 17:34:37,036 - lightrag - INFO - Process 9788 KV load llm_response_cache with 0 records
+2025-07-16 17:34:37,037 - lightrag - INFO - Process 9788 doc status load doc_status with 0 records
+2025-07-16 17:34:37,042 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:34:37,044 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:35:37,710 - lightrag - INFO - Created new empty graph
+2025-07-16 17:35:37,728 - lightrag - INFO - Process 30524 KV load full_docs with 0 records
+2025-07-16 17:35:37,729 - lightrag - INFO - Process 30524 KV load text_chunks with 0 records
+2025-07-16 17:35:37,730 - lightrag - INFO - Process 30524 KV load llm_response_cache with 0 records
+2025-07-16 17:35:37,731 - lightrag - INFO - Process 30524 doc status load doc_status with 0 records
+2025-07-16 17:35:37,734 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:35:37,734 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:36:01,770 - lightrag - INFO - Created new empty graph
+2025-07-16 17:36:01,788 - lightrag - INFO - Process 59808 KV load full_docs with 0 records
+2025-07-16 17:36:01,789 - lightrag - INFO - Process 59808 KV load text_chunks with 0 records
+2025-07-16 17:36:01,790 - lightrag - INFO - Process 59808 KV load llm_response_cache with 0 records
+2025-07-16 17:36:01,791 - lightrag - INFO - Process 59808 doc status load doc_status with 0 records
+2025-07-16 17:36:01,792 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:36:01,792 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:37:07,682 - lightrag - INFO - Created new empty graph
+2025-07-16 17:37:07,700 - lightrag - INFO - Process 29324 KV load full_docs with 0 records
+2025-07-16 17:37:07,701 - lightrag - INFO - Process 29324 KV load text_chunks with 0 records
+2025-07-16 17:37:07,702 - lightrag - INFO - Process 29324 KV load llm_response_cache with 0 records
+2025-07-16 17:37:07,702 - lightrag - INFO - Process 29324 doc status load doc_status with 0 records
+2025-07-16 17:37:07,704 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:37:07,704 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:37:47,019 - lightrag - INFO - Created new empty graph
+2025-07-16 17:37:47,036 - lightrag - INFO - Process 17788 KV load full_docs with 0 records
+2025-07-16 17:37:47,036 - lightrag - INFO - Process 17788 KV load text_chunks with 0 records
+2025-07-16 17:37:47,037 - lightrag - INFO - Process 17788 KV load llm_response_cache with 0 records
+2025-07-16 17:37:47,037 - lightrag - INFO - Process 17788 doc status load doc_status with 0 records
+2025-07-16 17:37:47,042 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:37:47,042 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:39:30,220 - lightrag - INFO - Created new empty graph
+2025-07-16 17:39:30,237 - lightrag - INFO - Process 21104 KV load full_docs with 0 records
+2025-07-16 17:39:30,238 - lightrag - INFO - Process 21104 KV load text_chunks with 0 records
+2025-07-16 17:39:30,239 - lightrag - INFO - Process 21104 KV load llm_response_cache with 0 records
+2025-07-16 17:39:30,240 - lightrag - INFO - Process 21104 doc status load doc_status with 0 records
+2025-07-16 17:39:30,242 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:39:30,243 - lightrag - INFO - Storage Finalization completed!
+2025-07-16 17:41:01,545 - lightrag - INFO - Created new empty graph
+2025-07-16 17:41:01,565 - lightrag - INFO - Process 13132 KV load full_docs with 0 records
+2025-07-16 17:41:01,566 - lightrag - INFO - Process 13132 KV load text_chunks with 0 records
+2025-07-16 17:41:01,566 - lightrag - INFO - Process 13132 KV load llm_response_cache with 0 records
+2025-07-16 17:41:01,567 - lightrag - INFO - Process 13132 doc status load doc_status with 0 records
+2025-07-16 17:41:01,579 - lightrag - INFO - Stored 1 new unique documents
+2025-07-16 17:41:01,579 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:41:01,580 - lightrag - INFO - Processing 1 document(s)
+2025-07-16 17:41:01,581 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-16 17:41:01,581 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-16 17:41:01,603 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-16 17:41:01,603 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-16 17:41:05,134 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o-mini,
+Params: {}, Got: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:41:05,135 - lightrag - ERROR - limit_async: Error in decorated function: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:41:05,136 - lightrag - ERROR - Failed to extract entities and relationships: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:41:05,146 - lightrag - ERROR - Traceback (most recent call last):
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1006, in process_document
+    await asyncio.gather(*tasks)
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1204, in _process_entity_relation_graph
+    raise e
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1190, in _process_entity_relation_graph
+    chunk_results = await extract_entities(
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1316, in extract_entities
+    raise task.exception()
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1292, in _process_with_semaphore
+    return await _process_single_content(chunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1215, in _process_single_content
+    final_result = await use_llm_func_with_cache(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 1586, in use_llm_func_with_cache
+    res: str = await use_llm_func(input_text, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 585, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 369, in worker
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 377, in gpt_4o_mini_complete
+    return await openai_complete_if_cache(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 186, in openai_complete_if_cache
+    response = await openai_async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2454, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\_base_client.py", line 1791, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\_base_client.py", line 1591, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+
+2025-07-16 17:41:05,147 - lightrag - ERROR - Failed to extract document 1/1: unknown_source
+2025-07-16 17:41:05,149 - lightrag - INFO - Document processing pipeline completed
+2025-07-16 17:41:17,505 - lightrag - INFO - Creating a new event loop in main thread.
+2025-07-16 17:43:59,132 - lightrag - INFO - Created new empty graph
+2025-07-16 17:43:59,149 - lightrag - INFO - Process 56464 KV load full_docs with 0 records
+2025-07-16 17:43:59,150 - lightrag - INFO - Process 56464 KV load text_chunks with 0 records
+2025-07-16 17:43:59,152 - lightrag - INFO - Process 56464 KV load llm_response_cache with 0 records
+2025-07-16 17:43:59,194 - lightrag - INFO - Process 56464 doc status load doc_status with 1 records
+2025-07-16 17:43:59,196 - lightrag - INFO - No new unique documents were found.
+2025-07-16 17:43:59,197 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:43:59,197 - lightrag - INFO - Processing 1 document(s)
+2025-07-16 17:43:59,198 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-16 17:43:59,198 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-16 17:43:59,211 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-16 17:43:59,212 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-16 17:44:03,883 - lightrag - ERROR - OpenAI API Rate Limit Error: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2025-07-16 17:44:04,044 - lightrag - ERROR - OpenAI API Rate Limit Error: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2025-07-16 17:44:04,477 - lightrag - ERROR - OpenAI API Rate Limit Error: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2025-07-16 17:44:04,494 - lightrag - ERROR - OpenAI API Rate Limit Error: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2025-07-16 17:44:07,408 - lightrag - INFO - Document processing pipeline completed
+2025-07-16 17:44:09,777 - lightrag - INFO - Creating a new event loop in main thread.
+2025-07-16 17:46:12,121 - lightrag - INFO - Created new empty graph
+2025-07-16 17:46:12,137 - lightrag - INFO - Process 972 KV load full_docs with 0 records
+2025-07-16 17:46:12,138 - lightrag - INFO - Process 972 KV load text_chunks with 0 records
+2025-07-16 17:46:12,139 - lightrag - INFO - Process 972 KV load llm_response_cache with 0 records
+2025-07-16 17:46:12,172 - lightrag - INFO - Process 972 doc status load doc_status with 1 records
+2025-07-16 17:46:12,173 - lightrag - INFO - No new unique documents were found.
+2025-07-16 17:46:12,174 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:46:12,174 - lightrag - INFO - Processing 1 document(s)
+2025-07-16 17:46:12,174 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-16 17:46:12,175 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-16 17:46:12,187 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-16 17:46:12,187 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-16 17:46:14,276 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o-mini,
+Params: {}, Got: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:46:14,277 - lightrag - ERROR - limit_async: Error in decorated function: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:46:14,278 - lightrag - ERROR - Failed to extract entities and relationships: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:46:14,285 - lightrag - ERROR - Traceback (most recent call last):
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1006, in process_document
+    await asyncio.gather(*tasks)
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1204, in _process_entity_relation_graph
+    raise e
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1190, in _process_entity_relation_graph
+    chunk_results = await extract_entities(
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1316, in extract_entities
+    raise task.exception()
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1292, in _process_with_semaphore
+    return await _process_single_content(chunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1215, in _process_single_content
+    final_result = await use_llm_func_with_cache(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 1586, in use_llm_func_with_cache
+    res: str = await use_llm_func(input_text, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 585, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 369, in worker
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 377, in gpt_4o_mini_complete
+    return await openai_complete_if_cache(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 186, in openai_complete_if_cache
+    response = await openai_async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2454, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\_base_client.py", line 1791, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\_base_client.py", line 1591, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+
+2025-07-16 17:46:14,286 - lightrag - ERROR - Failed to extract document 1/1: unknown_source
+2025-07-16 17:46:14,296 - lightrag - INFO - Document processing pipeline completed
+2025-07-16 17:46:14,298 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o-mini,
+Params: {}, Got: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:46:14,299 - lightrag - ERROR - limit_async: Error in decorated function: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:46:20,445 - lightrag - INFO - Creating a new event loop in main thread.
+2025-07-16 17:48:32,180 - lightrag - INFO - Created new empty graph
+2025-07-16 17:48:32,197 - lightrag - INFO - Process 57204 KV load full_docs with 0 records
+2025-07-16 17:48:32,198 - lightrag - INFO - Process 57204 KV load text_chunks with 0 records
+2025-07-16 17:48:32,199 - lightrag - INFO - Process 57204 KV load llm_response_cache with 0 records
+2025-07-16 17:48:32,229 - lightrag - INFO - Process 57204 doc status load doc_status with 1 records
+2025-07-16 17:48:32,231 - lightrag - INFO - No new unique documents were found.
+2025-07-16 17:48:32,232 - lightrag - INFO - Storage Initialization completed!
+2025-07-16 17:48:32,232 - lightrag - INFO - Processing 1 document(s)
+2025-07-16 17:48:32,232 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-07-16 17:48:32,233 - lightrag - INFO - Processing d-id: vpflow_softai_doc
+2025-07-16 17:48:32,245 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-07-16 17:48:32,246 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-07-16 17:48:34,339 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o-mini,
+Params: {}, Got: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:48:34,339 - lightrag - ERROR - limit_async: Error in decorated function: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:48:34,340 - lightrag - ERROR - Failed to extract entities and relationships: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-07-16 17:48:34,346 - lightrag - ERROR - Traceback (most recent call last):
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1006, in process_document
+    await asyncio.gather(*tasks)
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1204, in _process_entity_relation_graph
+    raise e
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\lightrag.py", line 1190, in _process_entity_relation_graph
+    chunk_results = await extract_entities(
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1316, in extract_entities
+    raise task.exception()
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1292, in _process_with_semaphore
+    return await _process_single_content(chunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\operate.py", line 1215, in _process_single_content
+    final_result = await use_llm_func_with_cache(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 1586, in use_llm_func_with_cache
+    res: str = await use_llm_func(input_text, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 585, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\utils.py", line 369, in worker
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 377, in gpt_4o_mini_complete
+    return await openai_complete_if_cache(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\tenacity\asyncio\__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\lightrag\llm\openai.py", line 186, in openai_complete_if_cache
+    response = await openai_async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2454, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\_base_client.py", line 1791, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vatuk\miniconda3\envs\vpflow\Lib\site-packages\openai\_base_client.py", line 1591, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_1lkpMX0ocDGyPwtL3ugGegBa` does not have access to model `gpt-4o-mini`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+
+2025-07-16 17:48:34,347 - lightrag - ERROR - Failed to extract document 1/1: unknown_source
+2025-07-16 17:48:34,351 - lightrag - INFO - Document processing pipeline completed
+2025-07-16 17:48:42,807 - lightrag - INFO - Creating a new event loop in main thread.
