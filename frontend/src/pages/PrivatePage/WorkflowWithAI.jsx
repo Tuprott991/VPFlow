@@ -68,7 +68,7 @@ export default function ChatPromptUI() {
             if (current >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
-                    navigate('/home');
+                    navigate('/workflow-details');
                 }, 500);
             }
         }, 100);
@@ -194,8 +194,15 @@ export default function ChatPromptUI() {
                                 px: 1,
                                 py: 0.5,
                                 borderRadius: '10px',
-                                bgcolor: '#dde3ea',
-                                color: '#575b5f'
+                                bgcolor: '#fff',
+                                color: '#575b5f',
+                                border: '1px solid #ddd',
+                                '&:hover': {
+                                    bgcolor: '#ffecec',
+                                    border: '1px solid #f5c2c7',
+                                    color: '#d32f2f',
+                                },
+
                             }}
                             onClick={() => handleRemoveFile(file)}
                             title="Click to remove"
