@@ -14,9 +14,10 @@ import {
     ZoomOut,
     ZoomOutMap,
     Undo,
-    Redo
+    Redo,
 } from '@mui/icons-material';
 
+// ===== DIAGRAM CONFIGURATION =====
 const createDiagram = (nodeDataArray, linkDataArray) => {
     const $ = go.GraphObject.make;
 
@@ -27,10 +28,20 @@ const createDiagram = (nodeDataArray, linkDataArray) => {
         allowVerticalScroll: true,
         padding: 20,
         initialAutoScale: go.Diagram.Uniform,
-        layout: $(go.Layout)
+        layout: $(go.Layout),
     });
 
-    diagram.groupTemplate = $(
+    diagram.groupTemplate = createGroupTemplate($);
+    diagram.nodeTemplate = createNodeTemplate($);
+    diagram.linkTemplate = createLinkTemplate($);
+    diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
+    // ❌ Không xử lý click vào node
+    return diagram;
+};
+
+const createGroupTemplate = ($) => {
+    return $(
         go.Group,
         'Vertical',
         {
@@ -38,22 +49,34 @@ const createDiagram = (nodeDataArray, linkDataArray) => {
             isSubGraphExpanded: true,
             movable: false,
             copyable: false,
-            deletable: false
+            deletable: false,
         },
         new go.Binding('background', 'color'),
-        $(go.Panel, 'Auto',
+        $(
+            go.Panel,
+            'Auto',
             $(go.Shape, 'Rectangle', { fill: null, stroke: null }),
-            $(go.Panel, 'Table',
-                $(go.TextBlock,
-                    { row: 0, margin: 6, font: 'bold 13px sans-serif', alignment: go.Spot.Left },
+            $(
+                go.Panel,
+                'Table',
+                $(
+                    go.TextBlock,
+                    {
+                        row: 0,
+                        margin: 6,
+                        font: 'bold 13px sans-serif',
+                        alignment: go.Spot.Left,
+                    },
                     new go.Binding('text', 'label')
                 ),
                 $(go.Placeholder, { row: 1, padding: 10 })
             )
         )
     );
+};
 
-    diagram.nodeTemplate = $(
+const createNodeTemplate = ($) => {
+    return $(
         go.Node,
         'Auto',
         new go.Binding('location', 'loc', go.Point.parse),
@@ -68,7 +91,7 @@ const createDiagram = (nodeDataArray, linkDataArray) => {
                 height: 100,
                 portId: '',
                 fromLinkable: true,
-                toLinkable: true
+                toLinkable: true,
             }
         ),
         $(
@@ -79,184 +102,149 @@ const createDiagram = (nodeDataArray, linkDataArray) => {
                 width: 220,
                 font: 'bold 20px sans-serif',
                 editable: false,
-                textAlign: 'center'
+                textAlign: 'center',
             },
             new go.Binding('text', 'text')
         )
     );
+};
 
-    diagram.linkTemplate = $(
+const createLinkTemplate = ($) => {
+    return $(
         go.Link,
         {
             routing: go.Link.AvoidsNodes,
             curve: go.Link.JumpGap,
             corner: 10,
             fromShortLength: 12,
-            toShortLength: 12
+            toShortLength: 12,
         },
         $(go.Shape, { strokeWidth: 1.5, stroke: '#666' }),
         $(go.Shape, { toArrow: 'Standard', stroke: '#666', fill: '#666' })
     );
-
-    diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
-    return diagram;
 };
 
+// ===== CONTROL PANEL COMPONENT =====
+const DiagramControlPanel = ({
+    onZoomIn,
+    onZoomOut,
+    onZoomToFit,
+    onUndo,
+    onRedo,
+    zoom,
+}) => {
+    const buttonStyles = {
+        border: '1px solid #EEEFF1',
+        borderRadius: '10px',
+    };
+
+    const panelStyles = {
+        position: 'fixed',
+        bottom: 16,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 1000,
+        p: 1,
+        borderRadius: '10px',
+        backgroundColor: '#FFF',
+        border: '1px solid #EEEFF1',
+    };
+
+    return (
+        <Paper elevation={1} sx={panelStyles}>
+            <Stack direction="row" spacing={1}>
+                <Tooltip title="Zoom In" placement="top">
+                    <IconButton onClick={onZoomIn} size="small" sx={buttonStyles}>
+                        <ZoomIn />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title="Zoom Out" placement="top">
+                    <IconButton onClick={onZoomOut} size="small" sx={buttonStyles}>
+                        <ZoomOut />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title="Zoom to Fit" placement="top">
+                    <IconButton onClick={onZoomToFit} size="small" sx={buttonStyles}>
+                        <ZoomOutMap />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title="Undo" placement="top">
+                    <IconButton onClick={onUndo} size="small" sx={buttonStyles}>
+                        <Undo />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title="Redo" placement="top">
+                    <IconButton onClick={onRedo} size="small" sx={buttonStyles}>
+                        <Redo />
+                    </IconButton>
+                </Tooltip>
+
+                <Box display="flex" alignItems="center">
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                        {Math.round(zoom * 100)}%
+                    </Typography>
+                </Box>
+            </Stack>
+        </Paper>
+    );
+};
+
+// ===== DIAGRAM HOOKS =====
+const useDiagramControls = (diagramRef) => {
+    const handleZoomIn = () => diagramRef.current?.commandHandler.increaseZoom();
+    const handleZoomOut = () => diagramRef.current?.commandHandler.decreaseZoom();
+    const handleZoomToFit = () => diagramRef.current?.commandHandler.zoomToFit();
+    const handleUndo = () => diagramRef.current?.commandHandler.undo();
+    const handleRedo = () => diagramRef.current?.commandHandler.redo();
+
+    return {
+        handleZoomIn,
+        handleZoomOut,
+        handleZoomToFit,
+        handleUndo,
+        handleRedo,
+    };
+};
+
+// ===== MAIN COMPONENT =====
 export default function SwimlaneDiagram({ nodeDataArray, linkDataArray }) {
     const diagramRef = useRef(null);
     const [zoom, setZoom] = useState(1);
+
+    const diagramControls = useDiagramControls(diagramRef);
 
     const initDiagram = () => {
         const diagram = createDiagram(nodeDataArray, linkDataArray);
         diagramRef.current = diagram;
 
-        // Listen for scale changes
-        diagram.addDiagramListener('ViewportBoundsChanged', (e) => {
+        diagram.addDiagramListener('ViewportBoundsChanged', () => {
             setZoom(diagram.scale);
         });
 
         return diagram;
     };
 
-    const handleZoomIn = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.increaseZoom();
-        }
-    };
-
-    const handleZoomOut = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.decreaseZoom();
-        }
-    };
-
-    const handleZoomToFit = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.zoomToFit();
-        }
-    };
-
-    const handleUndo = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.undo();
-        }
-    };
-
-    const handleRedo = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.redo();
-        }
-    };
-
     return (
         <Box sx={{ width: '100%', height: '90%', position: 'relative', backgroundColor: '#fff' }}>
-            {/* Control Panel */}
-            <Paper
-                elevation={1}
-                sx={{
-                    position: 'absolute',
-                    bottom: 16,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 1000,
-                    p: 1,
-                    borderRadius: '10px',
-                    backgroundColor: '#FFF',
-                    border: '1px solid #EEEFF1',
-                }}
-            >
-                <Stack direction="row" spacing={1}>
-                    <Tooltip title="Zoom In" placement="left">
-                        <IconButton
-                            onClick={handleZoomIn}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
-                            <ZoomIn />
-                        </IconButton>
-                    </Tooltip>
+            <DiagramControlPanel
+                onZoomIn={diagramControls.handleZoomIn}
+                onZoomOut={diagramControls.handleZoomOut}
+                onZoomToFit={diagramControls.handleZoomToFit}
+                onUndo={diagramControls.handleUndo}
+                onRedo={diagramControls.handleRedo}
+                zoom={zoom}
+            />
 
-                    <Tooltip title="Zoom Out" placement="left">
-                        <IconButton
-                            onClick={handleZoomOut}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
-                            <ZoomOut />
-                        </IconButton>
-                    </Tooltip>
-
-                    <Tooltip title="Zoom to Fit" placement="left">
-                        <IconButton
-                            onClick={handleZoomToFit}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
-                            <ZoomOutMap />
-                        </IconButton>
-                    </Tooltip>
-
-                    <Tooltip title="Undo" placement="left">
-                        <IconButton
-                            onClick={handleUndo}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
-                            <Undo />
-                        </IconButton>
-                    </Tooltip>
-
-                    <Tooltip title="Redo" placement="left">
-                        <IconButton
-                            onClick={handleRedo}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
-                            <Redo />
-                        </IconButton>
-                    </Tooltip>
-
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography
-                            variant="caption"
-                            sx={{
-                                textAlign: 'center',
-                                color: 'text.secondary',
-                            }}
-                        >
-                            {Math.round(zoom * 100)}%
-                        </Typography>
-                    </Box>
-                </Stack>
-            </Paper>
-
-            <Box
-                sx={{
-                    width: '100%',
-                    height: '100%',
-                    overflow: 'auto',
-                }}
-            >
+            <Box sx={{
+                width: '100%',
+                height: '100%',
+                overflow: 'auto',
+                transition: 'width 0.3s ease'
+            }}>
                 <ReactDiagram
                     initDiagram={initDiagram}
                     divClassName="swimlane-horizontal"

@@ -10,7 +10,6 @@ import {
     ListItemButton,
     Typography,
     Avatar,
-    Divider,
     IconButton,
     TextField
 } from "@mui/material";
@@ -22,7 +21,7 @@ import { PiGraph } from "react-icons/pi";
 import { BsPatchQuestion } from "react-icons/bs";
 import { TbMailQuestion, TbLogout } from "react-icons/tb";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -74,19 +73,22 @@ const Sidebar = () => {
                 },
             }}
         >
-            <Box sx={{ display: "flex", alignItems: "center", p: 2, backgroundColor: "#019C4B" }}>
+            <Box sx={{ display: "flex", alignItems: "center", backgroundColor: "#019C4B", py: 1.5, px: 1 }}>
                 <img
                     src="/branch_logo.png"
                     alt="VPFlow Logo"
-                    style={{ height: 40, objectFit: "contain" }}
+                    style={{
+                        objectFit: "cover",
+                        width: '100%',
+                    }}
                 />
             </Box>
 
-            <List sx={{ overflowX: "hidden" }}>
+            <List sx={{ overflowX: "hidden", px: 1 }}>
                 {sidebarItems.map((item, index) => (
                     <Box key={index}>
                         {item.text === "Quick actions" ? (
-                            <Box sx={{ px: 2, py: 1 }}>
+                            <Box sx={{ px: 0.5, py: 1 }}>
                                 <TextField
                                     fullWidth
                                     size="small"
@@ -101,6 +103,7 @@ const Sidebar = () => {
                             >
                                 <ListItemButton
                                     sx={{
+                                        px: 0.5,
                                         borderRadius: 1,
                                         mb: 0.5,
                                         overflowX: "hidden",
@@ -119,7 +122,7 @@ const Sidebar = () => {
                                     <ListItemText
                                         primary={item.text}
                                         primaryTypographyProps={{
-                                            fontSize: "0.875rem",
+                                            fontSize: "0.75rem",
                                             noWrap: true,
                                             fontWeight: 600,
                                         }}
@@ -138,15 +141,14 @@ const Sidebar = () => {
                 ))}
             </List>
 
-            <Box sx={{ mt: "auto", pb: 2 }}>
-                <Divider sx={{ mb: 2 }} />
-
+            <Box sx={{ mt: "auto", pb: 1, px: 1 }}>
                 <NavLink
                     to="/helps-and-first-step"
                     style={{ textDecoration: "none", color: "inherit" }}
                 >
                     <ListItemButton
                         sx={{
+                            px: 0.5,
                             borderRadius: 1,
                             mb: 2,
                             overflowX: "hidden",
@@ -158,7 +160,7 @@ const Sidebar = () => {
                         </ListItemIcon>
                         <ListItemText
                             primary="Help and first steps"
-                            primaryTypographyProps={{ fontSize: "0.875rem", noWrap: true, fontWeight: 550 }}
+                            primaryTypographyProps={{ fontSize: "0.75rem", noWrap: true, fontWeight: 550 }}
                         />
                     </ListItemButton>
                 </NavLink>
@@ -167,8 +169,7 @@ const Sidebar = () => {
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        pl: 2,
-                        pr: 1,
+                        px: 0.5,
                         overflow: "hidden",
                         maxWidth: "100%",
                     }}
@@ -202,7 +203,7 @@ const Sidebar = () => {
                     <IconButton
                         size="small"
                         sx={{
-                            color: "warning.main",
+                            color: "error.main",
                             ml: 1,
                             flexShrink: 0,
                         }}

@@ -1,183 +1,181 @@
+import { useState } from 'react';
 import {
     Box,
     Typography,
-    Button,
     TextField,
+    Grid,
     InputAdornment,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText
+    Button,
+    useMediaQuery,
 } from '@mui/material';
-import {
-    Search,
-    Upload,
-    TextSnippet,
-    Delete,
-    Compare,
-    List as ListIcon,
-    Feedback,
-    Psychology,
-    AutoAwesome,
-    SmartToy,
-    Description
-} from '@mui/icons-material';
-import { IoInformationCircleOutline } from 'react-icons/io5';
-import { SwimlaneDiagram } from '@/components/ui';
-import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
+import { useTheme } from '@mui/material/styles';
+import SendIcon from '@mui/icons-material/Send';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import MicNoneIcon from '@mui/icons-material/MicNone';
+import LinkIcon from '@mui/icons-material/Link';
+import { CustomAlert } from '@/components/custom';
 
-const WorkflowHeader = () => (
-    <Box sx={{ bgcolor: '#E5EEFF', px: 1.5, py: 1, borderRadius: '8px' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <IoInformationCircleOutline size={20} color="#1E3C7D" />
-                <Typography fontSize={14} color="#1E3C7D" fontWeight={500}>
-                    This workflow has not yet been published ( For manager to review )
-                </Typography>
-            </Box>
-            <Button sx={{ borderRadius: '8px', px: 2, bgcolor: '#256CF1', color: 'white', fontWeight: 400 }}>
-                Publish workflow
-            </Button>
-        </Box>
-    </Box>
-);
+export default function ChatPromptUI() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-const toolSections = [
-    {
-        title: 'Tools',
-        items: [{ icon: <Upload fontSize="small" color="action" />, text: 'Import file to generate workflow' }]
-    },
-    {
-        title: 'Generation',
-        items: [
-            { icon: <TextSnippet fontSize="small" color="action" />, text: 'Import text to generate workflow' },
-            { icon: <Delete fontSize="small" color="action" />, text: 'Delete workflow' }
-        ]
-    },
-    {
-        title: 'Interaction',
-        items: [
-            { icon: <Compare fontSize="small" color="action" />, text: 'Compare workflow' },
-            { icon: <ListIcon fontSize="small" color="action" />, text: 'Find list entries' },
-            { icon: <Feedback fontSize="small" color="action" />, text: 'Give feedback' }
-        ]
-    },
-    {
-        title: 'AI',
-        items: [
-            { icon: <Psychology fontSize="small" color="primary" />, text: 'Pain Point Detection', highlight: true },
-            { icon: <AutoAwesome fontSize="small" color="action" />, text: 'AI suggestion' },
-            { icon: <SmartToy fontSize="small" color="primary" />, text: 'Global AI Assistant', highlight: true },
-            { icon: <Description fontSize="small" color="action" />, text: 'Auto SOP Generator' }
-        ]
-    }
-];
+    const [alertOpen, setAlertOpen] = useState(false);
 
-const ToolsPanel = () => (
-    <Box sx={{
-        height: '100%',
-        bgcolor: 'white',
+    const showComingSoon = () => {
+        setAlertOpen(true);
+        setTimeout(() => setAlertOpen(false), 3000); // Auto-hide after 3s
+    };
+
+    const handleUploadFromDevice = () => {
+        console.log('Upload from device');
+    };
+
+    const handleUploadFromDrive = () => {
+        console.log('Upload from Google Drive');
+        showComingSoon();
+    };
+
+    const handleUploadFromURL = () => {
+        console.log('Upload from URL');
+        showComingSoon();
+    };
+
+    const uploadButtonStyle = {
+        width: '175px',
+        height: '175px',
         display: 'flex',
-        flexDirection: 'column'
-    }}>
-        {/* Header cố định */}
-        <Box sx={{
-            p: 1.5,
-            flexShrink: 0,
-            bgcolor: 'white'
-        }}>
-            <Typography variant="subtitle1" fontWeight={600} mb={1}>
-                Tools
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '1rem',
+        borderRadius: 2,
+        textTransform: 'none',
+    };
+
+    return (
+        <Box
+            sx={{
+                bgcolor: '#fff',
+                color: 'black',
+                p: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+        >
+            {/* Logo */}
+            <Box sx={{ mb: 2 }} component="img" src="/chatbot_logo.png" alt="logo" width={125} />
+
+            {/* Heading */}
+            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
+                How can I help you today?
             </Typography>
 
-            <TextField
-                fullWidth
-                size="small"
-                placeholder="Search blocks..."
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <Search color="action" fontSize="small" />
-                        </InputAdornment>
-                    )
+            {/* Subheading */}
+            <Typography
+                variant="body1"
+                sx={{
+                    mb: 2,
+                    maxWidth: 600,
+                    textAlign: 'center',
+                    color: '#666',
                 }}
-            />
-        </Box>
+            >
+                This code will display a prompt asking the user for their name, and
+                then it will display a greeting message with the name entered by the user.
+            </Typography>
 
-        {/* Nội dung có thể scroll */}
-        <Box sx={{
-            flex: 1,
-            p: 1.5,
-            pt: 1
-        }}>
-            {toolSections.map((section, i) => (
-                <Box key={i} mb={1.5}>
-                    <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        fontWeight={600}
-                        sx={{ mb: 0.5, textTransform: 'uppercase', letterSpacing: '0.5px' }}
-                    >
-                        {section.title}
-                    </Typography>
-                    <List dense sx={{ py: 0 }}>
-                        {section.items.map((item, j) => (
-                            <ListItem
-                                key={j}
-                                sx={{
-                                    py: 0.25,
-                                    px: 1,
-                                    borderRadius: 1,
-                                    cursor: 'pointer',
-                                    bgcolor: item.highlight ? '#e3f2fd' : 'transparent',
-                                    '&:hover': { bgcolor: item.highlight ? '#bbdefb' : '#f5f5f5' }
-                                }}
-                            >
-                                <ListItemIcon sx={{ minWidth: 28 }}>{item.icon}</ListItemIcon>
-                                <ListItemText
-                                    primary={item.text}
-                                    primaryTypographyProps={{
-                                        fontSize: '0.75rem',
-                                        color: item.highlight ? 'primary.main' : 'text.primary'
-                                    }}
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
-                </Box>
-            ))}
-        </Box>
-    </Box>
-);
-
-const App = () => (
-    <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 320px)', overflow: 'hidden' }}>
-            <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
-                <WorkflowHeader />
+            {/* ✅ Alert */}
+            <Box sx={{ width: '100%', maxWidth: 500, mb: 2 }}>
+                <CustomAlert
+                    open={alertOpen}
+                    severity="info"
+                    message="🚧 Feature coming soon!"
+                    onClose={() => setAlertOpen(false)}
+                />
             </Box>
 
-            <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>
-                <SwimlaneDiagram
-                    nodeDataArray={nodeDataArray}
-                    linkDataArray={linkDataArray}
+            {/* Upload Buttons */}
+            <Grid container spacing={2} justifyContent="center" sx={{ mb: 4 }}>
+                {[
+                    {
+                        label: 'Upload File',
+                        icon: <UploadFileIcon sx={{ fontSize: 50, mb: 1 }} />,
+                        onClick: handleUploadFromDevice,
+                    },
+                    {
+                        label: 'Google Drive',
+                        icon: <CloudUploadIcon sx={{ fontSize: 50, mb: 1 }} />,
+                        onClick: handleUploadFromDrive,
+                    },
+                    {
+                        label: 'From URL',
+                        icon: <LinkIcon sx={{ fontSize: 50, mb: 1 }} />,
+                        onClick: handleUploadFromURL,
+                    },
+                ].map((item, index) => (
+                    <Grid item xs={12} sm={4} key={index}>
+                        <Box
+                            sx={{
+                                width: '100%',
+                                aspectRatio: '1',
+                                display: 'flex',
+                            }}
+                        >
+                            <Button
+                                variant="outlined"
+                                onClick={item.onClick}
+                                sx={uploadButtonStyle}
+                            >
+                                {item.icon}
+                                {item.label}
+                            </Button>
+                        </Box>
+                    </Grid>
+                ))}
+            </Grid>
+
+            {/* Prompt Input */}
+            <Box sx={{ width: '80%' }}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    placeholder="Type your prompt here..."
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <MicNoneIcon sx={{ cursor: 'pointer' }} />
+                                    <SendIcon sx={{ cursor: 'pointer' }} />
+                                </Box>
+                            </InputAdornment>
+                        ),
+                    }}
+                    sx={{
+                        '& .MuiOutlinedInput-root': {
+                            bgcolor: '#f5f5f5',
+                            borderRadius: '10px',
+                            boxShadow: 'none',
+                            '& .MuiOutlinedInput-notchedOutline': {
+                                border: 'none',
+                            },
+                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                                border: 'none',
+                            },
+                            '&.Mui-focused': {
+                                boxShadow: 'none',
+                            },
+                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                border: 'none',
+                            },
+                        },
+                        input: {
+                            color: 'black',
+                        },
+                    }}
                 />
             </Box>
         </Box>
-
-        <Box
-            sx={{
-                width: 320,
-                bgcolor: '#f8f9fa',
-                borderLeft: 1,
-                borderColor: 'divider',
-                overflow: 'hidden',
-                flexShrink: 0
-            }}
-        >
-            <ToolsPanel />
-        </Box>
-    </Box>
-);
-
-export default App;
+    );
+}
