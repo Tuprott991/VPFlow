@@ -18,7 +18,7 @@ Khi được cung cấp một file hoặc nội dung SOP (Standard Operating Pro
           "duration": number,
           "dependencies": [string],
           "actor_transitions": [string],
-          "error_rate": number,
+          "error_rate": number, 
           "rework_count": number,
           "cost_estimate": number | null,
           "risk_level": number | null
