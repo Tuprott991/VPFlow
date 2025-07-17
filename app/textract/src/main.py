@@ -9,7 +9,7 @@ from datetime import datetime
 
 AWS_PROFILE = 'vpbank'
 BUCKET_NAME = 'vpbank-documents'
-LOCAL_FILE_PATH = r'C:/Users/Xuan Thanh/Desktop/VPBANK/documents/MB Doanh Nghiệp (chung cho vừa & nhỏ & lớn)/2-mb01bgiy--ngh-kim-h-m-v-s-dng-tktt-chung-khdn.pdf'
+LOCAL_FILE_PATH = r'D:\Github Repos\VPFlow-1\app\test\vplow.pdf'
 
 filename_only = os.path.basename(LOCAL_FILE_PATH)
 output_folder = os.path.join("../outputs", os.path.splitext(filename_only)[0])
@@ -30,6 +30,8 @@ session = boto3.Session(profile_name=AWS_PROFILE)
 s3 = session.resource("s3")
 s3_key = f"uploads/{filename_only}"
 
+print(1)
+
 try:
     logger.info("Uploading %s to S3 bucket %s at key %s", filename_only, BUCKET_NAME, s3_key)
     s3.Bucket(BUCKET_NAME).upload_file(LOCAL_FILE_PATH, s3_key)
@@ -37,6 +39,8 @@ try:
 except Exception as e:
     logger.error("Upload failed: %s", e)
     raise
+
+print(2)
 
 client = session.client("textract")
 token = str(random.randint(1, int(1e10)))
@@ -149,6 +153,8 @@ with open(json_path, "w", encoding="utf-8") as f:
     json.dump({"Blocks": all_blocks}, f, indent=2, ensure_ascii=False)
 logger.info("Saved analyze raw JSON to %s", json_path)
 
+print(3)
+
 def get_kv_map(blocks):
     key_map = {}
     value_map = {}
@@ -221,14 +227,18 @@ def extract_tables(blocks):
 
 tables = extract_tables(all_blocks)
 for i, table in enumerate(tables):
-    table_csv_path = os.path.join(output_folder, f"table_{i+1}.csv")
-    with open(table_csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        max_col = max(max(row.keys()) for row in table.values())
+    table_md_path = os.path.join(output_folder, f"table_{i+1}.md")
+    max_col = max(max(row.keys()) for row in table.values())
+    with open(table_md_path, "w", encoding="utf-8") as f:
+        # Write header row (use first row as header, or generate generic headers)
+        header_row = [table[min(table.keys())].get(c, f"Col{c}") for c in range(1, max_col + 1)]
+        f.write("| " + " | ".join(header_row) + " |\n")
+        f.write("|" + " --- |" * max_col + "\n")
+        # Write data rows
         for r in sorted(table.keys()):
             row_data = [table[r].get(c, "") for c in range(1, max_col + 1)]
-            writer.writerow(row_data)
-    logger.info("Extracted table %d to %s", i + 1, table_csv_path)
+            f.write("| " + " | ".join(row_data) + " |\n")
+    logger.info("Extracted table %d to %s (Markdown)", i + 1, table_md_path)
 
 logger.info("✅ All analysis complete. Output folder: %s", output_folder)
 print(f"✅ DONE. All outputs saved to: {output_folder}")
