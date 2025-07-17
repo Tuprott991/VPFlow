@@ -8,16 +8,18 @@ import {
     Stack,
     Tooltip,
     Typography,
+    Modal
 } from '@mui/material';
 import {
     ZoomIn,
     ZoomOut,
     ZoomOutMap,
     Undo,
-    Redo
+    Redo,
+    Close
 } from '@mui/icons-material';
 
-const createDiagram = (nodeDataArray, linkDataArray) => {
+const createDiagram = (nodeDataArray, linkDataArray, onNodeClick) => {
     const $ = go.GraphObject.make;
 
     const diagram = $(go.Diagram, {
@@ -99,54 +101,44 @@ const createDiagram = (nodeDataArray, linkDataArray) => {
     );
 
     diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
+    // 👇 Listen for node click
+    diagram.addDiagramListener('ObjectSingleClicked', (e) => {
+        const part = e.subject.part;
+        if (part instanceof go.Node) {
+            onNodeClick(part.data);
+        }
+    });
+
     return diagram;
 };
 
 export default function SwimlaneDiagram({ nodeDataArray, linkDataArray }) {
     const diagramRef = useRef(null);
     const [zoom, setZoom] = useState(1);
+    const [selectedNodeData, setSelectedNodeData] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const initDiagram = () => {
-        const diagram = createDiagram(nodeDataArray, linkDataArray);
+        const diagram = createDiagram(nodeDataArray, linkDataArray, (nodeData) => {
+            setSelectedNodeData(nodeData);
+            setIsModalOpen(true);
+        });
+
         diagramRef.current = diagram;
 
-        // Listen for scale changes
-        diagram.addDiagramListener('ViewportBoundsChanged', (e) => {
+        diagram.addDiagramListener('ViewportBoundsChanged', () => {
             setZoom(diagram.scale);
         });
 
         return diagram;
     };
 
-    const handleZoomIn = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.increaseZoom();
-        }
-    };
-
-    const handleZoomOut = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.decreaseZoom();
-        }
-    };
-
-    const handleZoomToFit = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.zoomToFit();
-        }
-    };
-
-    const handleUndo = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.undo();
-        }
-    };
-
-    const handleRedo = () => {
-        if (diagramRef.current) {
-            diagramRef.current.commandHandler.redo();
-        }
-    };
+    const handleZoomIn = () => diagramRef.current?.commandHandler.increaseZoom();
+    const handleZoomOut = () => diagramRef.current?.commandHandler.decreaseZoom();
+    const handleZoomToFit = () => diagramRef.current?.commandHandler.zoomToFit();
+    const handleUndo = () => diagramRef.current?.commandHandler.undo();
+    const handleRedo = () => diagramRef.current?.commandHandler.redo();
 
     return (
         <Box sx={{ width: '100%', height: '90%', position: 'relative', backgroundColor: '#fff' }}>
@@ -154,7 +146,7 @@ export default function SwimlaneDiagram({ nodeDataArray, linkDataArray }) {
             <Paper
                 elevation={1}
                 sx={{
-                    position: 'absolute',
+                    position: 'fixed',
                     bottom: 16,
                     left: '50%',
                     transform: 'translateX(-50%)',
@@ -166,103 +158,88 @@ export default function SwimlaneDiagram({ nodeDataArray, linkDataArray }) {
                 }}
             >
                 <Stack direction="row" spacing={1}>
-                    <Tooltip title="Zoom In" placement="left">
-                        <IconButton
-                            onClick={handleZoomIn}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
+                    <Tooltip title="Zoom In" placement="top">
+                        <IconButton onClick={handleZoomIn} size="small" sx={{ border: '1px solid #EEEFF1', borderRadius: '10px' }}>
                             <ZoomIn />
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Zoom Out" placement="left">
-                        <IconButton
-                            onClick={handleZoomOut}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
+                    <Tooltip title="Zoom Out" placement="top">
+                        <IconButton onClick={handleZoomOut} size="small" sx={{ border: '1px solid #EEEFF1', borderRadius: '10px' }}>
                             <ZoomOut />
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Zoom to Fit" placement="left">
-                        <IconButton
-                            onClick={handleZoomToFit}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
+                    <Tooltip title="Zoom to Fit" placement="top">
+                        <IconButton onClick={handleZoomToFit} size="small" sx={{ border: '1px solid #EEEFF1', borderRadius: '10px' }}>
                             <ZoomOutMap />
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Undo" placement="left">
-                        <IconButton
-                            onClick={handleUndo}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
+                    <Tooltip title="Undo" placement="top">
+                        <IconButton onClick={handleUndo} size="small" sx={{ border: '1px solid #EEEFF1', borderRadius: '10px' }}>
                             <Undo />
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Redo" placement="left">
-                        <IconButton
-                            onClick={handleRedo}
-                            size="small"
-                            color="#000"
-                            sx={{
-                                border: '1px solid #EEEFF1',
-                                borderRadius: '10px',
-                            }}
-                        >
+                    <Tooltip title="Redo" placement="top">
+                        <IconButton onClick={handleRedo} size="small" sx={{ border: '1px solid #EEEFF1', borderRadius: '10px' }}>
                             <Redo />
                         </IconButton>
                     </Tooltip>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography
-                            variant="caption"
-                            sx={{
-                                textAlign: 'center',
-                                color: 'text.secondary',
-                            }}
-                        >
+                    <Box display="flex" alignItems="center">
+                        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                             {Math.round(zoom * 100)}%
                         </Typography>
                     </Box>
                 </Stack>
             </Paper>
 
-            <Box
-                sx={{
-                    width: '100%',
-                    height: '100%',
-                    overflow: 'auto',
-                }}
-            >
+            {/* Diagram Area */}
+            <Box sx={{ width: '100%', height: '100%', overflow: 'auto' }}>
                 <ReactDiagram
                     initDiagram={initDiagram}
                     divClassName="swimlane-horizontal"
                     style={{ width: '100%', height: '100%' }}
                 />
             </Box>
+
+            {/* Node Info Modal */}
+            <Modal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                aria-labelledby="node-info-title"
+                aria-describedby="node-info-description"
+            >
+                <Paper
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 400,
+                        p: 3,
+                        borderRadius: 2,
+                        outline: 'none',
+                    }}
+                >
+                    <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                        <Typography id="node-info-title" variant="h6">
+                            Node Information
+                        </Typography>
+                        <IconButton onClick={() => setIsModalOpen(false)}>
+                            <Close />
+                        </IconButton>
+                    </Box>
+
+                    <Typography variant="body2" id="node-info-description">
+                        <strong>Text:</strong> {selectedNodeData?.text}<br />
+                        <strong>Key:</strong> {selectedNodeData?.key}<br />
+                        <strong>Description:</strong> This is simulated content for this node.
+                    </Typography>
+                </Paper>
+            </Modal>
         </Box>
     );
 }
