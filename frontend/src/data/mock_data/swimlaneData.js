@@ -1,40 +1,34 @@
-export const groups = [
-  { id: "customer", label: "CUSTOMER", color: "#f28b82", y: 0 },
-  { id: "rm", label: "Relationship Manager", color: "#fbbc04", y: 100 },
-  { id: "risk", label: "RISKS ASSESSMENT", color: "#d7aefb", y: 200 },
-  { id: "ops", label: "OPERATIONS", color: "#ccff90", y: 300 },
+export const nodeDataArray = [
+  { key: "CUSTOMER", isGroup: true, label: "Customer", color: "#f8d7da" },
+  { key: "RM", isGroup: true, label: "Relationship Manager", color: "#fff3cd" },
+  { key: "RISK", isGroup: true, label: "Risk Assessment", color: "#d1ecf1" },
+  { key: "OPS", isGroup: true, label: "Operations", color: "#d4edda" },
+
+  { key: 1, text: "Submit loan application", group: "CUSTOMER", loc: "0 0" },
+  { key: 2, text: "Upload to LOS", group: "RM", loc: "0 150" },
+  { key: 3, text: "Check CIC (Credit Report)", group: "RISK", loc: "0 300" },
+  { key: 4, text: "Analyze DTI + scoring", group: "RISK", loc: "300 300" },
+  { key: 5, text: "Verify income, collateral", group: "RM", loc: "600 150" },
+  { key: 6, text: "Issue approval letter", group: "OPS", loc: "600 450" },
+  { key: 7, text: "Input into Core Lending", group: "OPS", loc: "300 450" },
+  { key: 8, text: "Disburse loan", group: "OPS", loc: "900 450" },
+  { key: 9, text: "Input into Core Lending", group: "RISK", loc: "900 300" },
+  { key: 10, text: "Finish", group: "CUSTOMER", loc: "900 0" },
+  { key: 11, text: "Flag if risk > threshold", loc: "600 300" },
 ];
 
-export const nodes = [
-  {
-    id: "n1",
-    label: "Submit loan\napplication + documents",
-    group: "customer",
-    x: 100,
-  },
-  { id: "n2", label: "Upload to system (LOS)", group: "rm", x: 100 },
-  { id: "n3", label: "Check CIC (Credit Report)", group: "risk", x: 100 },
-  { id: "n4", label: "Analyze DTI + scoring", group: "risk", x: 300 },
-  {
-    id: "n5",
-    label: "Verify income\nemployment, collateral",
-    group: "rm",
-    x: 300,
-  },
-  { id: "n6", label: "Issue approval letter", group: "risk", x: 500 },
-  { id: "n7", label: "Input into Core Lending", group: "ops", x: 300 },
-  { id: "n8", label: "Disburse loan", group: "ops", x: 500 },
-  { id: "n9", label: "Finish", group: "customer", x: 700 },
-];
-
-export const edges = [
-  { from: "n1", to: "n2" },
-  { from: "n2", to: "n3" },
-  { from: "n3", to: "n4" },
-  { from: "n4", to: "n5" },
-  { from: "n5", to: "n4" },
-  { from: "n4", to: "n6" },
-  { from: "n6", to: "n7" },
-  { from: "n7", to: "n8" },
-  { from: "n8", to: "n9" },
+export const linkDataArray = [
+  { from: 1, to: 2 },
+  { from: 2, to: 3 },
+  { from: 3, to: 4 },
+  { from: 4, to: 5 },
+  { from: 4, to: 7 },
+  { from: 7, to: 6 },
+  { from: 6, to: 8 },
+  { from: 8, to: 9 },
+  { from: 9, to: 10 },
+  { from: 7, to: 11 },
+  { from: 11, to: 5 },
+  { from: 4, to: 11 },
+  { from: 6, to: 11 },
 ];

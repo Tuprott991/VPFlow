@@ -23,10 +23,11 @@ import {
     Description
 } from '@mui/icons-material';
 import { IoInformationCircleOutline } from 'react-icons/io5';
-import SwimlaneDiagram from '@/components/SwimlaneDiagram';
+import { SwimlaneDiagram } from '@/components/ui';
+import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
 
 const WorkflowHeader = () => (
-    <Box sx={{ bgcolor: '#E5EEFF', borderBottom: 1, borderColor: 'divider', px: 1.5, py: 1 }}>
+    <Box sx={{ bgcolor: '#E5EEFF', px: 1.5, py: 1, borderRadius: '8px' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                 <IoInformationCircleOutline size={20} color="#1E3C7D" />
@@ -34,7 +35,7 @@ const WorkflowHeader = () => (
                     This workflow has not yet been published ( For manager to review )
                 </Typography>
             </Box>
-            <Button sx={{ borderRadius: 2, px: 2, bgcolor: '#256CF1', color: 'white', fontWeight: 400 }}>
+            <Button sx={{ borderRadius: '8px', px: 2, bgcolor: '#256CF1', color: 'white', fontWeight: 400 }}>
                 Publish workflow
             </Button>
         </Box>
@@ -82,8 +83,6 @@ const ToolsPanel = () => (
         {/* Header cố định */}
         <Box sx={{
             p: 1.5,
-            borderBottom: 1,
-            borderColor: 'divider',
             flexShrink: 0,
             bgcolor: 'white'
         }}>
@@ -154,12 +153,15 @@ const ToolsPanel = () => (
 const App = () => (
     <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 320px)', overflow: 'hidden' }}>
-            <Box sx={{ bgcolor: 'background.default', borderBottom: 1, borderColor: 'divider', flexShrink: 0 }}>
+            <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
                 <WorkflowHeader />
             </Box>
 
-            <Box sx={{ flex: 1, overflow: 'hidden' }}>
-                <SwimlaneDiagram />
+            <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>
+                <SwimlaneDiagram
+                    nodeDataArray={nodeDataArray}
+                    linkDataArray={linkDataArray}
+                />
             </Box>
         </Box>
 

@@ -76,7 +76,7 @@ const Sidebar = () => {
         >
             <Box sx={{ display: "flex", alignItems: "center", p: 2, backgroundColor: "#019C4B" }}>
                 <img
-                    src="../../public/group_41.png"
+                    src="/branch_logo.png"
                     alt="VPFlow Logo"
                     style={{ height: 40, objectFit: "contain" }}
                 />
@@ -85,7 +85,7 @@ const Sidebar = () => {
             <List sx={{ overflowX: "hidden" }}>
                 {sidebarItems.map((item, index) => (
                     <Box key={index}>
-                        {item.text==="Quick actions" ? (
+                        {item.text === "Quick actions" ? (
                             <Box sx={{ px: 2, py: 1 }}>
                                 <TextField
                                     fullWidth
@@ -94,46 +94,46 @@ const Sidebar = () => {
                                     variant="outlined"
                                 />
                             </Box>
-                        ) :(
-                        <NavLink
-                            to={item.link || "#"}
-                            style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                            <ListItemButton
-                                sx={{
-                                    borderRadius: 1,
-                                    mb: 0.5,
-                                    overflowX: "hidden",
-                                    maxWidth: "100%",
-                                    whiteSpace: "nowrap",
-                                    textOverflow: "ellipsis",
-                                    "&.Mui-selected": {
-                                        backgroundColor: "#e3f2fd",
-                                        "&:hover": {
-                                            backgroundColor: "#e3f2fd",
-                                        },
-                                    },
-                                }}
+                        ) : (
+                            <NavLink
+                                to={item.link || "#"}
+                                style={{ textDecoration: "none", color: "inherit" }}
                             >
-                                <ListItemIcon sx={{ minWidth: 36 }}>{item.icon}</ListItemIcon>
-                                <ListItemText
-                                    primary={item.text}
-                                    primaryTypographyProps={{
-                                        fontSize: "0.875rem",
-                                        noWrap: true,
-                                        fontWeight: 600,
+                                <ListItemButton
+                                    sx={{
+                                        borderRadius: 1,
+                                        mb: 0.5,
+                                        overflowX: "hidden",
+                                        maxWidth: "100%",
+                                        whiteSpace: "nowrap",
+                                        textOverflow: "ellipsis",
+                                        "&.Mui-selected": {
+                                            backgroundColor: "#e3f2fd",
+                                            "&:hover": {
+                                                backgroundColor: "#e3f2fd",
+                                            },
+                                        },
                                     }}
-                                />
-                                {item.shortcut && (
-                                    <Typography
-                                        variant="caption"
-                                        sx={{ color: "text.secondary" }}
-                                    >
-                                        {item.shortcut}
-                                    </Typography>
-                                )}
-                            </ListItemButton>
-                        </NavLink> )}
+                                >
+                                    <ListItemIcon sx={{ minWidth: 36 }}>{item.icon}</ListItemIcon>
+                                    <ListItemText
+                                        primary={item.text}
+                                        primaryTypographyProps={{
+                                            fontSize: "0.875rem",
+                                            noWrap: true,
+                                            fontWeight: 600,
+                                        }}
+                                    />
+                                    {item.shortcut && (
+                                        <Typography
+                                            variant="caption"
+                                            sx={{ color: "text.secondary" }}
+                                        >
+                                            {item.shortcut}
+                                        </Typography>
+                                    )}
+                                </ListItemButton>
+                            </NavLink>)}
                     </Box>
                 ))}
             </List>

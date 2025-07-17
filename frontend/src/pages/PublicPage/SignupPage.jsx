@@ -198,7 +198,7 @@ export default function SignupPage() {
                 sx={{
                     minHeight: "100vh",
                     width: "100vw",
-                    backgroundImage: "url('/Group39.png')",
+                    backgroundImage: "url('/authen_background.png')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     margin: 0,
