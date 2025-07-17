@@ -1,0 +1,125 @@
+{
+  "process_name": "Mở và sử dụng tài khoản thanh toán cho khách hàng tổ chức tại VPBank",
+  "version": "MB01D.QĐ-GDTC/62",
+  "created_date": null,
+  "swimlanes": [
+    {
+      "role": "Customer Legal Representative",
+      "steps": [
+        {
+          "id": "step_1",
+          "name": "Khai báo thông tin tổ chức",
+          "description": "Điền thông tin pháp nhân, đăng ký kinh doanh, mã số thuế",
+          "duration": 1,
+          "dependencies": [],
+          "actor_transitions": [],
+          "error_rate": 0,
+          "rework_count": 0
+        },
+        {
+          "id": "step_2",
+          "name": "Khai báo thông tin đại diện pháp luật",
+          "description": "Cung cấp thông tin cá nhân, chức danh và chữ ký",
+          "duration": 1,
+          "dependencies": ["step_1"],
+          "actor_transitions": [],
+          "error_rate": 0,
+          "rework_count": 0
+        },
+        {
+          "id": "step_3",
+          "name": "Ủy quyền cho người được ủy quyền",
+          "description": "Thiết lập quyền đại diện và phạm vi ủy quyền qua văn bản",
+          "duration": 0.5,
+          "dependencies": ["step_2"],
+          "actor_transitions": [],
+          "error_rate": 0,
+          "rework_count": 0,
+          "risk_level": 2
+        },
+        {
+          "id": "step_4",
+          "name": "Đăng ký mẫu dấu và nguyên tắc sử dụng",
+          "description": "Chọn phương thức xác thực bằng dấu và chữ ký",
+          "duration": 0.5,
+          "dependencies": ["step_3"],
+          "actor_transitions": [],
+          "error_rate": 0,
+          "rework_count": 0
+        }
+      ]
+    },
+    {
+      "role": "Accounting Manager",
+      "steps": [
+        {
+          "id": "step_5",
+          "name": "Cung cấp thông tin Kế toán trưởng",
+          "description": "Điền thông tin cá nhân, chức danh và ủy quyền",
+          "duration": 1,
+          "dependencies": ["step_4"],
+          "actor_transitions": [],
+          "error_rate": 0,
+          "rework_count": 0
+        },
+        {
+          "id": "step_6",
+          "name": "Ủy quyền cho người phụ trách kế toán khác",
+          "description": "Lập văn bản ủy quyền thay mặt ký giao dịch tài khoản",
+          "duration": 0.5,
+          "dependencies": ["step_5"],
+          "actor_transitions": [],
+          "error_rate": 0,
+          "rework_count": 0,
+          "risk_level": 1
+        }
+      ]
+    },
+    {
+      "role": "Authorized Person",
+      "steps": [
+        {
+          "id": "step_7",
+          "name": "Ký hợp đồng và xác nhận sử dụng tài khoản",
+          "description": "Ký tên trên giấy đề nghị và các điều khoản sử dụng",
+          "duration": 0.5,
+          "dependencies": ["step_6"],
+          "actor_transitions": ["Nhận ủy quyền từ Đại diện pháp luật", "Nhận ủy quyền từ Kế toán trưởng"],
+          "error_rate": 0,
+          "rework_count": 0
+        }
+      ]
+    },
+    {
+      "role": "VPBank Staff",
+      "steps": [
+        {
+          "id": "step_8",
+          "name": "Tiếp nhận hồ sơ và thẩm định",
+          "description": "Kiểm tra thông tin, xác thực giấy tờ hợp lệ",
+          "duration": 1,
+          "dependencies": ["step_7"],
+          "actor_transitions": ["Nhận hồ sơ từ khách hàng"],
+          "error_rate": 0,
+          "rework_count": 0
+        },
+        {
+          "id": "step_9",
+          "name": "Mở tài khoản và thông báo kết quả",
+          "description": "Cấp số tài khoản và kích hoạt dịch vụ cho khách hàng",
+          "duration": 1,
+          "dependencies": ["step_8"],
+          "actor_transitions": ["Gửi thông tin tài khoản cho khách hàng"],
+          "error_rate": 0,
+          "rework_count": 0,
+          "cost_estimate": null
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "total_duration": 6.5,
+    "average_error_rate": 0,
+    "bottleneck_step": "step_8"
+  }
+}
