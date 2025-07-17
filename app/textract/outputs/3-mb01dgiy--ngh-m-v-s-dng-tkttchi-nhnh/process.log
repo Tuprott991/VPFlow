@@ -1,0 +1,38 @@
+2025-07-17 23:15:07,661 | INFO | Start Textract processing for: 3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh.pdf
+2025-07-17 23:15:07,926 | INFO | Found credentials in shared credentials file: ~/.aws/credentials
+2025-07-17 23:15:08,303 | INFO | Uploading 3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh.pdf to S3 bucket vpbank-documents at key uploads/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh.pdf
+2025-07-17 23:15:13,437 | INFO | Upload complete.
+2025-07-17 23:15:15,000 | INFO | Textract job started. JobId: 59b65f521e881924a55f6d975f6c19041936558bc737bebab97bf16c24233568
+2025-07-17 23:15:15,000 | INFO | Waiting for Textract job to complete...
+2025-07-17 23:15:15,271 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:15:20,562 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:15:25,864 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:15:31,145 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:15:36,432 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:15:41,707 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:15:56,161 | INFO | Got all blocks: 8635
+2025-07-17 23:15:56,756 | INFO | Saved full raw Textract JSON to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\text-detection.json
+2025-07-17 23:15:56,762 | INFO | Extracted 941 lines to CSV: ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\text-detection.csv
+2025-07-17 23:15:57,178 | INFO | Textract ANALYZE job started. JobId: 7427ac68bf9ec56705c4f5b2c6bff61103cd1fce4cd5ce42713707d27a9aba0e
+2025-07-17 23:15:57,447 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:16:02,737 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:16:08,848 | INFO | Job status: IN_PROGRESS. Sleeping 5s...
+2025-07-17 23:16:24,734 | INFO | Got 9972 blocks from analysis.
+2025-07-17 23:16:25,446 | INFO | Saved analyze raw JSON to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\document-analysis.json
+2025-07-17 23:16:25,452 | INFO | Extracted 372 form key-value pairs to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\forms.csv
+2025-07-17 23:16:25,469 | INFO | Extracted table 1 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_1.md (Markdown)
+2025-07-17 23:16:25,470 | INFO | Extracted table 2 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_2.md (Markdown)
+2025-07-17 23:16:25,471 | INFO | Extracted table 3 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_3.md (Markdown)
+2025-07-17 23:16:25,471 | INFO | Extracted table 4 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_4.md (Markdown)
+2025-07-17 23:16:25,472 | INFO | Extracted table 5 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_5.md (Markdown)
+2025-07-17 23:16:25,472 | INFO | Extracted table 6 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_6.md (Markdown)
+2025-07-17 23:16:25,473 | INFO | Extracted table 7 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_7.md (Markdown)
+2025-07-17 23:16:25,473 | INFO | Extracted table 8 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_8.md (Markdown)
+2025-07-17 23:16:25,474 | INFO | Extracted table 9 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_9.md (Markdown)
+2025-07-17 23:16:25,475 | INFO | Extracted table 10 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_10.md (Markdown)
+2025-07-17 23:16:25,475 | INFO | Extracted table 11 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_11.md (Markdown)
+2025-07-17 23:16:25,476 | INFO | Extracted table 12 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_12.md (Markdown)
+2025-07-17 23:16:25,477 | INFO | Extracted table 13 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_13.md (Markdown)
+2025-07-17 23:16:25,479 | INFO | Extracted table 14 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_14.md (Markdown)
+2025-07-17 23:16:25,479 | INFO | Extracted table 15 to ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\table_15.md (Markdown)
+2025-07-17 23:16:25,479 | INFO | \u2705 All analysis complete. Output folder: ../outputs/3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh

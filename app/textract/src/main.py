@@ -9,7 +9,7 @@ from datetime import datetime
 
 AWS_PROFILE = 'vpbank'
 BUCKET_NAME = 'vpbank-documents'
-LOCAL_FILE_PATH = r'D:\Github Repos\VPFlow-1\app\test\vplow.pdf'
+LOCAL_FILE_PATH = r'E:\VPFlow\app\textract\outputs\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh\3-mb01dgiy--ngh-m-v-s-dng-tkttchi-nhnh.pdf'
 
 filename_only = os.path.basename(LOCAL_FILE_PATH)
 output_folder = os.path.join("../outputs", os.path.splitext(filename_only)[0])
