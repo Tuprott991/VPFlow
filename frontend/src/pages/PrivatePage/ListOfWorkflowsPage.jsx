@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+// import { Menu, MenuItem } from "@mui/material";
 import {
     Box,
     Button,
@@ -18,6 +19,7 @@ import {
     Paper,
     Chip,
     Typography,
+    Menu
 } from "@mui/material";
 
 import {
@@ -40,6 +42,25 @@ import {
 
 export default function ListOfWorkflowsPage() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [anchorEl, setAnchorEl] = useState(null);
+    const filteredWorkflows = workflowData.filter((workflow) =>
+        workflow.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        // workflow.categories.some(category =>
+        // category.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        // )
+    );
+    
+    const allCategories = Array.from(
+    new Set(workflowData.flatMap(wf => wf.categories.map(cat => cat.name)))
+);
+
+    const handleFilterClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <Box sx={{ p: 1.5, flexGrow: 1 }}>
@@ -81,12 +102,29 @@ export default function ListOfWorkflowsPage() {
 
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
                 <Box sx={{ display: "flex", gap: 2 }}>
+                    
                     <Button variant="outlined" size="small" startIcon={<FilterList />}>
                         Sorted by Last published
                     </Button>
-                    <Button variant="outlined" size="small" startIcon={<FilterList />}>
+                    
+                    <Button variant="outlined" size="small" startIcon={<FilterList />}
+                    onClick={handleFilterClick}
+                    >
                         Filter
                     </Button>
+                    
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        {allCategories.map((cat, idx) => (
+                            <MenuItem key={idx} onClick={handleClose}>
+                                {cat}
+                            </MenuItem>
+                        ))}
+                    </Menu>
+
                 </Box>
                 <Box sx={{ display: "flex", gap: 1 }}>
                     <Button variant="text" size="small">
@@ -141,7 +179,7 @@ export default function ListOfWorkflowsPage() {
                     </TableHead>
 
                     <TableBody>
-                        {workflowData.map((workflow) => (
+                            {filteredWorkflows.map((workflow) => (
                             <TableRow key={workflow.id} hover>
                                 <TableCell sx={{ fontWeight: 500, borderRight: "1px solid #EEEFF1" }}>
                                     <Typography sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>

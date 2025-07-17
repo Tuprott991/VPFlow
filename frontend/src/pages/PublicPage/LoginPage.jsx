@@ -14,6 +14,9 @@ import {
     Grid,
 } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
+import userData from "../../data/locals/userData.json"
+import { Alert } from "@mui/material"
+
 
 const theme = createTheme({
     palette: {
@@ -42,7 +45,7 @@ function LoginForm({ formData, handleChange, handleSubmit }) {
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: "100%" }}>
                 <Typography variant="body2" sx={{ mb: 1, color: "#666", fontWeight: 500 }}>
-                    Email address
+                    Email address or UserName
                 </Typography>
                 <TextField
                     fullWidth
@@ -167,6 +170,8 @@ export default function LoginPage() {
         rememberMe: false,
     })
 
+    const [error, setError] = useState("")
+
     const handleChange = (event) => {
         const { name, value, checked, type } = event.target
         setFormData((prev) => ({
@@ -177,8 +182,20 @@ export default function LoginPage() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log("Login attempt:", formData)
+        const foundUser= userData.find(user =>
+        (user.email.toLowerCase()===formData.email.toLowerCase() || user.username.toLowerCase() === formData.email.toLowerCase())
+        && user.password === formData.password)
+        if (foundUser) {
+        console.log("Login success:", foundUser)
+        // Navigate hoặc lưu thông tin người dùng
         navigate("/list-of-workflows")
+    } else {
+        console.log("Invalid credentials")
+        setError("Invalid email/username or password")
+        setTimeout(() => {
+            setError("")
+        }, 3000)
+    }
     }
 
     return (
@@ -217,11 +234,17 @@ export default function LoginPage() {
                             alignItems: "center",
                         }}
                     >
+                        
                         <LoginForm
                             formData={formData}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
                         />
+                        {error && (
+                            <Alert severity="error" sx={{ width: "100%", mb: 2,mt:2 }}>
+                                {error}
+                            </Alert>
+                        )}
                     </Container>
                 </Grid>
 
@@ -235,6 +258,7 @@ export default function LoginPage() {
                     }}
                 >
                 </Grid>
+                
             </Grid>
         </ThemeProvider>
     )
