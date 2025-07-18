@@ -1,151 +1,118 @@
 import os
 import json
 
-output_folder = "."  # Đặt đúng thư mục chứa document-analysis.json
-
+output_folder = "."
 with open(os.path.join(output_folder, "document-analysis.json"), encoding="utf-8") as f:
     blocks = json.load(f)["Blocks"]
+
+block_map = {b["Id"]: b for b in blocks if "Id" in b}
 
 def get_text(block, block_map):
     text = ""
     for rel in block.get("Relationships", []):
         if rel["Type"] == "CHILD":
             for child_id in rel["Ids"]:
-                word = block_map[child_id]
+                word = block_map.get(child_id)
+                if not word:
+                    continue
                 if word["BlockType"] == "WORD":
                     text += word["Text"] + " "
                 elif word["BlockType"] == "SELECTION_ELEMENT":
-                    if word["SelectionStatus"] == "SELECTED":
+                    if word.get("SelectionStatus") == "SELECTED":
                         text += "X "
     return text.strip()
 
-def extract_table_cell_ids(blocks):
-    # Lấy tất cả cell id thuộc TABLE để loại khỏi paragraph
-    table_cell_ids = set()
-    block_map = {b["Id"]: b for b in blocks if "Id" in b}
-    for block in blocks:
-        if block.get("BlockType") == "TABLE":
-            for rel in block.get("Relationships", []):
-                if rel["Type"] == "CHILD":
-                    for cell_id in rel["Ids"]:
-                        table_cell_ids.add(cell_id)
-    return table_cell_ids
-
-def extract_lines_not_in_table(blocks, table_cell_ids):
-    # Trả về list các tuple (page, top, left, text) cho LINE không thuộc TABLE
-    lines = []
-    for b in blocks:
-        if b.get("BlockType") == "LINE":
-            # Nếu LINE có quan hệ PARENT là CELL thì bỏ qua
-            is_in_table = False
-            for rel in b.get("Relationships", []):
-                if rel["Type"] == "CHILD":
-                    for child_id in rel["Ids"]:
-                        if child_id in table_cell_ids:
-                            is_in_table = True
-            if not is_in_table:
-                text = b.get("Text", "")
-                page = b.get("Page", 1)
-                bbox = b.get("Geometry", {}).get("BoundingBox", {})
-                top = bbox.get("Top", 0)
-                left = bbox.get("Left", 0)
-                lines.append((page, top, left, text))
-    lines.sort()
-    return lines
-
-def group_paragraphs(lines, line_gap=0.02):
-    paragraphs = []
-    current_para = []
-    prev_page, prev_top = None, None
-    for page, top, left, text in lines:
-        if not text.strip():
-            if current_para:
-                paragraphs.append(" ".join(current_para))
-                current_para = []
-            continue
-        if prev_page is not None and (page != prev_page or abs(top - prev_top) > line_gap):
-            if current_para:
-                paragraphs.append(" ".join(current_para))
-                current_para = []
-        current_para.append(text.strip())
-        prev_page, prev_top = page, top
-    if current_para:
-        paragraphs.append(" ".join(current_para))
-    return paragraphs
-
-def extract_tables(blocks):
-    block_map = {b["Id"]: b for b in blocks if "Id" in b}
-    tables = []
-    for block in blocks:
-        if block.get("BlockType") == "TABLE":
-            rows = {}
-            for rel in block.get("Relationships", []):
-                if rel["Type"] == "CHILD":
-                    for cell_id in rel["Ids"]:
-                        cell = block_map[cell_id]
-                        row = cell["RowIndex"]
-                        col = cell["ColumnIndex"]
-                        text = get_text(cell, block_map)
-                        rows.setdefault(row, {})[col] = text
-            tables.append(rows)
-    return tables
+def extract_table(block, block_map):
+    rows = {}
+    for rel in block.get("Relationships", []):
+        if rel["Type"] == "CHILD":
+            for cell_id in rel["Ids"]:
+                cell = block_map.get(cell_id)
+                if cell and cell["BlockType"] == "CELL":
+                    row = cell["RowIndex"]
+                    col = cell["ColumnIndex"]
+                    text = get_text(cell, block_map)
+                    rows.setdefault(row, {})[col] = text
+    return rows
 
 def table_to_html(table):
     max_col = max(max(row.keys()) for row in table.values())
-    html = "<table>"
+    html = "<table border='1'>\n"
     for r in sorted(table.keys()):
-        html += "<tr>"
+        html += "  <tr>\n"
         for c in range(1, max_col + 1):
-            html += f"<td>{table[r].get(c, '')}</td>"
-        html += "</tr>"
+            html += f"    <td>{table[r].get(c, '')}</td>\n"
+        html += "  </tr>\n"
     html += "</table>"
     return html
 
-def extract_kv_pairs(blocks):
-    block_map = {b["Id"]: b for b in blocks if "Id" in b}
-    key_map = {}
-    value_map = {}
+def extract_kv_pairs(block, block_map):
+    value_block = None
+    key_text = get_text(block, block_map)
+    for rel in block.get("Relationships", []):
+        if rel["Type"] == "VALUE":
+            for value_id in rel["Ids"]:
+                value_block = block_map.get(value_id)
+    value_text = get_text(value_block, block_map) if value_block else ""
+    return key_text, value_text
+
+def get_all_child_ids(block, block_map):
+    all_ids = set()
+    to_process = list(block.get("Relationships", []))
+    while to_process:
+        rel = to_process.pop()
+        if rel["Type"] == "CHILD":
+            for cid in rel["Ids"]:
+                all_ids.add(cid)
+                child = block_map.get(cid)
+                if child and "Relationships" in child:
+                    to_process.extend(child["Relationships"])
+    return all_ids
+
+
+def get_all_word_ids_in_cells(blocks, block_map):
+    word_ids_in_cells = set()
     for block in blocks:
-        if block.get("BlockType") == "KEY_VALUE_SET":
-            if "KEY" in block.get("EntityTypes", []):
-                key_map[block["Id"]] = block
-            else:
-                value_map[block["Id"]] = block
-    kvs = []
-    for key_id, key_block in key_map.items():
-        value_block = None
-        for rel in key_block.get("Relationships", []):
-            if rel["Type"] == "VALUE":
-                for value_id in rel["Ids"]:
-                    value_block = value_map.get(value_id)
-        key = get_text(key_block, block_map)
-        value = get_text(value_block, block_map) if value_block else ""
-        kvs.append((key, value))
-    return kvs
+        if block.get("BlockType") == "TABLE":
+            for rel in block.get("Relationships", []):
+                if rel["Type"] == "CHILD":
+                    for cell_id in rel["Ids"]:
+                        cell_block = block_map.get(cell_id)
+                        if cell_block and cell_block.get("BlockType") == "CELL":
+                            for cell_rel in cell_block.get("Relationships", []):
+                                if cell_rel["Type"] == "CHILD":
+                                    word_ids_in_cells.update(cell_rel["Ids"])
+    return word_ids_in_cells
 
-# --- MAIN FLOW ---
 
-table_cell_ids = extract_table_cell_ids(blocks)
-lines = extract_lines_not_in_table(blocks, table_cell_ids)
-paragraphs = group_paragraphs(lines)
-tables = extract_tables(blocks)
-kvs = extract_kv_pairs(blocks)
+def is_line_in_table(line_block, word_ids_in_cells):
+    for rel in line_block.get("Relationships", []):
+        if rel["Type"] == "CHILD":
+            for wid in rel["Ids"]:
+                if wid in word_ids_in_cells:
+                    return True
+    return False
+
+word_ids_in_table_cells = get_all_word_ids_in_cells(blocks, block_map)
 
 with open(os.path.join(output_folder, "proposal.md"), "w", encoding="utf-8") as f:
-    f.write("# VPBank Technology Hackathon 2025\n\n")
-    if paragraphs:
-        f.write("## Nội dung văn bản (Paragraph)\n\n")
-        for para in paragraphs:
-            f.write(para + "\n\n")
-    if kvs:
-        f.write("## Extracted Key-Value Pairs (Forms)\n\n")
-        f.write("| Key | Value |\n| --- | --- |\n")
-        for key, value in kvs:
-            f.write(f"| {key} | {value} |\n")
-        f.write("\n")
-    if tables:
-        for i, table in enumerate(tables):
-            f.write(f"## Table {i+1}\n\n")
-            f.write(table_to_html(table) + "\n\n")
+    f.write("# VPBank Technology Hackathon 2025\n")
 
-print("✅ proposal.md generated at:", os.path.join(output_folder, "proposal.md"))
+    for block in blocks:
+        btype = block.get("BlockType")
+
+        if btype == "LINE":
+            if not is_line_in_table(block, word_ids_in_table_cells):
+                text = block.get("Text", "").strip()
+                if text:
+                    f.write(text + "\n")
+
+        elif btype == "TABLE":
+            table_data = extract_table(block, block_map)
+            html = table_to_html(table_data)
+            f.write(html + "\n\n")
+
+        elif btype == "KEY_VALUE_SET" and "KEY" in block.get("EntityTypes", []):
+            key, value = extract_kv_pairs(block, block_map)
+            f.write(f"**{key}**: {value}\n\n")
+

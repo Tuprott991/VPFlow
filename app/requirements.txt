@@ -1,0 +1,5 @@
+lightrag-hku
+networkx
+pyvis
+openai
+langchain
