@@ -14,5 +14,13 @@
     "username": "nghia_zun",
     "password": "nghia123@",
     "role": "director"
+  },
+  {
+    "id": "11223",
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "username": "admin",
+    "password": "123456",
+    "role": "banker"
   }
 ]

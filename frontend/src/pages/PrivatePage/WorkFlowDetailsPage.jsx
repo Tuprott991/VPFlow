@@ -20,7 +20,7 @@ import {
     Description
 } from '@mui/icons-material';
 import { IoInformationCircleOutline } from 'react-icons/io5';
-import { FaWindowClose} from "react-icons/fa";
+import { FaWindowClose } from "react-icons/fa";
 import { FcAssistant } from "react-icons/fc";
 
 import { SwimlaneDiagram } from '@/components/ui';
@@ -44,14 +44,14 @@ const WorkflowHeader = () => (
     </Box>
 );
 
-const ChatPanel = ({ onClose, defaultFile}) => {
+const ChatPanel = ({ onClose, defaultFile }) => {
     const [selectedFiles, setSelectedFiles] = useState(defaultFile ? [defaultFile] : []);
     const [messages, setMessages] = useState([
         { text: 'Hi, I need some help', fromUser: true },
         { text: 'Of course! What do you need help with?', fromUser: false },
     ]);
     const [input, setInput] = useState("");
-    
+
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         setSelectedFiles(prev => [...prev, ...files]);
@@ -60,7 +60,7 @@ const ChatPanel = ({ onClose, defaultFile}) => {
     const handleDeleteFile = (index) => {
         setSelectedFiles(files => files.filter((_, i) => i !== index));
     };
-    
+
     const handleSend = () => {
         if (!input.trim()) return;
         setMessages([...messages, { text: input, fromUser: true }]);
@@ -104,22 +104,22 @@ const ChatPanel = ({ onClose, defaultFile}) => {
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
-                                    maxWidth: 200 
+                                    maxWidth: 200
                                 }}>
                                     {file.name}
                                 </span>
                             }
                             onDelete={() => handleDeleteFile(idx)}
                             color="primary"
-                            sx={{ 
+                            sx={{
                                 flex: 1,
                                 '& .MuiChip-root': {
                                     display: 'flex',
                                     alignItems: 'center'
                                 },
                                 '& .MuiChip-deleteIcon': {
-                                    marginLeft: 'auto', 
-                                    order: 2 
+                                    marginLeft: 'auto',
+                                    order: 2
                                 },
                                 '& .MuiChip-label': {
                                     order: 1,
@@ -134,7 +134,7 @@ const ChatPanel = ({ onClose, defaultFile}) => {
                     component="label"
                     size="small"
                     sx={{
-                        color: 'primary.main',       
+                        color: 'primary.main',
                         borderColor: 'primary.main',
                         '&:hover': {
                             borderColor: 'primary.dark',
@@ -325,7 +325,7 @@ const App = () => {
     const [highlightedNodes, setHighlightedNodes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
-   
+
     const handlePainPointDetection = () => {
         if (highlightedNodes.length > 0) {
             setHighlightedNodes([]);
@@ -347,7 +347,7 @@ const App = () => {
                     .map(node => node.key);
                 setHighlightedNodes(cicNode);
             }
-        }, 100); 
+        }, 100);
     };
 
 
@@ -358,20 +358,20 @@ const App = () => {
                 <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
                     <WorkflowHeader />
 
-                    <Box sx={{ 
-                        display: 'flex', 
+                    <Box sx={{
+                        display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'flex-end', 
-                        gap: 2, 
-                        mt: 2 
+                        justifyContent: 'flex-end',
+                        gap: 2,
+                        mt: 2
                     }}>
-                        <Typography variant="body1" sx={{ 
+                        <Typography variant="body1" sx={{
                             color: 'text.primary',
                             fontWeight: 'medium'
                         }}>
                             Pain Point
                         </Typography>
-                        
+
                         {/* Pain Point Icon/Illustration */}
                         <Box sx={{
                             width: 80,
@@ -408,53 +408,53 @@ const App = () => {
                 {showChat ? (
                     <ChatPanel onClose={() => setShowChat(false)} defaultFile={defaultFile} />
                 ) : (
-                    <ToolsPanel 
-                        onShowChat={() => setShowChat(true)} 
-                        onPainPointDetection={handlePainPointDetection} 
+                    <ToolsPanel
+                        onShowChat={() => setShowChat(true)}
+                        onPainPointDetection={handlePainPointDetection}
                     />
                 )}
             </Box>
             {loading && (
-            <Box
-                sx={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    bgcolor: 'rgba(255, 255, 255, 0.7)',
-                    zIndex: 1300,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
-            <Box sx={{ width: '60%', textAlign: 'center' }}>
-                <Typography variant="h6" sx={{ color: '#1976d2', mb: 2 }}>
-                    Detecting Pain Points...
-                </Typography>
-                <Box sx={{ width: '100%' }}>
-                    <Box
-                        sx={{
-                            height: 10,
-                            bgcolor: '#ddd',
-                            borderRadius: 5,
-                            overflow: 'hidden',
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: `${progress}%`,
-                                height: '100%',
-                                bgcolor: '#1976d2',
-                                transition: 'width 0.1s linear',
-                            }}
-                        />
+                <Box
+                    sx={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100vw',
+                        height: '100vh',
+                        bgcolor: 'rgba(255, 255, 255, 0.7)',
+                        zIndex: 1300,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Box sx={{ width: '60%', textAlign: 'center' }}>
+                        <Typography variant="h6" sx={{ color: '#1976d2', mb: 2 }}>
+                            Detecting Pain Points...
+                        </Typography>
+                        <Box sx={{ width: '100%' }}>
+                            <Box
+                                sx={{
+                                    height: 10,
+                                    bgcolor: '#ddd',
+                                    borderRadius: 5,
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        width: `${progress}%`,
+                                        height: '100%',
+                                        bgcolor: '#1976d2',
+                                        transition: 'width 0.1s linear',
+                                    }}
+                                />
+                            </Box>
                         </Box>
                     </Box>
-                </Box> 
 
-            </Box>)}
+                </Box>)}
 
         </Box>
     );
