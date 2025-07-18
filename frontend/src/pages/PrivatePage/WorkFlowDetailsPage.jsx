@@ -45,27 +45,40 @@ const WorkflowHeader = () => (
     </Box>
 );
 
-const ChatPanel = ({ onClose, defaultFile }) => {
-    const [selectedFiles, setSelectedFiles] = useState(defaultFile ? [defaultFile] : []);
+const ChatPanel = ({ onClose }) => {
+    const botResponses = [
+        'Hello! How can I assist you today?',
+        'Verify income, collateral',
+        'This step often involves:\n1. Collecting documents from the customer\n2. Third-party verifications (employer, property appraisals)\n3. Manual reviews\n4. This process can take days or even weeks depending on the complexity.'
+    ];
+
     const [messages, setMessages] = useState([
-        { text: 'Hi, I need some help', fromUser: true },
-        { text: 'Of course! What do you need help with?', fromUser: false },
+        { text: botResponses[0], fromUser: false }
     ]);
     const [input, setInput] = useState("");
+    const [responseIndex, setResponseIndex] = useState(1);
+    const [isBotTyping, setIsBotTyping] = useState(false);
 
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        setSelectedFiles(prev => [...prev, ...files]);
-    };
+    const simulateBotResponse = () => {
+        if (responseIndex >= botResponses.length) return;
 
-    const handleDeleteFile = (index) => {
-        setSelectedFiles(files => files.filter((_, i) => i !== index));
+        const response = botResponses[responseIndex];
+        const isLong = response.length > 100;
+
+        setIsBotTyping(true);
+        setTimeout(() => {
+            setMessages(prev => [...prev, { text: response, fromUser: false }]);
+            setResponseIndex(prev => prev + 1);
+            setIsBotTyping(false);
+        }, isLong ? 2500 : 1000); // Giả lập thinking time
     };
 
     const handleSend = () => {
-        if (!input.trim()) return;
-        setMessages([...messages, { text: input, fromUser: true }]);
+        if (!input.trim() || isBotTyping) return;
+        setMessages(prev => [...prev, { text: input.trim(), fromUser: true }]);
         setInput("");
+
+        simulateBotResponse();
     };
 
     return (
@@ -80,82 +93,8 @@ const ChatPanel = ({ onClose, defaultFile }) => {
                 </Button>
             </Box>
 
-            <TextField
-                fullWidth
-                size="small"
-                placeholder="Search ..."
-                sx={{ mb: 1 }}
-            />
-
-            <Typography variant="subtitle2" fontWeight="bold" mb={1}>List of chat</Typography>
-
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mb: 1 }}>
-                <Button variant="outlined" size="small">Chat 1</Button>
-                <Button variant="outlined" size="small">Chat 2</Button>
-                <Button variant="outlined" size="small">New chat</Button>
-            </Box>
-
-            <Box sx={{ p: 1, bgcolor: '#f1c6b9ff', borderRadius: 1, mb: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
-                <Typography variant="body2" mb={0.5}>Import</Typography>
-                {selectedFiles.map((file, idx) => (
-                    <Box key={idx} sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Chip
-                            label={
-                                <span style={{
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                    maxWidth: 200
-                                }}>
-                                    {file.name}
-                                </span>
-                            }
-                            onDelete={() => handleDeleteFile(idx)}
-                            color="primary"
-                            sx={{
-                                flex: 1,
-                                '& .MuiChip-root': {
-                                    display: 'flex',
-                                    alignItems: 'center'
-                                },
-                                '& .MuiChip-deleteIcon': {
-                                    marginLeft: 'auto',
-                                    order: 2
-                                },
-                                '& .MuiChip-label': {
-                                    order: 1,
-                                    flex: 1
-                                }
-                            }}
-                        />
-                    </Box>
-                ))}
-                <Button
-                    variant="outlined"
-                    component="label"
-                    size="small"
-                    sx={{
-                        color: 'primary.main',
-                        borderColor: 'primary.main',
-                        '&:hover': {
-                            borderColor: 'primary.dark',
-                            color: 'primary.dark',
-                            backgroundColor: 'primary.light'
-                        }
-                    }}
-                >
-                    Import file
-                    <input
-                        type="file"
-                        hidden
-                        multiple
-                        onChange={handleFileChange}
-                    />
-                </Button>
-            </Box>
-
             <Box sx={{
-                height: 380,
+                height: 400,
                 bgcolor: '#fff',
                 border: '1px solid #ccc',
                 borderRadius: 1,
@@ -178,10 +117,15 @@ const ChatPanel = ({ onClose, defaultFile }) => {
                             borderRadius: 1,
                             maxWidth: '70%'
                         }}>
-                            <Typography variant="body2">{msg.text}</Typography>
+                            <Typography variant="body2" whiteSpace="pre-line">{msg.text}</Typography>
                         </Box>
                     </Box>
                 ))}
+                {isBotTyping && (
+                    <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'gray', ml: 1 }}>
+                        Bot is thinking...
+                    </Typography>
+                )}
             </Box>
 
             <Box sx={{ display: 'flex', gap: 1 }}>
@@ -191,8 +135,17 @@ const ChatPanel = ({ onClose, defaultFile }) => {
                     placeholder="Text prompt"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSend();
+                        }
+                    }}
+                    disabled={isBotTyping}
                 />
-                <Button variant="contained" onClick={handleSend}>Send</Button>
+                <Button variant="contained" onClick={handleSend} disabled={isBotTyping} sx={{ color: 'white', bgcolor: '#256CF1' }}>
+                    Send
+                </Button>
             </Box>
         </Box>
     );
