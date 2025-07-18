@@ -1,6 +1,6 @@
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
     Box,
     IconButton,
@@ -18,27 +18,6 @@ import {
 } from '@mui/icons-material';
 
 // ===== DIAGRAM CONFIGURATION =====
-const createDiagram = (nodeDataArray, linkDataArray) => {
-    const $ = go.GraphObject.make;
-
-    const diagram = $(go.Diagram, {
-        'undoManager.isEnabled': true,
-        allowZoom: true,
-        allowHorizontalScroll: true,
-        allowVerticalScroll: true,
-        padding: 20,
-        initialAutoScale: go.Diagram.Uniform,
-        layout: $(go.Layout),
-    });
-
-    diagram.groupTemplate = createGroupTemplate($);
-    diagram.nodeTemplate = createNodeTemplate($);
-    diagram.linkTemplate = createLinkTemplate($);
-    diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
-
-    // ❌ Không xử lý click vào node
-    return diagram;
-};
 
 const createGroupTemplate = ($) => {
     return $(
@@ -75,7 +54,7 @@ const createGroupTemplate = ($) => {
     );
 };
 
-const createNodeTemplate = ($) => {
+const createNodeTemplate = ($, highlightedNodes) => {
     return $(
         go.Node,
         'Auto',
@@ -84,7 +63,6 @@ const createNodeTemplate = ($) => {
             go.Shape,
             'RoundedRectangle',
             {
-                fill: '#ffffff',
                 stroke: '#888',
                 strokeWidth: 1.5,
                 width: 240,
@@ -92,7 +70,11 @@ const createNodeTemplate = ($) => {
                 portId: '',
                 fromLinkable: true,
                 toLinkable: true,
-            }
+            },
+            // Binding để đổi màu theo highlightedNodes
+            new go.Binding('fill', 'key', function(key) {
+                return highlightedNodes.includes(key) ? "#DF98EA" : "#ffffff";
+            })
         ),
         $(
             go.TextBlock,
@@ -211,22 +193,57 @@ const useDiagramControls = (diagramRef) => {
 };
 
 // ===== MAIN COMPONENT =====
-export default function SwimlaneDiagram({ nodeDataArray, linkDataArray }) {
+export default function SwimlaneDiagram({ nodeDataArray, linkDataArray, highlightedNodes = [] }) {
     const diagramRef = useRef(null);
     const [zoom, setZoom] = useState(1);
+    const [diagram, setDiagram] = useState(null);
 
     const diagramControls = useDiagramControls(diagramRef);
 
-    const initDiagram = () => {
-        const diagram = createDiagram(nodeDataArray, linkDataArray);
-        diagramRef.current = diagram;
-
-        diagram.addDiagramListener('ViewportBoundsChanged', () => {
-            setZoom(diagram.scale);
+    const createDiagram = (nodeDataArray, linkDataArray, highlightedNodes) => {
+        const $ = go.GraphObject.make;
+        const newDiagram = $(go.Diagram, {
+            'undoManager.isEnabled': true,
+            allowZoom: true,
+            allowHorizontalScroll: true,
+            allowVerticalScroll: true,
+            padding: 20,
+            initialAutoScale: go.Diagram.Uniform,
+            layout: $(go.Layout),
         });
 
-        return diagram;
+        newDiagram.groupTemplate = createGroupTemplate($);
+        newDiagram.nodeTemplate = createNodeTemplate($, highlightedNodes);
+        newDiagram.linkTemplate = createLinkTemplate($);
+        newDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
+        return newDiagram;
     };
+
+    const initDiagram = () => {
+        const newDiagram = createDiagram(nodeDataArray, linkDataArray, highlightedNodes);
+        diagramRef.current = newDiagram;
+        setDiagram(newDiagram);
+
+        newDiagram.addDiagramListener('ViewportBoundsChanged', () => {
+            setZoom(newDiagram.scale);
+        });
+
+        return newDiagram;
+    };
+
+    useEffect(() => {
+        if (diagramRef.current) {
+            // Recreate node template với highlightedNodes mới
+            const $ = go.GraphObject.make;
+            diagramRef.current.nodeTemplate = createNodeTemplate($, highlightedNodes);
+            
+            // Trigger update cho tất cả nodes
+            diagramRef.current.nodes.each(node => {
+                node.updateTargetBindings();
+            });
+        }
+    }, [highlightedNodes]);
 
     return (
         <Box sx={{ width: '100%', height: '90%', position: 'relative', backgroundColor: '#fff' }}>

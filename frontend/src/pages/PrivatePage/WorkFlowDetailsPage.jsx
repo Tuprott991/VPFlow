@@ -27,6 +27,7 @@ import { SwimlaneDiagram } from '@/components/ui';
 import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
 import { ToolButton, ToolGroupTitle } from '@/components/custom';
 import { useState } from 'react';
+
 const WorkflowHeader = () => (
     <Box sx={{ bgcolor: '#E5EEFF', px: 1.5, py: 1, borderRadius: '8px' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -43,7 +44,6 @@ const WorkflowHeader = () => (
     </Box>
 );
 
-
 const ChatPanel = ({ onClose, defaultFile}) => {
     const [selectedFiles, setSelectedFiles] = useState(defaultFile ? [defaultFile] : []);
     const [messages, setMessages] = useState([
@@ -51,7 +51,8 @@ const ChatPanel = ({ onClose, defaultFile}) => {
         { text: 'Of course! What do you need help with?', fromUser: false },
     ]);
     const [input, setInput] = useState("");
-        const handleFileChange = (e) => {
+    
+    const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         setSelectedFiles(prev => [...prev, ...files]);
     };
@@ -59,6 +60,7 @@ const ChatPanel = ({ onClose, defaultFile}) => {
     const handleDeleteFile = (index) => {
         setSelectedFiles(files => files.filter((_, i) => i !== index));
     };
+    
     const handleSend = () => {
         if (!input.trim()) return;
         setMessages([...messages, { text: input, fromUser: true }]);
@@ -69,8 +71,8 @@ const ChatPanel = ({ onClose, defaultFile}) => {
         <Box sx={{ p: 2, bgcolor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
                 <Typography variant="h6" fontWeight="bold">
-                <FcAssistant  fontSize="medium" />
-                     &nbsp; Global AI Assistant
+                    <FcAssistant fontSize="medium" />
+                    &nbsp; Global AI Assistant
                 </Typography>
                 <Button size="small" onClick={onClose} sx={{ minWidth: 'auto', p: 0.5 }}>
                     <FaWindowClose />
@@ -92,10 +94,10 @@ const ChatPanel = ({ onClose, defaultFile}) => {
                 <Button variant="outlined" size="small">New chat</Button>
             </Box>
 
-            <Box sx={{ p: 1, bgcolor: '#f1c6b9ff', borderRadius: 1, mb: 1, display: 'flex', flexDirection: 'column', gap: 1  }}>
+            <Box sx={{ p: 1, bgcolor: '#f1c6b9ff', borderRadius: 1, mb: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
                 <Typography variant="body2" mb={0.5}>Import</Typography>
                 {selectedFiles.map((file, idx) => (
-                   <Box key={idx} sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box key={idx} sx={{ display: 'flex', alignItems: 'center' }}>
                         <Chip
                             label={
                                 <span style={{
@@ -152,7 +154,6 @@ const ChatPanel = ({ onClose, defaultFile}) => {
             </Box>
 
             <Box sx={{
-                // flex: 1,
                 height: 380,
                 bgcolor: '#fff',
                 border: '1px solid #ccc',
@@ -196,8 +197,7 @@ const ChatPanel = ({ onClose, defaultFile}) => {
     );
 };
 
-
-const ToolsPanel = ({ onShowChat }) => (
+const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
     <Box sx={{
         width: '100%',
         height: '100%',
@@ -206,7 +206,6 @@ const ToolsPanel = ({ onShowChat }) => (
         flexDirection: 'column',
         fontSize: '12px'
     }}>
-        {/* Header */}
         <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
             <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
                 Tools
@@ -290,7 +289,8 @@ const ToolsPanel = ({ onShowChat }) => (
             <ToolButton
                 props={{
                     icon: <Psychology fontSize="small" color="primary" />,
-                    text: 'Pain Point Detection'
+                    text: 'Pain Point Detection',
+                    onClick: onPainPointDetection
                 }}
             />
 
@@ -315,7 +315,6 @@ const ToolsPanel = ({ onShowChat }) => (
                     text: 'Auto SOP Generator'
                 }}
             />
-
         </Box>
     </Box>
 );
@@ -323,38 +322,142 @@ const ToolsPanel = ({ onShowChat }) => (
 const App = () => {
     const [showChat, setShowChat] = useState(false);
     const [defaultFile, setDefaultFile] = useState(new File(["content"], "sample.txt"));
-    return(
-    <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 280px)', overflow: 'hidden' }}>
-            <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
-                <WorkflowHeader />
+    const [highlightedNodes, setHighlightedNodes] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
+   
+    const handlePainPointDetection = () => {
+        if (highlightedNodes.length > 0) {
+            setHighlightedNodes([]);
+            return;
+        }
+        setLoading(true);
+        setProgress(0);
+
+        let current = 0;
+        const interval = setInterval(() => {
+            current += 5;
+            setProgress(current);
+            if (current >= 100) {
+                clearInterval(interval);
+                setLoading(false);
+
+                const cicNode = nodeDataArray
+                    .filter(node => node.text === "Check CIC (Credit Report)")
+                    .map(node => node.key);
+                setHighlightedNodes(cicNode);
+            }
+        }, 100); 
+    };
+
+
+
+    return (
+        <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
+            <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 280px)', overflow: 'hidden' }}>
+                <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
+                    <WorkflowHeader />
+
+                    <Box sx={{ 
+                        display: 'flex', 
+                        alignItems: 'center',
+                        justifyContent: 'flex-end', 
+                        gap: 2, 
+                        mt: 2 
+                    }}>
+                        <Typography variant="body1" sx={{ 
+                            color: 'text.primary',
+                            fontWeight: 'medium'
+                        }}>
+                            Pain Point
+                        </Typography>
+                        
+                        {/* Pain Point Icon/Illustration */}
+                        <Box sx={{
+                            width: 80,
+                            height: 40,
+                            bgcolor: '#DF98EA',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            border: '2px solid #8308BC'
+                        }}>
+                        </Box>
+                    </Box>
+                </Box>
+
+                <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>
+                    <SwimlaneDiagram
+                        nodeDataArray={nodeDataArray}
+                        linkDataArray={linkDataArray}
+                        highlightedNodes={highlightedNodes}
+                    />
+                </Box>
             </Box>
 
-            <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>
-                <SwimlaneDiagram
-                    nodeDataArray={nodeDataArray}
-                    linkDataArray={linkDataArray}
-                />
-            </Box>
-        </Box>
-
-        <Box
-            sx={{
-                width: 280,
-                bgcolor: '#f8f9fa',
-                borderLeft: 0.5,
-                borderColor: 'divider',
-                overflow: 'hidden',
-                flexShrink: 0
-            }}
-        >
-            {showChat ? (
+            <Box
+                sx={{
+                    width: 280,
+                    bgcolor: '#f8f9fa',
+                    borderLeft: 0.5,
+                    borderColor: 'divider',
+                    overflow: 'hidden',
+                    flexShrink: 0
+                }}
+            >
+                {showChat ? (
                     <ChatPanel onClose={() => setShowChat(false)} defaultFile={defaultFile} />
                 ) : (
-                    <ToolsPanel onShowChat={() => setShowChat(true)} />
+                    <ToolsPanel 
+                        onShowChat={() => setShowChat(true)} 
+                        onPainPointDetection={handlePainPointDetection} 
+                    />
                 )}
+            </Box>
+            {loading && (
+            <Box
+                sx={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    bgcolor: 'rgba(255, 255, 255, 0.7)',
+                    zIndex: 1300,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+            <Box sx={{ width: '60%', textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ color: '#1976d2', mb: 2 }}>
+                    Detecting Pain Points...
+                </Typography>
+                <Box sx={{ width: '100%' }}>
+                    <Box
+                        sx={{
+                            height: 10,
+                            bgcolor: '#ddd',
+                            borderRadius: 5,
+                            overflow: 'hidden',
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: `${progress}%`,
+                                height: '100%',
+                                bgcolor: '#1976d2',
+                                transition: 'width 0.1s linear',
+                            }}
+                        />
+                        </Box>
+                    </Box>
+                </Box> 
+
+            </Box>)}
+
         </Box>
-    </Box>
-)};
+    );
+};
 
 export default App;
