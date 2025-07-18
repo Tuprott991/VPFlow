@@ -50,10 +50,10 @@ export default function ListOfWorkflowsPage() {
         // category.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
         // )
     );
-    
+
     const allCategories = Array.from(
-    new Set(workflowData.flatMap(wf => wf.categories.map(cat => cat.name)))
-);
+        new Set(workflowData.flatMap(wf => wf.categories.map(cat => cat.name)))
+    );
 
     const handleFilterClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -104,17 +104,17 @@ export default function ListOfWorkflowsPage() {
 
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
                 <Box sx={{ display: "flex", gap: 2 }}>
-                    
+
                     <Button variant="outlined" size="small" startIcon={<FilterList />}>
                         Sorted by Last published
                     </Button>
-                    
+
                     <Button variant="outlined" size="small" startIcon={<FilterList />}
-                    onClick={handleFilterClick}
+                        onClick={handleFilterClick}
                     >
                         Filter
                     </Button>
-                    
+
                     <Menu
                         anchorEl={anchorEl}
                         open={Boolean(anchorEl)}
@@ -181,17 +181,17 @@ export default function ListOfWorkflowsPage() {
                     </TableHead>
 
                     <TableBody>
-                            {filteredWorkflows.map((workflow) => (
-                            <TableRow 
-                             key={workflow.id}
-                            hover
-                            onClick={() => navigate('/workflow-details')}
-                            sx={{
-                                cursor: 'pointer',
-                                '&:hover': {
-                                    backgroundColor: '#85e9b6ff !important',  
-                                }
-                            }}
+                        {filteredWorkflows.map((workflow) => (
+                            <TableRow
+                                key={workflow.id}
+                                hover
+                                onClick={() => navigate('/workflow-details', { state: { from: 'list-of-workflows' } })}
+                                sx={{
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        backgroundColor: '#85e9b6ff !important',
+                                    }
+                                }}
                             >
                                 <TableCell sx={{ fontWeight: 500, borderRight: "1px solid #EEEFF1" }}>
                                     <Typography sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>

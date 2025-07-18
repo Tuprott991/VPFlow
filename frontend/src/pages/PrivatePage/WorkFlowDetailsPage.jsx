@@ -22,11 +22,12 @@ import {
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FaWindowClose } from "react-icons/fa";
 import { FcAssistant } from "react-icons/fc";
-
 import { SwimlaneDiagram } from '@/components/ui';
 import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
 import { ToolButton, ToolGroupTitle } from '@/components/custom';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { subNodeDataArray, subLinkDataArray } from '@/data/mock_data/subSwimlaneData';
 
 const WorkflowHeader = () => (
     <Box sx={{ bgcolor: '#E5EEFF', px: 1.5, py: 1, borderRadius: '8px' }}>
@@ -343,14 +344,15 @@ const App = () => {
                 setLoading(false);
 
                 const cicNode = nodeDataArray
-                    .filter(node => node.text === "Check CIC (Credit Report)")
+                    .filter(node => node.text === "Check CIC (Credit Report)" || node.text === "Tiếp nhận hồ sơ và thẩm định")
                     .map(node => node.key);
                 setHighlightedNodes(cicNode);
             }
         }, 100);
     };
 
-
+    const location = useLocation();
+    const fromPage = location.state?.from;
 
     return (
         <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
@@ -387,11 +389,20 @@ const App = () => {
                 </Box>
 
                 <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>
-                    <SwimlaneDiagram
-                        nodeDataArray={nodeDataArray}
-                        linkDataArray={linkDataArray}
-                        highlightedNodes={highlightedNodes}
-                    />
+                    {
+                        fromPage === 'list-of-workflows' ?
+                            <SwimlaneDiagram
+                                nodeDataArray={nodeDataArray}
+                                linkDataArray={linkDataArray}
+                                highlightedNodes={highlightedNodes}
+                            />
+                            : <SwimlaneDiagram
+                                nodeDataArray={subNodeDataArray}
+                                linkDataArray={subLinkDataArray}
+                                highlightedNodes={highlightedNodes}
+                            />
+                    }
+
                 </Box>
             </Box>
 
