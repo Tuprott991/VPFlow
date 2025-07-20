@@ -58,7 +58,7 @@ Khi được cung cấp một file hoặc nội dung SOP (Standard Operating Pro
 
 Nếu SOP có quy định về SLA, penalty, đặc điểm rủi ro, hãy đưa thông tin này vào "description" của step tương ứng hoặc vào "metrics" tùy trường hợp.
 
-Giả sử một Diagram:
+Dưới đây là ví dụ output JSON của một Diagram:
 
 {
   "process_name": "Mở và sử dụng tài khoản thanh toán cho khách hàng tổ chức tại VPBank",
