@@ -1,0 +1,379 @@
+"""
+AWS SAM (Serverless Application Model) template for VPFlow Lambda functions
+This template defines the serverless infrastructure for the VPFlow application
+"""
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: VPFlow - AI-Powered Banking Workflow Management System
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, staging, prod]
+    Description: Environment name
+
+  OpenAIApiKey:
+    Type: String
+    NoEcho: true
+    Description: OpenAI API key for AI features
+
+  DocumentBucketName:
+    Type: String
+    Default: vpflow-documents
+    Description: S3 bucket for document storage
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Runtime: python3.9
+    Environment:
+      Variables:
+        ENVIRONMENT: !Ref Environment
+        DOCUMENT_BUCKET: !Ref DocumentBucketName
+        OPENAI_API_KEY: !Ref OpenAIApiKey
+
+Resources:
+  # S3 Bucket for document storage
+  DocumentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${DocumentBucketName}-${Environment}"
+      VersioningConfiguration:
+        Status: Enabled
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: ['*']
+            AllowedMethods: [GET, PUT, POST, DELETE]
+            AllowedOrigins: ['*']
+            MaxAge: 3000
+
+  # DynamoDB Tables
+  DocumentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "vpflow-documents-${Environment}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: document_id
+          AttributeType: S
+        - AttributeName: user_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: document_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: user-id-index
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  DiagramsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "vpflow-diagrams-${Environment}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: diagram_id
+          AttributeType: S
+        - AttributeName: user_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: diagram_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: user-id-index
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  FeedbacksTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "vpflow-feedbacks-${Environment}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: feedback_id
+          AttributeType: S
+        - AttributeName: user_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: feedback_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: user-id-index
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  ChatHistoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "vpflow-chat-history-${Environment}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: message_id
+          AttributeType: S
+        - AttributeName: thread_id
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: S
+      KeySchema:
+        - AttributeName: message_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: thread-timestamp-index
+          KeySchema:
+            - AttributeName: thread_id
+              KeyType: HASH
+            - AttributeName: timestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "vpflow-users-${Environment}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+
+  # EventBridge Custom Bus
+  VPFlowEventBus:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: !Sub "vpflow-events-${Environment}"
+
+  # IAM Role for Lambda functions
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: VPFlowLambdaPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                Resource: 
+                  - !GetAtt DocumentsTable.Arn
+                  - !GetAtt DiagramsTable.Arn
+                  - !GetAtt FeedbacksTable.Arn
+                  - !GetAtt ChatHistoryTable.Arn
+                  - !GetAtt UsersTable.Arn
+                  - !Sub "${DocumentsTable.Arn}/index/*"
+                  - !Sub "${DiagramsTable.Arn}/index/*"
+                  - !Sub "${FeedbacksTable.Arn}/index/*"
+                  - !Sub "${ChatHistoryTable.Arn}/index/*"
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:DeleteObject
+                Resource: !Sub "${DocumentBucket}/*"
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource: !Ref DocumentBucket
+              - Effect: Allow
+                Action:
+                  - textract:StartDocumentTextDetection
+                  - textract:GetDocumentTextDetection
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - events:PutEvents
+                Resource: !GetAtt VPFlowEventBus.Arn
+              - Effect: Allow
+                Action:
+                  - sagemaker:InvokeEndpoint
+                Resource: '*'
+
+  # API Gateway
+  VPFlowApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Environment
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+
+  # Lambda Functions
+  UploadHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "vpflow-upload-handler-${Environment}"
+      CodeUri: .
+      Handler: upload_handler.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          DOCUMENTS_TABLE: !Ref DocumentsTable
+          EVENT_BUS_NAME: !Ref VPFlowEventBus
+      Events:
+        UploadApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VPFlowApi
+            Path: /upload
+            Method: post
+
+  RetrievalHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "vpflow-retrieval-handler-${Environment}"
+      CodeUri: .
+      Handler: retrieval_handler.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          DOCUMENTS_TABLE: !Ref DocumentsTable
+          WORKFLOWS_TABLE: !Ref DocumentsTable
+      Events:
+        RetrievalApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VPFlowApi
+            Path: /retrieval
+            Method: post
+
+  DiagramHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "vpflow-diagram-handler-${Environment}"
+      CodeUri: .
+      Handler: diagram_handler.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          DOCUMENTS_TABLE: !Ref DocumentsTable
+          DIAGRAMS_TABLE: !Ref DiagramsTable
+          EVENT_BUS_NAME: !Ref VPFlowEventBus
+          SAGEMAKER_DIAGRAM_ENDPOINT: vpflow-diagram-generator
+      Events:
+        DiagramApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VPFlowApi
+            Path: /diagram
+            Method: post
+
+  FeedbackHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "vpflow-feedback-handler-${Environment}"
+      CodeUri: .
+      Handler: feedback_handler.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          FEEDBACKS_TABLE: !Ref FeedbacksTable
+          DIAGRAMS_TABLE: !Ref DiagramsTable
+          EVENT_BUS_NAME: !Ref VPFlowEventBus
+      Events:
+        FeedbackApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VPFlowApi
+            Path: /feedback
+            Method: post
+
+  ChatbotHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "vpflow-chatbot-handler-${Environment}"
+      CodeUri: .
+      Handler: chatbot_handler.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          CHAT_HISTORY_TABLE: !Ref ChatHistoryTable
+          DOCUMENTS_TABLE: !Ref DocumentsTable
+      Events:
+        ChatbotApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VPFlowApi
+            Path: /chat
+            Method: post
+
+  AuthHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "vpflow-auth-handler-${Environment}"
+      CodeUri: .
+      Handler: auth_handler.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          USERS_TABLE: !Ref UsersTable
+          JWT_SECRET: !Sub "vpflow-jwt-secret-${Environment}-change-in-production"
+      Events:
+        AuthApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VPFlowApi
+            Path: /auth
+            Method: post
+
+Outputs:
+  ApiGatewayEndpoint:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${VPFlowApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/"
+
+  DocumentBucketName:
+    Description: S3 bucket for documents
+    Value: !Ref DocumentBucket
+
+  DocumentsTableName:
+    Description: DynamoDB table for documents
+    Value: !Ref DocumentsTable
+
+  DiagramsTableName:
+    Description: DynamoDB table for diagrams
+    Value: !Ref DiagramsTable
+
+  FeedbacksTableName:
+    Description: DynamoDB table for feedbacks
+    Value: !Ref FeedbacksTable
+
+  ChatHistoryTableName:
+    Description: DynamoDB table for chat history
+    Value: !Ref ChatHistoryTable
+
+  UsersTableName:
+    Description: DynamoDB table for users
+    Value: !Ref UsersTable
+
+  EventBusName:
+    Description: EventBridge custom event bus
+    Value: !Ref VPFlowEventBus

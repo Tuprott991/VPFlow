@@ -1,0 +1,35 @@
+"""
+Requirements file for Lambda functions
+Contains all Python dependencies needed for the Lambda functions
+"""
+
+# Core dependencies
+boto3>=1.26.137
+botocore>=1.29.137
+
+# Authentication and security
+PyJWT>=2.8.0
+cryptography>=41.0.0
+
+# AI and ML integration
+openai>=1.0.0
+langchain>=0.1.0
+langchain-openai>=0.0.5
+
+# Graph database
+gremlinpython>=3.6.0
+
+# Text processing
+networkx>=3.0
+numpy>=1.24.0
+
+# Utility libraries
+requests>=2.31.0
+python-dateutil>=2.8.2
+
+# Optional: LightRAG dependencies (if available)
+# lightrag-hku
+
+# Development and testing
+pytest>=7.4.0
+moto>=4.2.0  # For AWS service mocking in tests
