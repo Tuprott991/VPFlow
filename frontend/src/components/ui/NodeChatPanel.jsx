@@ -121,22 +121,42 @@ const Chatbot = (props) => {
                     bgcolor: 'transparent',
                     p: 1,
                     mb: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
                 }}
             >
                 {chatMessages.map((msg, i) => (
-                    <Typography
+                    <Box
                         key={i}
-                        align={msg.sender === 'user' ? 'right' : 'left'}
                         sx={{
-                            mb: 0.5,
-                            color: msg.sender === 'user' ? 'primary.main' : 'text.secondary',
+                            display: 'flex',
+                            justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start',
                         }}
                     >
-                        {msg.text}
-                    </Typography>
+                        <Typography
+                            sx={{
+                                fontSize: '0.875rem',
+                                px: 1.5,
+                                py: 0.75,
+                                mb: 0.5,
+                                maxWidth: '75%',
+                                wordBreak: 'break-word',
+                                borderRadius: 2,
+                                color: msg.sender === 'user' ? 'primary.main' : 'text.secondary',
+                                backgroundColor: msg.sender === 'user' ? '#E3F2FD' : '#F1F1F1',
+                            }}
+                        >
+                            {msg.text}
+                        </Typography>
+                    </Box>
                 ))}
+
                 {loading && (
-                    <Typography variant="body2" color="text.disabled">
+                    <Typography
+                        variant="body2"
+                        color="text.disabled"
+                        sx={{ fontSize: '1rem' }}
+                    >
                         Bot is typing...
                     </Typography>
                 )}
