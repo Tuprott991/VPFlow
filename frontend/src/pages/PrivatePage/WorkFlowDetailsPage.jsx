@@ -312,7 +312,7 @@ const App = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'flex-end',
-                        gap: 2,
+                        gap: 1,
                         mt: 2
                     }}>
                         <Typography variant="body1" sx={{
@@ -322,10 +322,9 @@ const App = () => {
                             Pain Point
                         </Typography>
 
-                        {/* Pain Point Icon/Illustration */}
                         <Box sx={{
-                            width: 80,
-                            height: 40,
+                            width: 50,
+                            height: 20,
                             bgcolor: '#DF98EA',
                             display: 'flex',
                             alignItems: 'center',
