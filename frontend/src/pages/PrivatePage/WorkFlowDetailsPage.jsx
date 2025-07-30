@@ -40,7 +40,9 @@ const WorkflowHeader = () => (
     </Box>
 );
 
-const WorkflowLegend = () => {
+const WorkflowLegend = (props) => {
+    const { version } = props;
+
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 2 }}>
             <Box sx={{
@@ -51,7 +53,7 @@ const WorkflowLegend = () => {
             }}>
                 <FiGitCommit size={24} />
                 <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
-                    Version 3.0
+                    Version {version}
                 </Typography>
             </Box>
             <Box sx={{
@@ -780,7 +782,7 @@ const App = () => {
                 {/* Header & Legend */}
                 <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
                     <WorkflowHeader />
-                    <WorkflowLegend />
+                    <WorkflowLegend version={enhancedNodeDataArray.length > 0 && enhancedLinkDataArray.length > 0 ? "4.0" : fromPage === 'list-of-workflows' ? "3.0" : "1.0"} />
                 </Box>
 
                 {/* Diagram */}
@@ -790,18 +792,21 @@ const App = () => {
                             nodeDataArray={enhancedNodeDataArray}
                             linkDataArray={enhancedLinkDataArray}
                             highlightedNodes={highlightedNodes}
+                            version={"4.0"}
                         />
                     ) : fromPage === 'list-of-workflows' ? (
                         <SwimlaneDiagram
                             nodeDataArray={nodeDataArray}
                             linkDataArray={linkDataArray}
                             highlightedNodes={highlightedNodes}
+                            version={"3.0"}
                         />
                     ) : (
                         <SwimlaneDiagram
                             nodeDataArray={subNodeDataArray}
                             linkDataArray={subLinkDataArray}
                             highlightedNodes={highlightedNodes}
+                            version={"1.0"}
                         />
                     )}
                 </Box>
