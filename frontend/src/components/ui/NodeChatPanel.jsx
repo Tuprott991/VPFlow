@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { CiMicrophoneOn } from "react-icons/ci";
 
 const NodeInfo = ({ mockNodeData, leftBgColor, leftTitleBgColor }) => {
     return (
@@ -51,8 +52,11 @@ const Chatbot = () => {
 
     const handleSendMessage = () => {
         if (!chatInput.trim()) return;
+
         const userMessage = { sender: 'user', text: chatInput };
-        setChatMessages(prev => [...prev, userMessage]);
+        const updatedMessages = [...chatMessages, userMessage];
+
+        setChatMessages(updatedMessages);
         setChatInput('');
         setLoading(true);
 
@@ -65,7 +69,7 @@ const Chatbot = () => {
                 "Let us know if you have further questions!"
             ];
 
-            const userIndex = chatMessages.filter(msg => msg.sender === 'user').length;
+            const userIndex = updatedMessages.filter(msg => msg.sender === 'user').length;
 
             const botReply = {
                 sender: 'bot',
@@ -83,11 +87,9 @@ const Chatbot = () => {
                 sx={{
                     flex: 1,
                     overflowY: 'auto',
-                    bgcolor: '#fff',
+                    bgcolor: 'transparent',
                     p: 1,
-                    borderRadius: 1,
                     mb: 1,
-                    border: '1px solid #ccc',
                 }}
             >
                 {chatMessages.map((msg, i) => (
@@ -103,12 +105,14 @@ const Chatbot = () => {
                     </Typography>
                 ))}
                 {loading && (
-                    <Typography variant="body2" color="text.disabled">Bot is typing...</Typography>
+                    <Typography variant="body2" color="text.disabled">
+                        Bot is typing...
+                    </Typography>
                 )}
             </Box>
 
             <TextField
-                placeholder="Type message..."
+                placeholder="Ask anything..."
                 fullWidth
                 size="small"
                 value={chatInput}
@@ -118,6 +122,42 @@ const Chatbot = () => {
                         e.preventDefault();
                         handleSendMessage();
                     }
+                }}
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: '20px',
+                        paddingRight: 1,
+                        backgroundColor: '#fff',
+                        boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.08)',
+                        fontSize: '0.875rem',
+                        '& fieldset': {
+                            borderColor: '#C0C0C0',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#C0C0C0',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#C0C0C0',
+                        },
+                    },
+                    '& .MuiInputBase-input': {
+                        padding: '8px 12px',
+                    },
+                    mt: 1,
+                }}
+                InputProps={{
+                    endAdornment: (
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                cursor: 'pointer',
+                                color: 'primary.main',
+                            }}
+                        >
+                            <CiMicrophoneOn size={24} color="#B2B2B2" />
+                        </Box>
+                    ),
                 }}
             />
         </Box>
@@ -165,7 +205,7 @@ const NodeChatPanel = ({ selectedNode, nodePosition }) => {
                     height: 340,
                     display: 'flex',
                     p: 0.7,
-                    bgcolor: '#fafafa',
+                    bgcolor: 'white',
                     zIndex: 1300,
                     borderRadius: 2,
                     boxShadow: 6,
