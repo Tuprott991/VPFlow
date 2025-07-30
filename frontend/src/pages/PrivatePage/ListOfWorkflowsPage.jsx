@@ -132,7 +132,17 @@ export default function ListOfWorkflowsPage() {
                     <Button variant="text" size="small">
                         Clear All
                     </Button>
-                    <Button variant="contained" size="small">
+                    <Button variant="contained" size="small"
+                    sx={{
+                        backgroundColor: '#667eea',         
+                        color: '#ffffff',                   
+                        textTransform: 'none',              
+                        fontWeight: 600,                    
+                        '&:hover': {
+                        backgroundColor: '#556cd6',       
+                        }
+                    }}
+                    >
                         Save
                     </Button>
                 </Box>
