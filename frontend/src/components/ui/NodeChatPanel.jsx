@@ -1,11 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import {
-    Box,
-    Typography,
-    TextField,
-    Paper,
-    Portal,
-} from '@mui/material';
+import { useState, useMemo } from 'react';
+import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
 
 const NodeChatPanel = (props) => {
     const { selectedNode, nodePosition } = props;
@@ -74,6 +68,11 @@ const NodeChatPanel = (props) => {
         return selectedNode.color;
     }, [selectedNode?.color]);
 
+    const leftTitleBgColor = useMemo(() => {
+        if (!selectedNode?.stroke) return '#ccc';
+        return selectedNode.stroke;
+    }, [selectedNode?.stroke]);
+
     if (!mockNodeData || !nodePosition) return null;
 
     return (
@@ -106,11 +105,33 @@ const NodeChatPanel = (props) => {
                         p: 1.5,
                     }}
                 >
-                    <Typography variant="h6" gutterBottom>Node Info</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Key:</strong> {mockNodeData.key}</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Text:</strong> {mockNodeData.text}</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Duration:</strong> {mockNodeData.duration}</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Description:</strong> {mockNodeData.description}</Typography>
+                    <Box
+                        sx={{
+                            display: 'inline-block',
+                            fontWeight: 600,
+                            bgcolor: leftTitleBgColor,
+                            borderRadius: 1,
+                            px: 2,
+                            py: 0.5,
+                            fontSize: '1rem',
+                            color: '#333',
+                            boxShadow: 'inset 0 0 4px rgba(0,0,0,0.05)',
+                            mb: 1,
+                        }}
+                    >
+                        {mockNodeData?.text}
+                    </Box>
+                    <Box>
+                        <Typography variant="body2" gutterBottom>
+                            <strong>Key:</strong> {mockNodeData.key}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                            <strong>Duration:</strong> {mockNodeData.duration}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                            <strong>Description:</strong> {mockNodeData.description}
+                        </Typography>
+                    </Box>
                 </Box>
 
                 {/* Right Column - Chatbot */}
