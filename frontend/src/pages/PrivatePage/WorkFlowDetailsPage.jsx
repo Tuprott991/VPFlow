@@ -15,6 +15,7 @@ import {
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FaWindowClose } from "react-icons/fa";
 import { FcAssistant } from "react-icons/fc";
+import { FiGitCommit } from "react-icons/fi";
 
 // Import custom components
 import { SwimlaneDiagram } from '@/components/ui';
@@ -39,6 +40,48 @@ const WorkflowHeader = () => (
         </Box>
     </Box>
 );
+
+const WorkflowLegend = () => {
+    return (
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 2 }}>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                gap: 1,
+            }}>
+                <FiGitCommit size={24} />
+                <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
+                    Version 3.0
+                </Typography>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                gap: 1,
+            }}>
+                <Typography variant="body1" sx={{
+                    color: 'text.primary',
+                    fontWeight: 'medium'
+                }}>
+                    Pain Point
+                </Typography>
+
+                <Box sx={{
+                    width: 50,
+                    height: 20,
+                    bgcolor: '#DF98EA',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '2px solid #8308BC'
+                }}>
+                </Box>
+            </Box>
+        </Box>
+    )
+};
 
 const ChatPanel = ({ onClose }) => {
     const botResponses = [
@@ -65,7 +108,7 @@ const ChatPanel = ({ onClose }) => {
             setMessages(prev => [...prev, { text: response, fromUser: false }]);
             setResponseIndex(prev => prev + 1);
             setIsBotTyping(false);
-        }, isLong ? 2500 : 1000); // Giả lập thinking time
+        }, isLong ? 2500 : 1000);
     };
 
     const handleSend = () => {
@@ -308,31 +351,7 @@ const App = () => {
                 <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
                     <WorkflowHeader />
 
-                    <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        gap: 1,
-                        mt: 2
-                    }}>
-                        <Typography variant="body1" sx={{
-                            color: 'text.primary',
-                            fontWeight: 'medium'
-                        }}>
-                            Pain Point
-                        </Typography>
-
-                        <Box sx={{
-                            width: 50,
-                            height: 20,
-                            bgcolor: '#DF98EA',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            border: '2px solid #8308BC'
-                        }}>
-                        </Box>
-                    </Box>
+                    <WorkflowLegend />
                 </Box>
 
                 <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>

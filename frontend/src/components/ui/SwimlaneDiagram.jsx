@@ -21,7 +21,6 @@ const createGroupTemplate = ($) => {
         go.Group,
         'Vertical',
         {
-            background: '#F4F4F4',
             isSubGraphExpanded: true,
             movable: false,
             copyable: false,
