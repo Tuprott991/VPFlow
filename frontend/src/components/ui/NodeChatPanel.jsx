@@ -2,6 +2,102 @@ import { useState, useMemo } from 'react';
 import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 
+const NodeInfo = (props) => {
+    const { mockNodeData, leftBgColor, leftTitleBgColor } = props;
+
+    return (
+        <Box
+            sx={{
+                flex: 1,
+                pr: 2,
+                bgcolor: alpha(leftBgColor, 0.5),
+                borderRadius: 2,
+                p: 1.5,
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'inline-block',
+                    fontWeight: 600,
+                    bgcolor: alpha(leftTitleBgColor, 0.6),
+                    borderRadius: 2,
+                    px: 2,
+                    py: 0.5,
+                    fontSize: '1rem',
+                    color: '#333',
+                    boxShadow: 'inset 0 0 4px rgba(0,0,0,0.05)',
+                    mb: 1,
+                }}
+            >
+                {mockNodeData?.text}
+            </Box>
+            <Box>
+                <Typography variant="body2" gutterBottom>
+                    <strong>Key:</strong> {mockNodeData.key}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                    <strong>Duration:</strong> {mockNodeData.duration}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                    <strong>Description:</strong> {mockNodeData.description}
+                </Typography>
+            </Box>
+        </Box>
+    )
+};
+
+const Chatbot = (props) => {
+    const { chatMessages, chatInput, setChatInput, handleSendMessage, loading } = props;
+
+    return (
+        <Box sx={{ flex: 1, pl: 2, display: 'flex', flexDirection: 'column' }}>
+            <Typography variant="h6" gutterBottom>Chatbot</Typography>
+
+            <Box
+                sx={{
+                    flex: 1,
+                    overflowY: 'auto',
+                    bgcolor: '#fff',
+                    p: 1,
+                    borderRadius: 1,
+                    mb: 1,
+                    border: '1px solid #ccc',
+                }}
+            >
+                {chatMessages.map((msg, i) => (
+                    <Typography
+                        key={i}
+                        align={msg.sender === 'user' ? 'right' : 'left'}
+                        sx={{
+                            mb: 0.5,
+                            color: msg.sender === 'user' ? 'primary.main' : 'text.secondary',
+                        }}
+                    >
+                        {msg.text}
+                    </Typography>
+                ))}
+                {loading && (
+                    <Typography variant="body2" color="text.disabled">Bot is typing...</Typography>
+                )}
+            </Box>
+
+            <TextField
+                placeholder="Type message..."
+                fullWidth
+                size="small"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSendMessage();
+                    }
+                }}
+            />
+        </Box>
+    )
+};
+
 const NodeChatPanel = (props) => {
     const { selectedNode, nodePosition } = props;
     const [chatMessages, setChatMessages] = useState([]);
@@ -99,90 +195,18 @@ const NodeChatPanel = (props) => {
                 }}
             >
                 {/* Left Column - Node Info */}
-                <Box
-                    sx={{
-                        flex: 1,
-                        pr: 2,
-                        bgcolor: alpha(leftBgColor, 0.5),
-                        borderRadius: 2,
-                        p: 1.5,
-                    }}
-                >
-                    <Box
-                        sx={{
-                            display: 'inline-block',
-                            fontWeight: 600,
-                            bgcolor: alpha(leftTitleBgColor, 0.6),
-                            borderRadius: 2,
-                            px: 2,
-                            py: 0.5,
-                            fontSize: '1rem',
-                            color: '#333',
-                            boxShadow: 'inset 0 0 4px rgba(0,0,0,0.05)',
-                            mb: 1,
-                        }}
-                    >
-                        {mockNodeData?.text}
-                    </Box>
-                    <Box>
-                        <Typography variant="body2" gutterBottom>
-                            <strong>Key:</strong> {mockNodeData.key}
-                        </Typography>
-                        <Typography variant="body2" gutterBottom>
-                            <strong>Duration:</strong> {mockNodeData.duration}
-                        </Typography>
-                        <Typography variant="body2" gutterBottom>
-                            <strong>Description:</strong> {mockNodeData.description}
-                        </Typography>
-                    </Box>
-                </Box>
+                <NodeInfo
+                    mockNodeData={mockNodeData}
+                    leftBgColor={leftBgColor}
+                    leftTitleBgColor={leftTitleBgColor}
+                />
 
                 {/* Right Column - Chatbot */}
-                <Box sx={{ flex: 1, pl: 2, display: 'flex', flexDirection: 'column' }}>
-                    <Typography variant="h6" gutterBottom>Chatbot</Typography>
-
-                    <Box
-                        sx={{
-                            flex: 1,
-                            overflowY: 'auto',
-                            bgcolor: '#fff',
-                            p: 1,
-                            borderRadius: 1,
-                            mb: 1,
-                            border: '1px solid #ccc',
-                        }}
-                    >
-                        {chatMessages.map((msg, i) => (
-                            <Typography
-                                key={i}
-                                align={msg.sender === 'user' ? 'right' : 'left'}
-                                sx={{
-                                    mb: 0.5,
-                                    color: msg.sender === 'user' ? 'primary.main' : 'text.secondary',
-                                }}
-                            >
-                                {msg.text}
-                            </Typography>
-                        ))}
-                        {loading && (
-                            <Typography variant="body2" color="text.disabled">Bot is typing...</Typography>
-                        )}
-                    </Box>
-
-                    <TextField
-                        placeholder="Type message..."
-                        fullWidth
-                        size="small"
-                        value={chatInput}
-                        onChange={(e) => setChatInput(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                                e.preventDefault();
-                                handleSendMessage();
-                            }
-                        }}
-                    />
-                </Box>
+                <Chatbot
+                    chatMessages={chatMessages}
+                    loading={loading}
+                    onSendMessage={handleSendMessage}
+                />
             </Paper>
         </Portal >
     );
