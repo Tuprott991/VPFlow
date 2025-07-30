@@ -3,7 +3,6 @@ export const subNodeDataArray = [
     key: "Customer Legal Representative",
     isGroup: true,
     label: "Customer Legal Representative",
-    color: "#f8d7da", // đỏ nhạt
   },
   {
     key: "step_1",
@@ -54,7 +53,6 @@ export const subNodeDataArray = [
     key: "Accounting Manager",
     isGroup: true,
     label: "Accounting Manager",
-    color: "#fff3cd", // vàng nhạt
   },
   {
     key: "step_5",
@@ -83,7 +81,6 @@ export const subNodeDataArray = [
     key: "Authorized Person",
     isGroup: true,
     label: "Authorized Person",
-    color: "#d1ecf1", // xanh dương nhạt
   },
   {
     key: "step_7",
@@ -104,7 +101,6 @@ export const subNodeDataArray = [
     key: "VPBank Staff",
     isGroup: true,
     label: "VPBank Staff",
-    color: "#d4edda",
   },
   {
     key: "step_8",

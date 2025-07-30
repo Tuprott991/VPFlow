@@ -21,7 +21,7 @@ const createGroupTemplate = ($) => {
         go.Group,
         'Vertical',
         {
-            background: 'white',
+            background: '#F4F4F4',
             isSubGraphExpanded: true,
             movable: false,
             copyable: false,
@@ -72,8 +72,8 @@ const createNodeTemplate = ($, highlightedNodes) => {
                     return '#DF98EA';
                 }
                 return data.color || '#ffffff';
-            })
-
+            }),
+            new go.Binding('stroke', 'stroke')
         ),
         $(
             go.TextBlock,
