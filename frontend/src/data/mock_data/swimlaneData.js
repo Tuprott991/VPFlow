@@ -88,6 +88,8 @@ export const nodeDataArray = [
     key: 11,
     text: "Flag if risk > threshold",
     loc: "600 300",
+    color: "#FFF5CC",
+    stroke: "#FFC107",
   },
 ];
 
