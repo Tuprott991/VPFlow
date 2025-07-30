@@ -604,10 +604,7 @@ const ToolsPanel = (props) => {
             fontSize: '12px'
         }}>
             <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
-                <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
-                    Tools
-                </Typography>
-
+                <ToolGroupTitle title="Tools" />
                 <ToolButton
                     props={{
                         text: 'Upload file to generate workflow',

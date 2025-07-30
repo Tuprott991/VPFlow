@@ -14,7 +14,7 @@ export const workflowData = [
   },
   {
     id: 2,
-    name: "WF02",
+    name: "Register Card",
     categories: [
       { name: "Automation", color: "#FF7043" },
       { name: "B2B", color: "#8D6E63" },
@@ -28,7 +28,7 @@ export const workflowData = [
   },
   {
     id: 3,
-    name: "WF03",
+    name: "Verify Information",
     categories: [
       { name: "B2C", color: "#8D6E63" },
       { name: "Finance", color: "#FFB74D" },
@@ -42,7 +42,7 @@ export const workflowData = [
   },
   {
     id: 4,
-    name: "WF04",
+    name: "Activate Card",
     categories: [
       { name: "B2C", color: "#8D6E63" },
       { name: "Internet", color: "#4FC3F7" },
