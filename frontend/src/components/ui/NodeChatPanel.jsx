@@ -7,7 +7,7 @@ const NodeInfo = ({ mockNodeData, leftBgColor, leftTitleBgColor }) => {
     return (
         <Box
             sx={{
-                flex: 1,
+                flex: 2,
                 pr: 2,
                 bgcolor: alpha(leftBgColor, 0.5),
                 borderRadius: 2,
@@ -82,7 +82,7 @@ const Chatbot = () => {
     };
 
     return (
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
             <Box
                 sx={{
                     flex: 1,
@@ -201,7 +201,7 @@ const NodeChatPanel = ({ selectedNode, nodePosition }) => {
                     top: nodePosition.y,
                     left: nodePosition.x + 260,
                     transform: (nodePosition.x + 600 > window.innerWidth) ? 'translateX(-610px)' : 'none',
-                    width: 560,
+                    width: 600,
                     height: 340,
                     display: 'flex',
                     p: 0.7,
