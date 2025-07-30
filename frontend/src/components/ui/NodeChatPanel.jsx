@@ -1,14 +1,50 @@
-import React, { useState, useMemo } from 'react';
-import {
-    Box,
-    Typography,
-    TextField,
-    Paper,
-    Portal,
-} from '@mui/material';
+import { useState, useMemo } from 'react';
+import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 
-const NodeChatPanel = (props) => {
-    const { selectedNode, nodePosition } = props;
+const NodeInfo = ({ mockNodeData, leftBgColor, leftTitleBgColor }) => {
+    return (
+        <Box
+            sx={{
+                flex: 1,
+                pr: 2,
+                bgcolor: alpha(leftBgColor, 0.5),
+                borderRadius: 2,
+                p: 1.5,
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'inline-block',
+                    fontWeight: 600,
+                    bgcolor: alpha(leftTitleBgColor, 0.6),
+                    borderRadius: 2,
+                    px: 2,
+                    py: 0.5,
+                    fontSize: '1rem',
+                    color: '#333',
+                    boxShadow: 'inset 0 0 4px rgba(0,0,0,0.05)',
+                    mb: 1,
+                }}
+            >
+                {mockNodeData?.text}
+            </Box>
+            <Box>
+                <Typography variant="body2" gutterBottom>
+                    <strong>Key:</strong> {mockNodeData.key}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                    <strong>Duration:</strong> {mockNodeData.duration}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                    <strong>Description:</strong> {mockNodeData.description}
+                </Typography>
+            </Box>
+        </Box>
+    );
+};
+
+const Chatbot = () => {
     const [chatMessages, setChatMessages] = useState([]);
     const [chatInput, setChatInput] = useState('');
     const [loading, setLoading] = useState(false);
@@ -19,6 +55,7 @@ const NodeChatPanel = (props) => {
         setChatMessages(prev => [...prev, userMessage]);
         setChatInput('');
         setLoading(true);
+
         setTimeout(() => {
             const predefinedReplies = [
                 "Welcome! How can I assist you with your loan application?",
@@ -40,6 +77,54 @@ const NodeChatPanel = (props) => {
         }, 1000);
     };
 
+    return (
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <Box
+                sx={{
+                    flex: 1,
+                    overflowY: 'auto',
+                    bgcolor: '#fff',
+                    p: 1,
+                    borderRadius: 1,
+                    mb: 1,
+                    border: '1px solid #ccc',
+                }}
+            >
+                {chatMessages.map((msg, i) => (
+                    <Typography
+                        key={i}
+                        align={msg.sender === 'user' ? 'right' : 'left'}
+                        sx={{
+                            mb: 0.5,
+                            color: msg.sender === 'user' ? 'primary.main' : 'text.secondary',
+                        }}
+                    >
+                        {msg.text}
+                    </Typography>
+                ))}
+                {loading && (
+                    <Typography variant="body2" color="text.disabled">Bot is typing...</Typography>
+                )}
+            </Box>
+
+            <TextField
+                placeholder="Type message..."
+                fullWidth
+                size="small"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSendMessage();
+                    }
+                }}
+            />
+        </Box>
+    );
+};
+
+const NodeChatPanel = ({ selectedNode, nodePosition }) => {
     const mockNodeData = useMemo(() => {
         if (!selectedNode) return null;
 
@@ -54,25 +139,16 @@ const NodeChatPanel = (props) => {
             };
         }
 
-        const durations = ['1 - 2 business days'];
-        const descriptions = [
-            'The customer initiates the loan process by submitting a completed loan application form through an online portal or in person at a branch. This step involves providing personal, employment, financial, and collateral information.',
-        ];
-
-        const randomDuration = durations[Math.floor(Math.random() * durations.length)];
-        const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
-
         return {
             ...selectedNode,
-            duration: randomDuration,
-            description: randomDescription,
+            duration: '1 - 2 business days',
+            description:
+                'The customer provides information or interacts with the loan system at this stage. Please refer to specific instructions provided for the selected step.',
         };
     }, [selectedNode?.key]);
 
-    const leftBgColor = useMemo(() => {
-        if (!selectedNode?.color) return '#eee';
-        return selectedNode.color;
-    }, [selectedNode?.color]);
+    const leftBgColor = selectedNode?.color || '#eee';
+    const leftTitleBgColor = selectedNode?.stroke || '#ccc';
 
     if (!mockNodeData || !nodePosition) return null;
 
@@ -88,77 +164,23 @@ const NodeChatPanel = (props) => {
                     width: 560,
                     height: 340,
                     display: 'flex',
-                    p: 2,
+                    p: 0.7,
                     bgcolor: '#fafafa',
                     zIndex: 1300,
                     borderRadius: 2,
                     boxShadow: 6,
+                    borderColor: alpha(leftTitleBgColor, 0.75),
+                    borderWidth: 2,
+                    borderStyle: 'solid',
+                    gap: 1,
                 }}
             >
-                {/* Left Column - Node Info */}
-                <Box
-                    sx={{
-                        flex: 1,
-                        pr: 2,
-                        borderRight: '1px solid #ddd',
-                        bgcolor: leftBgColor,
-                        borderRadius: 1,
-                        p: 1.5,
-                    }}
-                >
-                    <Typography variant="h6" gutterBottom>Node Info</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Key:</strong> {mockNodeData.key}</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Text:</strong> {mockNodeData.text}</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Duration:</strong> {mockNodeData.duration}</Typography>
-                    <Typography variant="body2" gutterBottom><strong>Description:</strong> {mockNodeData.description}</Typography>
-                </Box>
-
-                {/* Right Column - Chatbot */}
-                <Box sx={{ flex: 1, pl: 2, display: 'flex', flexDirection: 'column' }}>
-                    <Typography variant="h6" gutterBottom>Chatbot</Typography>
-
-                    <Box
-                        sx={{
-                            flex: 1,
-                            overflowY: 'auto',
-                            bgcolor: '#fff',
-                            p: 1,
-                            borderRadius: 1,
-                            mb: 1,
-                            border: '1px solid #ccc',
-                        }}
-                    >
-                        {chatMessages.map((msg, i) => (
-                            <Typography
-                                key={i}
-                                align={msg.sender === 'user' ? 'right' : 'left'}
-                                sx={{
-                                    mb: 0.5,
-                                    color: msg.sender === 'user' ? 'primary.main' : 'text.secondary',
-                                }}
-                            >
-                                {msg.text}
-                            </Typography>
-                        ))}
-                        {loading && (
-                            <Typography variant="body2" color="text.disabled">Bot is typing...</Typography>
-                        )}
-                    </Box>
-
-                    <TextField
-                        placeholder="Type message..."
-                        fullWidth
-                        size="small"
-                        value={chatInput}
-                        onChange={(e) => setChatInput(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                                e.preventDefault();
-                                handleSendMessage();
-                            }
-                        }}
-                    />
-                </Box>
+                <NodeInfo
+                    mockNodeData={mockNodeData}
+                    leftBgColor={leftBgColor}
+                    leftTitleBgColor={leftTitleBgColor}
+                />
+                <Chatbot />
             </Paper>
         </Portal>
     );

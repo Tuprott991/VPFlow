@@ -38,7 +38,7 @@ const createGroupTemplate = ($) => {
                     {
                         row: 0,
                         margin: 6,
-                        font: 'bold 13px sans-serif',
+                        font: 'bold 20px sans-serif',
                         alignment: go.Spot.Left,
                     },
                     new go.Binding('text', 'label')

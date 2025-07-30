@@ -17,10 +17,10 @@ VPFlow provides a flexible platform for designing, executing, and monitoring bus
 
 ## Tech Stack
 
-- **Backend**: Python, Flask/FastAPI
-- **Frontend**: Node.js, React/Vue.js
-- **Database**: PostgreSQL/MongoDB
-- **AI/ML**: TensorFlow/PyTorch
+- **Sagemaker**: Python, FastAPI
+- **Frontend**: ReactJS, MaterialUI (Google)
+- **Database**: AWS RDS PostgreSQL, DynamoDB
+- **AI/ML**: AWS Bedrock, Sagemaker,...
 - **Deployment**: Docker, Kubernetes
 
 ## Getting Started
@@ -31,47 +31,6 @@ VPFlow provides a flexible platform for designing, executing, and monitoring bus
 - Node.js 16+
 - Git
 
-### Installation
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-org/VPFlow.git
-    cd VPFlow
-    ```
-
-2. Install Backend dependencies:
-    ```bash
-    cd app
-    pip install -r requirements.txt
-    ```
-
-3. Install Frontend dependencies:
-    ```bash
-    cd frontend
-    npm install
-    ```
-
-4. Set up environment variables:
-    ```bash
-    cp .env.example .env
-    # Edit .env with your configuration
-    ```
-
-5. Start the development servers:
-    
-    **Backend:**
-    ```bash
-    cd app
-    python main.py
-    ```
-    
-    **Frontend:**
-    ```bash
-    cd frontend
-    npm start
-    ```
-
-6. Open your browser and navigate to `http://localhost:3000`
 
 ## Configuration
 
