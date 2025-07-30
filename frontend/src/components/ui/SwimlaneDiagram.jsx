@@ -1,40 +1,28 @@
 // Import necessary libraries
 import { useState, useRef, useEffect } from 'react';
-
-// Import necessary libraries for GoJS
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
-
-// Import necessary components from MUI
 import {
     Box, IconButton, Paper, Stack, Tooltip, Typography,
 } from '@mui/material';
 import {
     ZoomIn, ZoomOut, ZoomOutMap, Undo, Redo,
 } from '@mui/icons-material';
-
-// Import custom components
 import NodeChatPanel from './NodeChatPanel';
 
 const createGroupTemplate = ($) => {
     return $(
-        go.Group,
-        'Vertical',
+        go.Group, 'Vertical',
         {
             isSubGraphExpanded: true,
             movable: false,
             copyable: false,
             deletable: false,
         },
-        $(
-            go.Panel,
-            'Auto',
+        $(go.Panel, 'Auto',
             $(go.Shape, 'Rectangle', { fill: null, stroke: null }),
-            $(
-                go.Panel,
-                'Table',
-                $(
-                    go.TextBlock,
+            $(go.Panel, 'Table',
+                $(go.TextBlock,
                     {
                         row: 0,
                         margin: 6,
@@ -51,12 +39,9 @@ const createGroupTemplate = ($) => {
 
 const createNodeTemplate = ($, highlightedNodes) => {
     return $(
-        go.Node,
-        'Auto',
+        go.Node, 'Auto',
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
-        $(
-            go.Shape,
-            'RoundedRectangle',
+        $(go.Shape, 'RoundedRectangle',
             {
                 stroke: '#888',
                 strokeWidth: 1.5,
@@ -66,16 +51,10 @@ const createNodeTemplate = ($, highlightedNodes) => {
                 fromLinkable: true,
                 toLinkable: true,
             },
-            new go.Binding('fill', '', data => {
-                if (highlightedNodes.includes(data.key)) {
-                    return '#DF98EA';
-                }
-                return data.color || '#ffffff';
-            }),
+            new go.Binding('fill', '', data => highlightedNodes.includes(data.key) ? '#DF98EA' : data.color || '#ffffff'),
             new go.Binding('stroke', 'stroke')
         ),
-        $(
-            go.TextBlock,
+        $(go.TextBlock,
             {
                 margin: 16,
                 wrap: go.TextBlock.WrapFit,
@@ -110,6 +89,7 @@ const DiagramControlPanel = ({ onZoomIn, onZoomOut, onZoomToFit, onUndo, onRedo,
         position: 'fixed', bottom: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1000,
         p: 1, borderRadius: '10px', backgroundColor: '#FFF', border: '1px solid #EEEFF1'
     };
+
     return (
         <Paper elevation={1} sx={panelStyles}>
             <Stack direction="row" spacing={1}>
@@ -138,6 +118,7 @@ export default function SwimlaneDiagram({ nodeDataArray, linkDataArray, highligh
     const [zoom, setZoom] = useState(1);
     const [selectedNode, setSelectedNode] = useState(null);
     const [nodePosition, setNodePosition] = useState({ x: 0, y: 0 });
+    const [showChatPanel, setShowChatPanel] = useState(false);
 
     const diagramControls = useDiagramControls(diagramRef);
 
@@ -168,6 +149,7 @@ export default function SwimlaneDiagram({ nodeDataArray, linkDataArray, highligh
 
             setSelectedNode(nodeData);
             setNodePosition({ x: point.x, y: point.y });
+            setShowChatPanel(true); // Mở panel
         });
 
         newDiagram.addDiagramListener('ViewportBoundsChanged', () => {
@@ -201,7 +183,13 @@ export default function SwimlaneDiagram({ nodeDataArray, linkDataArray, highligh
                     style={{ width: '100%', height: '100%' }}
                 />
             </Box>
-            <NodeChatPanel selectedNode={selectedNode} nodePosition={nodePosition} />
+            {showChatPanel && (
+                <NodeChatPanel
+                    selectedNode={selectedNode}
+                    nodePosition={nodePosition}
+                    onClose={() => setShowChatPanel(false)}
+                />
+            )}
         </Box>
     );
 }

@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
-import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
+import { Box, Typography, TextField, Paper, Portal, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { CiMicrophoneOn } from "react-icons/ci";
+import { IoClose } from "react-icons/io5";
 
 const NodeInfo = ({ mockNodeData, leftBgColor, leftTitleBgColor }) => {
     return (
@@ -45,7 +46,9 @@ const NodeInfo = ({ mockNodeData, leftBgColor, leftTitleBgColor }) => {
     );
 };
 
-const Chatbot = () => {
+const Chatbot = (props) => {
+    const { onClose } = props;
+
     const [chatMessages, setChatMessages] = useState([]);
     const [chatInput, setChatInput] = useState('');
     const [loading, setLoading] = useState(false);
@@ -83,6 +86,34 @@ const Chatbot = () => {
 
     return (
         <Box sx={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    mb: 1,
+                }}
+            >
+                <Tooltip title="Close chat panel" arrow>
+                    <Box
+                        onClick={onClose}
+                        sx={{
+                            cursor: 'pointer',
+                            color: 'primary.main',
+                            borderColor: 'primary.main',
+                            '&:hover': {
+                                color: 'error.main',
+                                borderColor: 'error.main',
+                            },
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderRadius: 1,
+                            border: '1px solid',
+                        }}
+                    >
+                        <IoClose size={20} />
+                    </Box>
+                </Tooltip>
+            </Box>
             <Box
                 sx={{
                     flex: 1,
@@ -164,7 +195,8 @@ const Chatbot = () => {
     );
 };
 
-const NodeChatPanel = ({ selectedNode, nodePosition }) => {
+const NodeChatPanel = (props) => {
+    const { selectedNode, nodePosition, onClose } = props;
     const mockNodeData = useMemo(() => {
         if (!selectedNode) return null;
 
@@ -219,8 +251,11 @@ const NodeChatPanel = ({ selectedNode, nodePosition }) => {
                     mockNodeData={mockNodeData}
                     leftBgColor={leftBgColor}
                     leftTitleBgColor={leftTitleBgColor}
+
                 />
-                <Chatbot />
+                <Chatbot
+                    onClose={onClose}
+                />
             </Paper>
         </Portal>
     );

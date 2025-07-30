@@ -1,5 +1,4 @@
 // components/CustomAlert.jsx
-import React from 'react';
 import { Alert, Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
