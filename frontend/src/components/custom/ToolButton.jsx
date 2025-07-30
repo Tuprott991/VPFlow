@@ -48,7 +48,7 @@ const ToolButton = ({ props }) => {
             fullWidth
             onClick={props.onClick || (() => {})}
             sx={{
-                backgroundColor: '#FBFBFB',
+                backgroundColor: '#e9fbe5',
                 fontSize: 12,
                 py: 1,
                 borderRadius: '10px',
@@ -76,11 +76,14 @@ const ToolButton = ({ props }) => {
                         border: '1px solid #EEEFF1',
                         borderRadius: '5px',
                         p: '2px',
+                        '& .MuiSvgIcon-root': {
+                            color: '#577f5cff' 
+                        }
                     }}
                 >
                     {props.icon}
                 </Box>
-                <Box component="span" sx={{ textAlign: 'left', color: '#303135' }}>
+                <Box component="span" sx={{ textAlign: 'left', color: '#456c4bff' }}>
                     {props.text}
                 </Box>
             </Box>
