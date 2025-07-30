@@ -2,9 +2,7 @@ import { useState, useMemo } from 'react';
 import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 
-const NodeInfo = (props) => {
-    const { mockNodeData, leftBgColor, leftTitleBgColor } = props;
-
+const NodeInfo = ({ mockNodeData, leftBgColor, leftTitleBgColor }) => {
     return (
         <Box
             sx={{
@@ -43,16 +41,44 @@ const NodeInfo = (props) => {
                 </Typography>
             </Box>
         </Box>
-    )
+    );
 };
 
-const Chatbot = (props) => {
-    const { chatMessages, chatInput, setChatInput, handleSendMessage, loading } = props;
+const Chatbot = () => {
+    const [chatMessages, setChatMessages] = useState([]);
+    const [chatInput, setChatInput] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSendMessage = () => {
+        if (!chatInput.trim()) return;
+        const userMessage = { sender: 'user', text: chatInput };
+        setChatMessages(prev => [...prev, userMessage]);
+        setChatInput('');
+        setLoading(true);
+
+        setTimeout(() => {
+            const predefinedReplies = [
+                "Welcome! How can I assist you with your loan application?",
+                "Sure, submitting your documents is the first step.",
+                "Your application will be reviewed within 1 - 2 business days.",
+                "Please wait for a notification via email or SMS regarding the result.",
+                "Let us know if you have further questions!"
+            ];
+
+            const userIndex = chatMessages.filter(msg => msg.sender === 'user').length;
+
+            const botReply = {
+                sender: 'bot',
+                text: predefinedReplies[userIndex] || "I'm here to help you with anything related to your application."
+            };
+
+            setChatMessages(prev => [...prev, botReply]);
+            setLoading(false);
+        }, 1000);
+    };
 
     return (
-        <Box sx={{ flex: 1, pl: 2, display: 'flex', flexDirection: 'column' }}>
-            <Typography variant="h6" gutterBottom>Chatbot</Typography>
-
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Box
                 sx={{
                     flex: 1,
@@ -95,42 +121,10 @@ const Chatbot = (props) => {
                 }}
             />
         </Box>
-    )
+    );
 };
 
-const NodeChatPanel = (props) => {
-    const { selectedNode, nodePosition } = props;
-    const [chatMessages, setChatMessages] = useState([]);
-    const [chatInput, setChatInput] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    const handleSendMessage = () => {
-        if (!chatInput.trim()) return;
-        const userMessage = { sender: 'user', text: chatInput };
-        setChatMessages(prev => [...prev, userMessage]);
-        setChatInput('');
-        setLoading(true);
-        setTimeout(() => {
-            const predefinedReplies = [
-                "Welcome! How can I assist you with your loan application?",
-                "Sure, submitting your documents is the first step.",
-                "Your application will be reviewed within 1 - 2 business days.",
-                "Please wait for a notification via email or SMS regarding the result.",
-                "Let us know if you have further questions!"
-            ];
-
-            const userIndex = chatMessages.filter(msg => msg.sender === 'user').length;
-
-            const botReply = {
-                sender: 'bot',
-                text: predefinedReplies[userIndex] || "I'm here to help you with anything related to your application."
-            };
-
-            setChatMessages(prev => [...prev, botReply]);
-            setLoading(false);
-        }, 1000);
-    };
-
+const NodeChatPanel = ({ selectedNode, nodePosition }) => {
     const mockNodeData = useMemo(() => {
         if (!selectedNode) return null;
 
@@ -145,30 +139,16 @@ const NodeChatPanel = (props) => {
             };
         }
 
-        const durations = ['1 - 2 business days'];
-        const descriptions = [
-            'The customer initiates the loan process by submitting a completed loan application form through an online portal or in person at a branch. This step involves providing personal, employment, financial, and collateral information.',
-        ];
-
-        const randomDuration = durations[Math.floor(Math.random() * durations.length)];
-        const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
-
         return {
             ...selectedNode,
-            duration: randomDuration,
-            description: randomDescription,
+            duration: '1 - 2 business days',
+            description:
+                'The customer provides information or interacts with the loan system at this stage. Please refer to specific instructions provided for the selected step.',
         };
     }, [selectedNode?.key]);
 
-    const leftBgColor = useMemo(() => {
-        if (!selectedNode?.color) return '#eee';
-        return selectedNode.color;
-    }, [selectedNode?.color]);
-
-    const leftTitleBgColor = useMemo(() => {
-        if (!selectedNode?.stroke) return '#ccc';
-        return selectedNode.stroke;
-    }, [selectedNode?.stroke]);
+    const leftBgColor = selectedNode?.color || '#eee';
+    const leftTitleBgColor = selectedNode?.stroke || '#ccc';
 
     if (!mockNodeData || !nodePosition) return null;
 
@@ -192,23 +172,17 @@ const NodeChatPanel = (props) => {
                     borderColor: alpha(leftTitleBgColor, 0.75),
                     borderWidth: 2,
                     borderStyle: 'solid',
+                    gap: 1,
                 }}
             >
-                {/* Left Column - Node Info */}
                 <NodeInfo
                     mockNodeData={mockNodeData}
                     leftBgColor={leftBgColor}
                     leftTitleBgColor={leftTitleBgColor}
                 />
-
-                {/* Right Column - Chatbot */}
-                <Chatbot
-                    chatMessages={chatMessages}
-                    loading={loading}
-                    onSendMessage={handleSendMessage}
-                />
+                <Chatbot />
             </Paper>
-        </Portal >
+        </Portal>
     );
 };
 
