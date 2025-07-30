@@ -82,9 +82,6 @@ const WorkflowLegend = () => {
     )
 };
 
-
-
-
 const ChatPanel = ({ onClose }) => {
     const botResponses = [
         'Hello! How can I assist you today?',
@@ -757,11 +754,23 @@ const App = () => {
     };
 
     const onAISuggestion = () => {
-        console.log('Applying AI suggestion...');
-        console.log('Original:', enhanceNodeDataArray, enhanceLinkDataArray);
-        // Ép React render lại bằng cách clone dữ liệu mới
-        setEnhancedNodeDataArray([...enhanceNodeDataArray]);
-        setEnhancedLinkDataArray([...enhanceLinkDataArray]);
+        setLoading(true);
+        setProgress(0);
+
+        let current = 0;
+        const interval = setInterval(() => {
+            current += 5;
+            setProgress(current);
+            if (current >= 100) {
+                clearInterval(interval);
+                setLoading(false);
+            }
+        }, 100);
+
+        setTimeout(() => {
+            setEnhancedNodeDataArray([...enhanceNodeDataArray]);
+            setEnhancedLinkDataArray([...enhanceLinkDataArray]);
+        }, 2000);
     };
 
     return (
@@ -838,7 +847,7 @@ const App = () => {
                 >
                     <Box sx={{ width: '60%', textAlign: 'center' }}>
                         <Typography variant="h6" sx={{ color: '#1976d2', mb: 2 }}>
-                            Detecting Pain Points...
+                            Processing...
                         </Typography>
                         <Box sx={{ width: '100%' }}>
                             <Box
