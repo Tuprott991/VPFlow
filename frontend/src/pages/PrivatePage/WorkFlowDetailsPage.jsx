@@ -1,31 +1,27 @@
+// Import necessary libraries
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+// Import necessary components from MUI
 import {
-    Box,
-    Typography,
-    Button,
-    TextField,
-    InputAdornment,
+    Box, Typography, Button, TextField, InputAdornment,
 } from '@mui/material';
+
+// Import necessary icons
 import {
-    Search,
-    Upload,
-    TextSnippet,
-    Delete,
-    Compare,
-    List as ListIcon,
-    Feedback,
-    Psychology,
-    AutoAwesome,
-    SmartToy,
-    Description
+    Search, Upload, TextSnippet, Delete, Compare, List as ListIcon, Feedback, Psychology, AutoAwesome,
+    SmartToy, Description
 } from '@mui/icons-material';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FaWindowClose } from "react-icons/fa";
 import { FcAssistant } from "react-icons/fc";
+
+// Import custom components
 import { SwimlaneDiagram } from '@/components/ui';
-import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
 import { ToolButton, ToolGroupTitle } from '@/components/custom';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+
+// Import mock data for swimlane diagram
+import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
 import { subNodeDataArray, subLinkDataArray } from '@/data/mock_data/subSwimlaneData';
 
 const WorkflowHeader = () => (

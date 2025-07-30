@@ -7,7 +7,8 @@ import {
     Portal,
 } from '@mui/material';
 
-const NodeChatPanel = ({ selectedNode, nodePosition }) => {
+const NodeChatPanel = (props) => {
+    const { selectedNode, nodePosition } = props;
     const [chatMessages, setChatMessages] = useState([]);
     const [chatInput, setChatInput] = useState('');
     const [loading, setLoading] = useState(false);
@@ -39,7 +40,6 @@ const NodeChatPanel = ({ selectedNode, nodePosition }) => {
         }, 1000);
     };
 
-    // 🧠 Mô phỏng dữ liệu mô tả node (có rule riêng cho "Submit loan application")
     const mockNodeData = useMemo(() => {
         if (!selectedNode) return null;
 
@@ -69,16 +69,10 @@ const NodeChatPanel = ({ selectedNode, nodePosition }) => {
         };
     }, [selectedNode?.key]);
 
-    // 🎨 Màu nền ngẫu nhiên cho cột trái
     const leftBgColor = useMemo(() => {
-        if (!selectedNode?.key) return '#eee';
-
-        const colors = ['#FFECB3', '#C8E6C9', '#B3E5FC', '#D1C4E9', '#FFCDD2', '#F0F4C3'];
-        const keyStr = String(selectedNode.key);
-        const index = [...keyStr].reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
-
-        return colors[index];
-    }, [selectedNode?.key]);
+        if (!selectedNode?.color) return '#eee';
+        return selectedNode.color;
+    }, [selectedNode?.color]);
 
     if (!mockNodeData || !nodePosition) return null;
 
