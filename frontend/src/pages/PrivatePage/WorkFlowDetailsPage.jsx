@@ -4,7 +4,6 @@ import {
     Button,
     TextField,
     InputAdornment,
-    Chip
 } from '@mui/material';
 import {
     Search,

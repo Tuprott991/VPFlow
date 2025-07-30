@@ -29,7 +29,6 @@ const createGroupTemplate = ($) => {
             copyable: false,
             deletable: false,
         },
-        new go.Binding('background', 'color'),
         $(
             go.Panel,
             'Auto',
@@ -57,7 +56,7 @@ const createNodeTemplate = ($, highlightedNodes) => {
     return $(
         go.Node,
         'Auto',
-        new go.Binding('location', 'loc', go.Point.parse),
+        new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         $(
             go.Shape,
             'RoundedRectangle',
@@ -70,7 +69,13 @@ const createNodeTemplate = ($, highlightedNodes) => {
                 fromLinkable: true,
                 toLinkable: true,
             },
-            new go.Binding('fill', 'key', key => highlightedNodes.includes(key) ? '#DF98EA' : '#ffffff')
+            new go.Binding('fill', '', data => {
+                if (highlightedNodes.includes(data.key)) {
+                    return '#DF98EA';
+                }
+                return data.color || '#ffffff';
+            })
+
         ),
         $(
             go.TextBlock,
