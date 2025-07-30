@@ -1,21 +1,19 @@
+// Import necessary libraries
+import { useState, useRef, useEffect } from 'react';
+
+// Import necessary libraries for GoJS
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
-import { useState, useRef, useEffect } from 'react';
+
+// Import necessary components from MUI
 import {
-    Box,
-    IconButton,
-    Paper,
-    Stack,
-    Tooltip,
-    Typography,
+    Box, IconButton, Paper, Stack, Tooltip, Typography,
 } from '@mui/material';
 import {
-    ZoomIn,
-    ZoomOut,
-    ZoomOutMap,
-    Undo,
-    Redo,
+    ZoomIn, ZoomOut, ZoomOutMap, Undo, Redo,
 } from '@mui/icons-material';
+
+// Import custom components
 import NodeChatPanel from './NodeChatPanel';
 
 const createGroupTemplate = ($) => {
@@ -29,7 +27,6 @@ const createGroupTemplate = ($) => {
             copyable: false,
             deletable: false,
         },
-        new go.Binding('background', 'color'),
         $(
             go.Panel,
             'Auto',
@@ -57,7 +54,7 @@ const createNodeTemplate = ($, highlightedNodes) => {
     return $(
         go.Node,
         'Auto',
-        new go.Binding('location', 'loc', go.Point.parse),
+        new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         $(
             go.Shape,
             'RoundedRectangle',
@@ -70,7 +67,13 @@ const createNodeTemplate = ($, highlightedNodes) => {
                 fromLinkable: true,
                 toLinkable: true,
             },
-            new go.Binding('fill', 'key', key => highlightedNodes.includes(key) ? '#DF98EA' : '#ffffff')
+            new go.Binding('fill', '', data => {
+                if (highlightedNodes.includes(data.key)) {
+                    return '#DF98EA';
+                }
+                return data.color || '#ffffff';
+            })
+
         ),
         $(
             go.TextBlock,
