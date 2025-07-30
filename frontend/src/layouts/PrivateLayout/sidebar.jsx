@@ -102,6 +102,7 @@ const Sidebar = () => {
                                 style={{ textDecoration: "none", color: "inherit" }}
                             >
                                 <ListItemButton
+                                    selected={item.selected}
                                     sx={{
                                         px: 0.5,
                                         borderRadius: 1,
@@ -110,21 +111,40 @@ const Sidebar = () => {
                                         maxWidth: "100%",
                                         whiteSpace: "nowrap",
                                         textOverflow: "ellipsis",
-                                        "&.Mui-selected": {
-                                            backgroundColor: "#e3f2fd",
-                                            "&:hover": {
-                                                backgroundColor: "#e3f2fd",
+                                        color: "#303135",
+                                        transition: 'background 0.3s ease, transform 0.2s',
+                                        '&:hover': {
+                                            background: 'linear-gradient(90deg, #ce93d8 0%, #19d078ff 100%)',
+                                            color: 'white',
+                                            transform: 'translateY(-1px)',
+                                            '& .MuiListItemIcon-root': {
+                                                color: 'white',
+                                            },
+                                            '& .MuiTypography-root': {
+                                                color: 'white',
+                                            }
+                                        },
+                                        '&.Mui-selected': {
+                                            backgroundColor: "#e6f4ea",
+                                            color: "#2e7d32",
+                                            '&:hover': {
+                                                background: 'linear-gradient(90deg, #ce93d8 0%, #19d078ff 100%)',
+                                                color: 'white',
+                                                transform: 'translateY(-1px)',
                                             },
                                         },
                                     }}
                                 >
-                                    <ListItemIcon sx={{ minWidth: 36 }}>{item.icon}</ListItemIcon>
+                                    <ListItemIcon sx={{ minWidth: 36, color:"#e7531eff" }}>
+                                        {item.icon}
+                                    </ListItemIcon>
                                     <ListItemText
                                         primary={item.text}
                                         primaryTypographyProps={{
-                                            fontSize: "0.75rem",
+                                            fontSize: "0.875rem",
                                             noWrap: true,
                                             fontWeight: 600,
+                                            color: "#2e7d32"
                                         }}
                                     />
                                     {item.shortcut && (
@@ -136,6 +156,8 @@ const Sidebar = () => {
                                         </Typography>
                                     )}
                                 </ListItemButton>
+
+
                             </NavLink>)}
                     </Box>
                 ))}

@@ -471,6 +471,128 @@ const ChatPanel = ({ onClose }) => {
 };
 
 
+// const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
+//     <Box sx={{
+//         width: '100%',
+//         height: '100%',
+//         bgcolor: 'white',
+//         display: 'flex',
+//         flexDirection: 'column',
+//         fontSize: '12px'
+//     }}>
+//         <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
+//             <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
+//                 Tools
+//             </Typography>
+
+//             <ToolButton
+//                 props={{
+//                     text: 'Upload file to generate workflow',
+//                     icon: <Upload fontSize="small" />
+//                 }}
+//             />
+
+//             <TextField
+//                 fullWidth
+//                 size="small"
+//                 placeholder="Search blocks..."
+//                 InputProps={{
+//                     startAdornment: (
+//                         <InputAdornment position="start">
+//                             <Search sx={{ color: '#AFB0B4', fontSize: '16px' }} />
+//                         </InputAdornment>
+//                     ),
+//                 }}
+//                 inputProps={{
+//                     style: { fontSize: '12px', padding: '8px 0px' },
+//                 }}
+//                 sx={{
+//                     mb: 1,
+//                     borderRadius: '10px',
+//                     '& .MuiOutlinedInput-root': {
+//                         borderRadius: '10px',
+//                         fontSize: '12px',
+//                     },
+//                     '& .MuiOutlinedInput-notchedOutline': {
+//                         borderColor: '#EEEFF1',
+//                     },
+//                 }}
+//             />
+
+//             <ToolGroupTitle title="Generation" />
+
+//             <ToolButton
+//                 props={{
+//                     text: 'Import text to generate workflow',
+//                     icon: <TextSnippet fontSize="small" color="action" />
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     text: 'Delete workflow',
+//                     icon: <Delete fontSize="small" color="action" />
+//                 }}
+//             />
+
+//             <ToolGroupTitle title="Interaction" />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Compare fontSize="small" color="action" />,
+//                     text: 'Compare workflow'
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <ListIcon fontSize="small" color="action" />,
+//                     text: 'Find list entries'
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Feedback fontSize="small" color="action" />,
+//                     text: 'Give feedback'
+//                 }}
+//             />
+
+//             <ToolGroupTitle title="AI" />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Psychology fontSize="small" color="primary" />,
+//                     text: 'Pain Point Detection',
+//                     onClick: onPainPointDetection
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <AutoAwesome fontSize="small" color="action" />,
+//                     text: 'AI suggestion'
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <SmartToy fontSize="small" color="primary" />,
+//                     text: 'Global AI Assistant',
+//                     onClick: onShowChat
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Description fontSize="small" color="action" />,
+//                     text: 'Auto SOP Generator'
+//                 }}
+//             />
+//         </Box>
+//     </Box>
+// );
+
 const ToolsPanel = (props) => {
 
     const { onShowChat, onPainPointDetection, onAISuggestion } = props;
