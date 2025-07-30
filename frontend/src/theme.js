@@ -2,17 +2,17 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   typography: {
-    fontFamily: '"Poppins", sans-serif',
+    fontFamily: '"Nunito", sans-serif',
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          fontFamily: '"Poppins", sans-serif',
+          fontFamily: '"Nunito", sans-serif',
           userSelect: "none",
         },
         "*": {
-          fontFamily: '"Poppins", sans-serif',
+          fontFamily: '"Nunito", sans-serif',
           userSelect: "none",
         },
       },
