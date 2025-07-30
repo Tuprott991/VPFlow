@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import { Menu, MenuItem } from "@mui/material";
 import {
     Box,
     Button,
@@ -29,11 +28,9 @@ import {
     Settings,
     ImportExport,
     CalendarToday,
-    Star,
     Add,
 } from "@mui/icons-material";
 import { BiCategory } from "react-icons/bi";
-import { SiCodemagic } from "react-icons/si";
 import { CiShoppingTag } from "react-icons/ci";
 import { LiaNetworkWiredSolid } from "react-icons/lia";
 import { GrUpdate } from "react-icons/gr";
@@ -46,9 +43,6 @@ export default function ListOfWorkflowsPage() {
     const [anchorEl, setAnchorEl] = useState(null);
     const filteredWorkflows = workflowData.filter((workflow) =>
         workflow.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
-        // workflow.categories.some(category =>
-        // category.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
-        // )
     );
 
     const allCategories = Array.from(
@@ -133,15 +127,15 @@ export default function ListOfWorkflowsPage() {
                         Clear All
                     </Button>
                     <Button variant="contained" size="small"
-                    sx={{
-                        backgroundColor: '#667eea',         
-                        color: '#ffffff',                   
-                        textTransform: 'none',              
-                        fontWeight: 600,                    
-                        '&:hover': {
-                        backgroundColor: '#556cd6',       
-                        }
-                    }}
+                        sx={{
+                            backgroundColor: '#667eea',
+                            color: '#ffffff',
+                            textTransform: 'none',
+                            fontWeight: 600,
+                            '&:hover': {
+                                backgroundColor: '#556cd6',
+                            }
+                        }}
                     >
                         Save
                     </Button>
@@ -162,7 +156,6 @@ export default function ListOfWorkflowsPage() {
                                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
                                     <CiShoppingTag size={24} />
                                     Categories
-                                    {/* <SiCodemagic size={24} /> */}
                                 </Box>
                             </TableCell>
                             <TableCell sx={{ fontWeight: 600, borderRight: "1px solid #EEEFF1" }}>
@@ -216,9 +209,10 @@ export default function ListOfWorkflowsPage() {
                                                 label={category.name}
                                                 size="small"
                                                 sx={{
-                                                    backgroundColor: category.color,
-                                                    color: "white",
+                                                    backgroundColor: category.bgcolor,
+                                                    color: category.color,
                                                     fontSize: "0.75rem",
+                                                    fontWeight: 700,
                                                 }}
                                             />
                                         ))}
