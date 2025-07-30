@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Box, Typography, TextField, Paper, Portal } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 
 const NodeChatPanel = (props) => {
     const { selectedNode, nodePosition } = props;
@@ -87,11 +88,14 @@ const NodeChatPanel = (props) => {
                     width: 560,
                     height: 340,
                     display: 'flex',
-                    p: 2,
+                    p: 0.7,
                     bgcolor: '#fafafa',
                     zIndex: 1300,
                     borderRadius: 2,
                     boxShadow: 6,
+                    borderColor: alpha(leftTitleBgColor, 0.75),
+                    borderWidth: 2,
+                    borderStyle: 'solid',
                 }}
             >
                 {/* Left Column - Node Info */}
@@ -99,9 +103,8 @@ const NodeChatPanel = (props) => {
                     sx={{
                         flex: 1,
                         pr: 2,
-                        borderRight: '1px solid #ddd',
-                        bgcolor: leftBgColor,
-                        borderRadius: 1,
+                        bgcolor: alpha(leftBgColor, 0.5),
+                        borderRadius: 2,
                         p: 1.5,
                     }}
                 >
@@ -109,8 +112,8 @@ const NodeChatPanel = (props) => {
                         sx={{
                             display: 'inline-block',
                             fontWeight: 600,
-                            bgcolor: leftTitleBgColor,
-                            borderRadius: 1,
+                            bgcolor: alpha(leftTitleBgColor, 0.6),
+                            borderRadius: 2,
                             px: 2,
                             py: 0.5,
                             fontSize: '1rem',
@@ -181,7 +184,7 @@ const NodeChatPanel = (props) => {
                     />
                 </Box>
             </Paper>
-        </Portal>
+        </Portal >
     );
 };
 
