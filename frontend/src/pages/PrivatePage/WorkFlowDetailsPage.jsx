@@ -1,5 +1,5 @@
 // Import necessary libraries
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Import necessary components from MUI
@@ -83,6 +83,9 @@ const WorkflowLegend = () => {
     )
 };
 
+
+
+
 const ChatPanel = ({ onClose }) => {
     const botResponses = [
         'Hello! How can I assist you today?',
@@ -96,6 +99,15 @@ const ChatPanel = ({ onClose }) => {
     const [input, setInput] = useState("");
     const [responseIndex, setResponseIndex] = useState(1);
     const [isBotTyping, setIsBotTyping] = useState(false);
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const simulateBotResponse = () => {
         if (responseIndex >= botResponses.length) return;
@@ -119,75 +131,346 @@ const ChatPanel = ({ onClose }) => {
         simulateBotResponse();
     };
 
-    return (
-        <Box sx={{ p: 2, bgcolor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="h6" fontWeight="bold">
-                    <FcAssistant fontSize="medium" />
-                    &nbsp; Global AI Assistant
-                </Typography>
-                <Button size="small" onClick={onClose} sx={{ minWidth: 'auto', p: 0.5 }}>
-                    <FaWindowClose />
-                </Button>
-            </Box>
-
-            <Box sx={{
-                height: 400,
-                bgcolor: '#fff',
-                border: '1px solid #ccc',
-                borderRadius: 1,
-                p: 1,
-                mb: 1,
-                overflowY: 'auto',
+    const TypingIndicator = () => (
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '12px',
+            marginBottom: '8px',
+            opacity: isBotTyping ? 1 : 0,
+            transition: 'opacity 0.3s ease'
+        }}>
+            <div style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 'bold'
             }}>
-                {messages.map((msg, idx) => (
-                    <Box
-                        key={idx}
-                        sx={{
+                VP Agent
+            </div>
+            <div style={{
+                backgroundColor: '#f1f3f5',
+                padding: '8px 16px',
+                borderRadius: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+            }}>
+                <div style={{ display: 'flex', gap: '3px' }}>
+                    {[0, 1, 2].map((i) => (
+                        <div
+                            key={i}
+                            style={{
+                                width: '6px',
+                                height: '6px',
+                                borderRadius: '50%',
+                                backgroundColor: '#667eea',
+                                animation: `bounce 1.4s ease-in-out infinite both ${i * 0.16}s`
+                            }}
+                        />
+                    ))}
+                </div>
+                <span style={{ fontSize: '12px', color: '#666', marginLeft: '8px' }}>
+                    Thinking...
+                </span>
+            </div>
+        </div>
+    );
+
+    const styles = `
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-animation {
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .chat-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 3px;
+        }
+
+        .chat-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .message-bubble:hover {
+            transform: translateY(-1px);
+        }
+
+        .close-button:hover {
+            transform: scale(1.05);
+        }
+    `;
+
+    return (
+        <>
+            <style>{styles}</style>
+            <div style={{
+                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+                position: 'relative'
+            }}>
+                {/* Header */}
+                <div style={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    color: 'white',
+                    padding: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(255,255,255,0.2)',
                             display: 'flex',
-                            justifyContent: msg.fromUser ? 'flex-end' : 'flex-start',
-                            mb: 1
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '24px',
+                            backdropFilter: 'blur(10px)'
+                        }}>
+                            <img src="/chatbot_logo.png" alt="VPFlow Logo" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
+                        </div>
+                        <div>
+                            <h3 style={{ 
+                                margin: 0, 
+                                fontSize: '18px', 
+                                fontWeight: 'bold' 
+                            }}>
+                                VP ChatBot
+                            </h3>
+                            <p style={{ 
+                                margin: 0, 
+                                fontSize: '12px', 
+                                opacity: 0.8 
+                            }}>
+                                Ready to help you
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="close-button"
+                        style={{
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            border: 'none',
+                            color: 'white',
+                            backgroundColor: 'rgba(255,255,255,0.1)',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            transition: 'all 0.2s ease',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
                         }}
                     >
-                        <Box sx={{
-                            bgcolor: msg.fromUser ? '#cce5ff' : '#e1f7d5',
-                            p: 1,
-                            borderRadius: 1,
-                            maxWidth: '70%'
-                        }}>
-                            <Typography variant="body2" whiteSpace="pre-line">{msg.text}</Typography>
-                        </Box>
-                    </Box>
-                ))}
-                {isBotTyping && (
-                    <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'gray', ml: 1 }}>
-                        Bot is thinking...
-                    </Typography>
-                )}
-            </Box>
+                        ✕
+                    </button>
+                </div>
 
-            <Box sx={{ display: 'flex', gap: 1 }}>
-                <TextField
-                    fullWidth
-                    size="small"
-                    placeholder="Text prompt"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();
-                            handleSend();
-                        }
+                {/* Messages Container */}
+                <div
+                    className="chat-scrollbar"
+                    style={{
+                        flex: 1,
+                        height: '100vh',
+                        padding: '20px',
+                        overflowY: 'auto',
+                        background: 'linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.7))'
                     }}
-                    disabled={isBotTyping}
-                />
-                <Button variant="contained" onClick={handleSend} disabled={isBotTyping} sx={{ color: 'white', bgcolor: '#256CF1' }}>
-                    Send
-                </Button>
-            </Box>
-        </Box>
+                >
+                    {messages.map((msg, idx) => (
+                        <div
+                            key={idx}
+                            className="message-animation"
+                            style={{
+                                display: 'flex',
+                                justifyContent: msg.fromUser ? 'flex-end' : 'flex-start',
+                                marginBottom: '16px',
+                                alignItems: 'flex-end',
+                                gap: '8px'
+                            }}
+                        >
+                            {!msg.fromUser && (
+                                <div style={{
+                                    width: '32px',
+                                    height: '32px',
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'white',
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                    flexShrink: 0
+                                }}>
+                                    VP
+                                </div>
+                            )}
+                            
+                            <div
+                                className="message-bubble"
+                                style={{
+                                    background: msg.fromUser 
+                                        ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                                        : '#ffffff',
+                                    color: msg.fromUser ? 'white' : '#333',
+                                    padding: '12px 16px',
+                                    borderRadius: msg.fromUser ? '20px 20px 5px 20px' : '20px 20px 20px 5px',
+                                    maxWidth: '75%',
+                                    boxShadow: msg.fromUser 
+                                        ? '0 4px 12px rgba(102, 126, 234, 0.3)'
+                                        : '0 2px 8px rgba(0,0,0,0.1)',
+                                    transition: 'all 0.2s ease',
+                                    fontSize: '14px',
+                                    lineHeight: '1.4'
+                                }}
+                            >
+                                <div style={{ whiteSpace: 'pre-line' }}>
+                                    {msg.text}
+                                </div>
+                            </div>
+
+                            {msg.fromUser && (
+                                <div style={{
+                                    width: '32px',
+                                    height: '32px',
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'white',
+                                    fontSize: '10px',
+                                    fontWeight: 'bold',
+                                    flexShrink: 0
+                                }}>
+                                    Tú Ktu
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                    
+                    <TypingIndicator />
+                    <div ref={messagesEndRef} />
+                </div>
+
+                {/* Input Area */}
+                <div style={{
+                    padding: '20px',
+                    background: 'rgba(255,255,255,0.95)',
+                    backdropFilter: 'blur(10px)',
+                    borderTop: '1px solid rgba(0,0,0,0.1)'
+                }}>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-end' }}>
+                        <textarea
+                            placeholder="Input your message"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleSend();
+                                }
+                            }}
+                            disabled={isBotTyping}
+                            rows={1}
+                            style={{
+                                flex: 1,
+                                padding: '12px 16px',
+                                borderRadius: '20px',
+                                border: '2px solid #e1e5e9',
+                                fontSize: '14px',
+                                resize: 'none',
+                                outline: 'none',
+                                fontFamily: 'inherit',
+                                backgroundColor: 'white',
+                                transition: 'border-color 0.2s ease',
+                                minHeight: '44px',
+                                maxHeight: '100px'
+                            }}
+                            onFocus={(e) => e.target.style.borderColor = '#667eea'}
+                            onBlur={(e) => e.target.style.borderColor = '#e1e5e9'}
+                        />
+                        <button
+                            onClick={handleSend}
+                            disabled={isBotTyping || !input.trim()}
+                            className="send-button"
+                            style={{
+                                width: '48px',
+                                height: '48px',
+                                borderRadius: '20px',
+                                border: 'none',
+                                background: input.trim() && !isBotTyping 
+                                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                                    : '#ccd6dd',
+                                color: 'white',
+                                cursor: input.trim() && !isBotTyping ? 'pointer' : 'not-allowed',
+                                fontSize: '18px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                transition: 'all 0.2s ease',
+                                boxShadow: input.trim() && !isBotTyping 
+                                    ? '0 4px 12px rgba(102, 126, 234, 0.3)'
+                                    : 'none'
+                            }}
+                        >
+                            {isBotTyping ? '⏳' : '>>'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 };
+
 
 const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
     <Box sx={{
