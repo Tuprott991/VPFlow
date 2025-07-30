@@ -1,5 +1,5 @@
 // Import necessary libraries
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Import necessary components from MUI
@@ -13,8 +13,6 @@ import {
     SmartToy, Description
 } from '@mui/icons-material';
 import { IoInformationCircleOutline } from 'react-icons/io5';
-import { FaWindowClose } from "react-icons/fa";
-import { FcAssistant } from "react-icons/fc";
 import { FiGitCommit } from "react-icons/fi";
 
 // Import custom components
@@ -24,6 +22,7 @@ import { ToolButton, ToolGroupTitle } from '@/components/custom';
 // Import mock data for swimlane diagram
 import { nodeDataArray, linkDataArray } from '@/data/mock_data/swimlaneData';
 import { subNodeDataArray, subLinkDataArray } from '@/data/mock_data/subSwimlaneData';
+import { enhanceNodeDataArray, enhanceLinkDataArray } from '@/data/mock_data/enchanceSwimlaneData';
 
 const WorkflowHeader = () => (
     <Box sx={{ bgcolor: '#E5EEFF', px: 1.5, py: 1, borderRadius: '8px' }}>
@@ -275,17 +274,17 @@ const ChatPanel = ({ onClose }) => {
                             <img src="/chatbot_logo.png" alt="VPFlow Logo" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
                         </div>
                         <div>
-                            <h3 style={{ 
-                                margin: 0, 
-                                fontSize: '18px', 
-                                fontWeight: 'bold' 
+                            <h3 style={{
+                                margin: 0,
+                                fontSize: '18px',
+                                fontWeight: 'bold'
                             }}>
                                 VP ChatBot
                             </h3>
-                            <p style={{ 
-                                margin: 0, 
-                                fontSize: '12px', 
-                                opacity: 0.8 
+                            <p style={{
+                                margin: 0,
+                                fontSize: '12px',
+                                opacity: 0.8
                             }}>
                                 Ready to help you
                             </p>
@@ -353,18 +352,18 @@ const ChatPanel = ({ onClose }) => {
                                     VP
                                 </div>
                             )}
-                            
+
                             <div
                                 className="message-bubble"
                                 style={{
-                                    background: msg.fromUser 
+                                    background: msg.fromUser
                                         ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
                                         : '#ffffff',
                                     color: msg.fromUser ? 'white' : '#333',
                                     padding: '12px 16px',
                                     borderRadius: msg.fromUser ? '20px 20px 5px 20px' : '20px 20px 20px 5px',
                                     maxWidth: '75%',
-                                    boxShadow: msg.fromUser 
+                                    boxShadow: msg.fromUser
                                         ? '0 4px 12px rgba(102, 126, 234, 0.3)'
                                         : '0 2px 8px rgba(0,0,0,0.1)',
                                     transition: 'all 0.2s ease',
@@ -396,7 +395,7 @@ const ChatPanel = ({ onClose }) => {
                             )}
                         </div>
                     ))}
-                    
+
                     <TypingIndicator />
                     <div ref={messagesEndRef} />
                 </div>
@@ -447,7 +446,7 @@ const ChatPanel = ({ onClose }) => {
                                 height: '48px',
                                 borderRadius: '20px',
                                 border: 'none',
-                                background: input.trim() && !isBotTyping 
+                                background: input.trim() && !isBotTyping
                                     ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
                                     : '#ccd6dd',
                                 color: 'white',
@@ -457,7 +456,7 @@ const ChatPanel = ({ onClose }) => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 transition: 'all 0.2s ease',
-                                boxShadow: input.trim() && !isBotTyping 
+                                boxShadow: input.trim() && !isBotTyping
                                     ? '0 4px 12px rgba(102, 126, 234, 0.3)'
                                     : 'none'
                             }}
@@ -472,127 +471,133 @@ const ChatPanel = ({ onClose }) => {
 };
 
 
-const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
-    <Box sx={{
-        width: '100%',
-        height: '100%',
-        bgcolor: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        fontSize: '12px'
-    }}>
-        <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
-            <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
-                Tools
-            </Typography>
+const ToolsPanel = (props) => {
 
-            <ToolButton
-                props={{
-                    text: 'Upload file to generate workflow',
-                    icon: <Upload fontSize="small" />
-                }}
-            />
+    const { onShowChat, onPainPointDetection, onAISuggestion } = props;
 
-            <TextField
-                fullWidth
-                size="small"
-                placeholder="Search blocks..."
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <Search sx={{ color: '#AFB0B4', fontSize: '16px' }} />
-                        </InputAdornment>
-                    ),
-                }}
-                inputProps={{
-                    style: { fontSize: '12px', padding: '8px 0px' },
-                }}
-                sx={{
-                    mb: 1,
-                    borderRadius: '10px',
-                    '& .MuiOutlinedInput-root': {
+    return (
+        <Box sx={{
+            width: '100%',
+            height: '100%',
+            bgcolor: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            fontSize: '12px'
+        }}>
+            <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
+                <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
+                    Tools
+                </Typography>
+
+                <ToolButton
+                    props={{
+                        text: 'Upload file to generate workflow',
+                        icon: <Upload fontSize="small" />
+                    }}
+                />
+
+                <TextField
+                    fullWidth
+                    size="small"
+                    placeholder="Search blocks..."
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search sx={{ color: '#AFB0B4', fontSize: '16px' }} />
+                            </InputAdornment>
+                        ),
+                    }}
+                    inputProps={{
+                        style: { fontSize: '12px', padding: '8px 0px' },
+                    }}
+                    sx={{
+                        mb: 1,
                         borderRadius: '10px',
-                        fontSize: '12px',
-                    },
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#EEEFF1',
-                    },
-                }}
-            />
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            fontSize: '12px',
+                        },
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#EEEFF1',
+                        },
+                    }}
+                />
 
-            <ToolGroupTitle title="Generation" />
+                <ToolGroupTitle title="Generation" />
 
-            <ToolButton
-                props={{
-                    text: 'Import text to generate workflow',
-                    icon: <TextSnippet fontSize="small" color="action" />
-                }}
-            />
+                <ToolButton
+                    props={{
+                        text: 'Import text to generate workflow',
+                        icon: <TextSnippet fontSize="small" color="action" />
+                    }}
+                />
 
-            <ToolButton
-                props={{
-                    text: 'Delete workflow',
-                    icon: <Delete fontSize="small" color="action" />
-                }}
-            />
+                <ToolButton
+                    props={{
+                        text: 'Delete workflow',
+                        icon: <Delete fontSize="small" color="action" />
+                    }}
+                />
 
-            <ToolGroupTitle title="Interaction" />
+                <ToolGroupTitle title="Interaction" />
 
-            <ToolButton
-                props={{
-                    icon: <Compare fontSize="small" color="action" />,
-                    text: 'Compare workflow'
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <Compare fontSize="small" color="action" />,
+                        text: 'Compare workflow'
+                    }}
+                />
 
-            <ToolButton
-                props={{
-                    icon: <ListIcon fontSize="small" color="action" />,
-                    text: 'Find list entries'
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <ListIcon fontSize="small" color="action" />,
+                        text: 'Find list entries'
+                    }}
+                />
 
-            <ToolButton
-                props={{
-                    icon: <Feedback fontSize="small" color="action" />,
-                    text: 'Give feedback'
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <Feedback fontSize="small" color="action" />,
+                        text: 'Give feedback'
+                    }}
+                />
 
-            <ToolGroupTitle title="AI" />
+                <ToolGroupTitle title="AI" />
 
-            <ToolButton
-                props={{
-                    icon: <Psychology fontSize="small" color="primary" />,
-                    text: 'Pain Point Detection',
-                    onClick: onPainPointDetection
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <Psychology fontSize="small" color="primary" />,
+                        text: 'Pain Point Detection',
+                        onClick: onPainPointDetection
+                    }}
+                />
 
-            <ToolButton
-                props={{
-                    icon: <AutoAwesome fontSize="small" color="action" />,
-                    text: 'AI suggestion'
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <AutoAwesome fontSize="small" color="action" />,
+                        text: 'AI suggestion',
+                        onClick: onAISuggestion
+                    }}
+                />
 
-            <ToolButton
-                props={{
-                    icon: <SmartToy fontSize="small" color="primary" />,
-                    text: 'Global AI Assistant',
-                    onClick: onShowChat
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <SmartToy fontSize="small" color="primary" />,
+                        text: 'Global AI Assistant',
+                        onClick: onShowChat
+                    }}
+                />
 
-            <ToolButton
-                props={{
-                    icon: <Description fontSize="small" color="action" />,
-                    text: 'Auto SOP Generator'
-                }}
-            />
+                <ToolButton
+                    props={{
+                        icon: <Description fontSize="small" color="action" />,
+                        text: 'Auto SOP Generator'
+                    }}
+                />
+            </Box>
         </Box>
-    </Box>
-);
+    );
+};
 
 const App = () => {
     const [showChat, setShowChat] = useState(false);
@@ -600,12 +605,18 @@ const App = () => {
     const [highlightedNodes, setHighlightedNodes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [enhancedNodeDataArray, setEnhancedNodeDataArray] = useState([]);
+    const [enhancedLinkDataArray, setEnhancedLinkDataArray] = useState([]);
+
+    const location = useLocation();
+    const fromPage = location.state?.from;
 
     const handlePainPointDetection = () => {
         if (highlightedNodes.length > 0) {
             setHighlightedNodes([]);
             return;
         }
+
         setLoading(true);
         setProgress(0);
 
@@ -620,41 +631,55 @@ const App = () => {
                 const cicNode = nodeDataArray
                     .filter(node => node.text === "Check CIC (Credit Report)" || node.text === "Tiếp nhận hồ sơ và thẩm định")
                     .map(node => node.key);
+
                 setHighlightedNodes(cicNode);
             }
         }, 100);
     };
 
-    const location = useLocation();
-    const fromPage = location.state?.from;
+    const onAISuggestion = () => {
+        console.log('Applying AI suggestion...');
+        console.log('Original:', enhanceNodeDataArray, enhanceLinkDataArray);
+        // Ép React render lại bằng cách clone dữ liệu mới
+        setEnhancedNodeDataArray([...enhanceNodeDataArray]);
+        setEnhancedLinkDataArray([...enhanceLinkDataArray]);
+    };
 
     return (
         <Box sx={{ bgcolor: 'background.default', height: '100vh', overflow: 'hidden', width: '100%', display: 'flex' }}>
+            {/* Diagram & Header */}
             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 280px)', overflow: 'hidden' }}>
+                {/* Header & Legend */}
                 <Box sx={{ bgcolor: 'background.default', flexShrink: 0, p: 1.5 }}>
                     <WorkflowHeader />
-
                     <WorkflowLegend />
                 </Box>
 
+                {/* Diagram */}
                 <Box sx={{ flex: 1, overflow: 'hidden', p: 1.5 }}>
-                    {
-                        fromPage === 'list-of-workflows' ?
-                            <SwimlaneDiagram
-                                nodeDataArray={nodeDataArray}
-                                linkDataArray={linkDataArray}
-                                highlightedNodes={highlightedNodes}
-                            />
-                            : <SwimlaneDiagram
-                                nodeDataArray={subNodeDataArray}
-                                linkDataArray={subLinkDataArray}
-                                highlightedNodes={highlightedNodes}
-                            />
-                    }
-
+                    {enhancedNodeDataArray.length > 0 && enhancedLinkDataArray.length > 0 ? (
+                        <SwimlaneDiagram
+                            nodeDataArray={enhancedNodeDataArray}
+                            linkDataArray={enhancedLinkDataArray}
+                            highlightedNodes={highlightedNodes}
+                        />
+                    ) : fromPage === 'list-of-workflows' ? (
+                        <SwimlaneDiagram
+                            nodeDataArray={nodeDataArray}
+                            linkDataArray={linkDataArray}
+                            highlightedNodes={highlightedNodes}
+                        />
+                    ) : (
+                        <SwimlaneDiagram
+                            nodeDataArray={subNodeDataArray}
+                            linkDataArray={subLinkDataArray}
+                            highlightedNodes={highlightedNodes}
+                        />
+                    )}
                 </Box>
             </Box>
 
+            {/* Sidebar Chat / Tool */}
             <Box
                 sx={{
                     width: 280,
@@ -671,9 +696,12 @@ const App = () => {
                     <ToolsPanel
                         onShowChat={() => setShowChat(true)}
                         onPainPointDetection={handlePainPointDetection}
+                        onAISuggestion={onAISuggestion}
                     />
                 )}
             </Box>
+
+            {/* Loading Overlay */}
             {loading && (
                 <Box
                     sx={{
@@ -713,9 +741,8 @@ const App = () => {
                             </Box>
                         </Box>
                     </Box>
-
-                </Box>)}
-
+                </Box>
+            )}
         </Box>
     );
 };

@@ -173,6 +173,12 @@ export default function SwimlaneDiagram({ nodeDataArray, linkDataArray, highligh
         }
     }, [highlightedNodes]);
 
+    useEffect(() => {
+        if (diagramRef.current) {
+            diagramRef.current.model = new go.GraphLinksModel([...nodeDataArray], [...linkDataArray]);
+        }
+    }, [nodeDataArray, linkDataArray]);
+
     return (
         <Box sx={{ width: '100%', height: '90%', position: 'relative', backgroundColor: '#fff' }}>
             <DiagramControlPanel {...diagramControls} zoom={zoom} />

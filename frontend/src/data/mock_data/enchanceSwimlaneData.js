@@ -1,0 +1,100 @@
+export const enhanceNodeDataArray = [
+  { key: "CUSTOMER", isGroup: true, label: "Customer", color: "#F4F4F4" },
+  { key: "RM", isGroup: true, label: "Relationship Manager", color: "#F4F4F4" },
+  { key: "RISK", isGroup: true, label: "Risk Assessment", color: "#F4F4F4" },
+  { key: "OPS", isGroup: true, label: "Operations", color: "#F4F4F4" },
+
+  {
+    key: 1,
+    text: "Submit loan application",
+    group: "CUSTOMER",
+    loc: "0 0",
+    color: "#FFD7D7",
+    stroke: "#FF6666",
+  },
+  {
+    key: 2,
+    text: "Upload to system (LOS)",
+    group: "RM",
+    loc: "0 150",
+    color: "#FFEAD2",
+    stroke: "#FF974D",
+  },
+  {
+    key: 3,
+    text: "Check CIC (Credit Report)",
+    group: "RISK",
+    loc: "0 300",
+    color: "#DAF0FF",
+    stroke: "#51C5FF",
+  },
+  {
+    key: 4,
+    text: "Analyze DTI + scoring",
+    group: "RISK",
+    loc: "300 300",
+    color: "#DAF0FF",
+    stroke: "#51C5FF",
+  },
+  {
+    key: 5,
+    text: "Verify income, collateral",
+    group: "RM",
+    loc: "300 150",
+    color: "#FFEAD2",
+    stroke: "#FF974D",
+  },
+  {
+    key: 6,
+    text: "Flag if risk > threshold",
+    group: "RISK",
+    loc: "600 300",
+    color: "#FFF5CC",
+    stroke: "#FFC107",
+  },
+  {
+    key: 7,
+    text: "Input into Core Lending",
+    group: "OPS",
+    loc: "600 450",
+    color: "#d4edda",
+    stroke: "#09A125",
+  },
+  {
+    key: 8,
+    text: "Issue approval letter",
+    group: "OPS",
+    loc: "900 450",
+    color: "#d4edda",
+    stroke: "#09A125",
+  },
+  {
+    key: 9,
+    text: "Disburse loan",
+    group: "OPS",
+    loc: "1200 450",
+    color: "#d4edda",
+    stroke: "#09A125",
+  },
+  {
+    key: 10,
+    text: "Finish",
+    group: "CUSTOMER",
+    loc: "1200 0",
+    color: "#FFD7D7",
+    stroke: "#FF6666",
+  },
+];
+
+export const enhanceLinkDataArray = [
+  { from: 1, to: 2 },
+  { from: 2, to: 3 },
+  { from: 2, to: 5 }, // RM verification in parallel
+  { from: 3, to: 4 },
+  { from: 4, to: 6 }, // Flagging if risk
+  { from: 5, to: 6 },
+  { from: 6, to: 7 }, // Move to OPS after all checks
+  { from: 7, to: 8 },
+  { from: 8, to: 9 },
+  { from: 9, to: 10 },
+];
