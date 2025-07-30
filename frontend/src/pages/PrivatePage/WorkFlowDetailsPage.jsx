@@ -472,6 +472,128 @@ const ChatPanel = ({ onClose }) => {
 };
 
 
+// const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
+//     <Box sx={{
+//         width: '100%',
+//         height: '100%',
+//         bgcolor: 'white',
+//         display: 'flex',
+//         flexDirection: 'column',
+//         fontSize: '12px'
+//     }}>
+//         <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
+//             <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
+//                 Tools
+//             </Typography>
+
+//             <ToolButton
+//                 props={{
+//                     text: 'Upload file to generate workflow',
+//                     icon: <Upload fontSize="small" />
+//                 }}
+//             />
+
+//             <TextField
+//                 fullWidth
+//                 size="small"
+//                 placeholder="Search blocks..."
+//                 InputProps={{
+//                     startAdornment: (
+//                         <InputAdornment position="start">
+//                             <Search sx={{ color: '#AFB0B4', fontSize: '16px' }} />
+//                         </InputAdornment>
+//                     ),
+//                 }}
+//                 inputProps={{
+//                     style: { fontSize: '12px', padding: '8px 0px' },
+//                 }}
+//                 sx={{
+//                     mb: 1,
+//                     borderRadius: '10px',
+//                     '& .MuiOutlinedInput-root': {
+//                         borderRadius: '10px',
+//                         fontSize: '12px',
+//                     },
+//                     '& .MuiOutlinedInput-notchedOutline': {
+//                         borderColor: '#EEEFF1',
+//                     },
+//                 }}
+//             />
+
+//             <ToolGroupTitle title="Generation" />
+
+//             <ToolButton
+//                 props={{
+//                     text: 'Import text to generate workflow',
+//                     icon: <TextSnippet fontSize="small" color="action" />
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     text: 'Delete workflow',
+//                     icon: <Delete fontSize="small" color="action" />
+//                 }}
+//             />
+
+//             <ToolGroupTitle title="Interaction" />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Compare fontSize="small" color="action" />,
+//                     text: 'Compare workflow'
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <ListIcon fontSize="small" color="action" />,
+//                     text: 'Find list entries'
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Feedback fontSize="small" color="action" />,
+//                     text: 'Give feedback'
+//                 }}
+//             />
+
+//             <ToolGroupTitle title="AI" />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Psychology fontSize="small" color="primary" />,
+//                     text: 'Pain Point Detection',
+//                     onClick: onPainPointDetection
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <AutoAwesome fontSize="small" color="action" />,
+//                     text: 'AI suggestion'
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <SmartToy fontSize="small" color="primary" />,
+//                     text: 'Global AI Assistant',
+//                     onClick: onShowChat
+//                 }}
+//             />
+
+//             <ToolButton
+//                 props={{
+//                     icon: <Description fontSize="small" color="action" />,
+//                     text: 'Auto SOP Generator'
+//                 }}
+//             />
+//         </Box>
+//     </Box>
+// );
+
 const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
     <Box sx={{
         width: '100%',
@@ -482,14 +604,12 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
         fontSize: '12px'
     }}>
         <Box sx={{ p: 1.5, flexShrink: 0, bgcolor: 'white' }}>
-            <Typography fontWeight={600} mb={1} sx={{ fontSize: '12px' }}>
-                Tools
-            </Typography>
+            <ToolGroupTitle title="Tools" />
 
             <ToolButton
                 props={{
                     text: 'Upload file to generate workflow',
-                    icon: <Upload fontSize="small" />
+                    icon: <Upload fontSize="small" sx={{ color: '#4CAF50' }} />
                 }}
             />
 
@@ -500,7 +620,7 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
-                            <Search sx={{ color: '#AFB0B4', fontSize: '16px' }} />
+                            <Search sx={{ color: '#81C784', fontSize: '16px' }} />
                         </InputAdornment>
                     ),
                 }}
@@ -513,9 +633,15 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
                     '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         fontSize: '12px',
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#81C784',
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#4CAF50',
+                        },
                     },
                     '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#EEEFF1',
+                        borderColor: '#C8E6C9',
                     },
                 }}
             />
@@ -525,14 +651,14 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
             <ToolButton
                 props={{
                     text: 'Import text to generate workflow',
-                    icon: <TextSnippet fontSize="small" color="action" />
+                    icon: <TextSnippet fontSize="small" sx={{ color: '#66BB6A' }} />
                 }}
             />
 
             <ToolButton
                 props={{
                     text: 'Delete workflow',
-                    icon: <Delete fontSize="small" color="action" />
+                    icon: <Delete fontSize="small" sx={{ color: '#A5D6A7' }} />
                 }}
             />
 
@@ -540,21 +666,21 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
 
             <ToolButton
                 props={{
-                    icon: <Compare fontSize="small" color="action" />,
+                    icon: <Compare fontSize="small" sx={{ color: '#66BB6A' }} />,
                     text: 'Compare workflow'
                 }}
             />
 
             <ToolButton
                 props={{
-                    icon: <ListIcon fontSize="small" color="action" />,
+                    icon: <ListIcon fontSize="small" sx={{ color: '#66BB6A' }} />,
                     text: 'Find list entries'
                 }}
             />
 
             <ToolButton
                 props={{
-                    icon: <Feedback fontSize="small" color="action" />,
+                    icon: <Feedback fontSize="small" sx={{ color: '#66BB6A' }} />,
                     text: 'Give feedback'
                 }}
             />
@@ -563,7 +689,7 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
 
             <ToolButton
                 props={{
-                    icon: <Psychology fontSize="small" color="primary" />,
+                    icon: <Psychology fontSize="small" sx={{ color: '#2E7D32' }} />,
                     text: 'Pain Point Detection',
                     onClick: onPainPointDetection
                 }}
@@ -571,14 +697,14 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
 
             <ToolButton
                 props={{
-                    icon: <AutoAwesome fontSize="small" color="action" />,
+                    icon: <AutoAwesome fontSize="small" sx={{ color: '#4CAF50' }} />,
                     text: 'AI suggestion'
                 }}
             />
 
             <ToolButton
                 props={{
-                    icon: <SmartToy fontSize="small" color="primary" />,
+                    icon: <SmartToy fontSize="small" sx={{ color: '#2E7D32' }} />,
                     text: 'Global AI Assistant',
                     onClick: onShowChat
                 }}
@@ -586,7 +712,7 @@ const ToolsPanel = ({ onShowChat, onPainPointDetection }) => (
 
             <ToolButton
                 props={{
-                    icon: <Description fontSize="small" color="action" />,
+                    icon: <Description fontSize="small" sx={{ color: '#66BB6A' }} />,
                     text: 'Auto SOP Generator'
                 }}
             />
