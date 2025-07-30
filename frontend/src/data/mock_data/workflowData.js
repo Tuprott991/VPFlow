@@ -3,7 +3,7 @@ export const workflowData = [
     id: 1,
     name: "Credit Card",
     categories: [
-      { name: "Computer Hardware", color: "#FFA726" },
+      { name: "Information", color: "#FFA726" },
       { name: "Consumer goods", color: "#5C6BC0" },
       { name: "Consumer", color: "#AB47BC" },
     ],

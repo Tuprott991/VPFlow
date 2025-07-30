@@ -14,6 +14,8 @@ export const subNodeDataArray = [
     actorTransitions: [],
     errorRate: 0,
     reworkCount: 0,
+    color: "#FFD7D7",
+    stroke: "#FF6666",
   },
   {
     key: "step_2",
@@ -25,6 +27,8 @@ export const subNodeDataArray = [
     actorTransitions: [],
     errorRate: 0,
     reworkCount: 0,
+    color: "#FFD7D7",
+    stroke: "#FF6666",
   },
   {
     key: "step_3",
@@ -36,6 +40,8 @@ export const subNodeDataArray = [
     actorTransitions: [],
     errorRate: 0,
     reworkCount: 0,
+    color: "#FFD7D7",
+    stroke: "#FF6666",
   },
   {
     key: "step_4",
@@ -47,6 +53,8 @@ export const subNodeDataArray = [
     actorTransitions: [],
     errorRate: 0,
     reworkCount: 0,
+    color: "#FFD7D7",
+    stroke: "#FF6666",
   },
 
   {
@@ -64,6 +72,8 @@ export const subNodeDataArray = [
     actorTransitions: [],
     errorRate: 0,
     reworkCount: 0,
+    color: "#FFEAD2",
+    stroke: "#FF974D",
   },
   {
     key: "step_6",
@@ -75,6 +85,8 @@ export const subNodeDataArray = [
     actorTransitions: [],
     errorRate: 0,
     reworkCount: 0,
+    color: "#FFEAD2",
+    stroke: "#FF974D",
   },
 
   {
@@ -95,6 +107,8 @@ export const subNodeDataArray = [
     ],
     errorRate: 0,
     reworkCount: 0,
+    color: "#DAF0FF",
+    stroke: "#51C5FF",
   },
 
   {
@@ -112,6 +126,8 @@ export const subNodeDataArray = [
     actorTransitions: ["Nhận hồ sơ từ khách hàng"],
     errorRate: 0,
     reworkCount: 0,
+    color: "#DAFFD5",
+    stroke: "#09A125",
   },
   {
     key: "step_9",
@@ -123,6 +139,8 @@ export const subNodeDataArray = [
     actorTransitions: ["Gửi thông tin tài khoản cho khách hàng"],
     errorRate: 0,
     reworkCount: 0,
+    color: "#DAFFD5",
+    stroke: "#09A125",
   },
 ];
 
