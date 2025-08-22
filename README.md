@@ -23,6 +23,14 @@ VPFlow provides a flexible platform for designing, executing, and monitoring bus
 - **AI/ML**: AWS Bedrock, Sagemaker,...
 - **Deployment**: Docker, Kubernetes
 
+## VPBank Architecture Project
+
+### System Architecture (AWS Cloud)
+![Architecture](document/AWS Cloud Architechture.png)
+
+### Workflow Concept
+![Data Flow](document/VPFlow data flow.png)
+
 ## Getting Started
 
 ### Prerequisites
