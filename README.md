@@ -26,10 +26,10 @@ VPFlow provides a flexible platform for designing, executing, and monitoring bus
 ## VPBank Architecture Project
 
 ### System Architecture (AWS Cloud)
-![Architecture](document/AWS Cloud Architechture.png)
+![Architecture](document/AWS%20Cloud%20Architechture.png)
 
 ### Workflow Concept
-![Data Flow](document/VPFlow data flow.png)
+![Data Flow](document/VPFlow%20data%20flow.png)
 
 ## Getting Started
 
